@@ -1,0 +1,5 @@
+# ignore all files in uploads folder
+uploads/*
+
+# ignore all files in instance folder
+instance/*
