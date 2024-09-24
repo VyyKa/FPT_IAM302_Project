@@ -1,5 +1,5 @@
 # ignore all files in uploads folder
-uploads/*
+uploads/**
 
 # ignore all files in instance folder
-instance/*
+instance/**
