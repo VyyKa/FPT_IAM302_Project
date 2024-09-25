@@ -28,6 +28,7 @@ class UploadedFile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.String(100), nullable=False)
     filepath = db.Column(db.String(200), nullable=False)
+    status = db.db.Column(db.String(200), nullable=True)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     
 # Creating the upload folder
