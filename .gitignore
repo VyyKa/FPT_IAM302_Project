@@ -3,3 +3,5 @@ web/uploads/**
 
 # ignore all files in instance folder
 web/instance/**
+
+web/venv/**
