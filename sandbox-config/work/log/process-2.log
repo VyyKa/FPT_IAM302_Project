@@ -1,0 +1,4 @@
+2024-10-01 11:22:53,770 [Task 2] [lib.cuckoo.common.integrations.virustotal] ERROR: VT: Request failed
+2024-10-01 11:22:54,196 [Task 2] [capa.features.extractors.cape.extractor] ERROR: capa currently only supports PE target files, this target file's type is: 'EICAR virus test files'.
+Please report this at: https://github.com/mandiant/capa/issues/1933
+2024-10-01 11:22:54,196 [Task 2] [lib.cuckoo.common.integrations.capa] ERROR: FLARE CAPA -> UnsupportedFormatError

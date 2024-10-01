@@ -2,7 +2,7 @@
 
 # Define variables
 name="snapshot1"
-name_vm="cybersec_default_1727711225143_35755"
+name_vm="cybersec_windows_10"
 
 # Take a snapshot of the VM
 VBoxManage snapshot "$name_vm" take "$name" --pause
