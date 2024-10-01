@@ -69,6 +69,7 @@ Vagrant.configure("2") do |config|
   # SHELL
   
   config.vm.provider "virtualbox" do |vb|
+    vb.name = "cybersec_windows_10"
     vb.cpus = 2
     vb.memory = "4096"
 
@@ -103,6 +104,9 @@ Vagrant.configure("2") do |config|
     # Python install module
     python -m pip install --upgrade pip
     python -m pip install Pillow==9.5.0
+    python -m pip install etw
+    python -m pip install numpy
+    python -m pip install pywintrace
 
     # Define the file path and task name
     $filePath = "C:\\my_secret.pyw"
