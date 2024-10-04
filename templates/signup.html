@@ -1,31 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign up for an account">
+    <meta name="keywords" content="signup, registration, user account">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
+
 <body>
     <div class="container">
-        <h2>Sign Up</h2>
-        <form action="{{ url_for('signup')}}" method="POST">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Sign Up</button>
-        </form>
-        <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+        <main>
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" aria-label="Username" placeholder="Choose a username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" aria-label="Email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" aria-label="Password" placeholder="Create a password" minlength="8" required autocomplete="off">
+                </div>
+                <button type="submit">Sign Up</button>
+                <p>Already have an account? <a href="{{ url_for('frontend.signin') }}">Sign in</a></p>
+            </form>
+            <div id="message"></div>
+        </main>
     </div>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/api/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, email, password }),
+            });
+
+            const data = await response.json();
+            const messageDiv = document.getElementById('message');
+
+            if (data.status === 'success') {
+                messageDiv.innerHTML = `<p class="success">${data.message}</p>`;
+                // Chuyển hướng đến trang đăng nhập sau khi đăng ký thành công
+                setTimeout(() => {
+                    window.location.href = '{{ url_for('frontend.signin') }}';
+                }, 2000);
+            } else {
+                messageDiv.innerHTML = `<p class="error">${data.message}</p>`;
+            }
+        });
+    </script>
 </body>
+
 </html>
