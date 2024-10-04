@@ -1,5 +1,19 @@
 #!/bin/bash
 
+# Check if the script is run as root
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run this script as root or use sudo."
+    exit 1
+fi
+
+# Check if string "* 0.0.0.0/0 ::/0" in file /etc/vbox/networks.txt
+if grep -q "* 0.0.0.0/0 ::/0" /etc/vbox/networks.txt; then
+    echo "Networks are already configured."
+else
+    echo "Configuring networks..."
+    echo "* 0.0.0.0/0 ::/0" >> /etc/vbox/networks.txt
+fi
+
 IP_ADDRESS="192.168.23.1"
 
 if VBoxManage list hostonlyifs | grep -q "Name:            vboxnet0"; then
