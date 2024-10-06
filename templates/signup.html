@@ -55,7 +55,7 @@
 
             if (data.status === 'success') {
                 messageDiv.innerHTML = `<p class="success">${data.message}</p>`;
-                // Chuyển hướng đến trang đăng nhập sau khi đăng ký thành công
+                // Redirect to the login page after successful registration
                 setTimeout(() => {
                     window.location.href = '{{ url_for('frontend.signin') }}';
                 }, 2000);

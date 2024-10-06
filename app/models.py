@@ -15,7 +15,7 @@ class UploadedFile(db.Model):
     status = db.Column(db.String(50), nullable=False, default="Uploaded")  
     filepath = db.Column(db.String(200), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.now)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
 
     # Establishing a relationship between User and UploadedFile
     user = db.relationship('User', backref=db.backref('uploaded_files', lazy=True))

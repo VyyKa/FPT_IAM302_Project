@@ -50,11 +50,11 @@
 
             if (data.status === 'success') {
                 messageDiv.innerHTML = `<p class="success">${data.message}</p>`;
-                // Lưu trữ token và tên người dùng trong localStorage
+                // Store the token and username in localStorage
                 localStorage.setItem('access_token', data.data.access_token);
                 localStorage.setItem('refresh_token', data.data.refresh_token);
-                localStorage.setItem('username', username); // Lưu tên người dùng
-                // Chuyển hướng đến trang upload
+                localStorage.setItem('username', username); // Store the username
+                // Redirect to the upload page
                 window.location.href = '{{ url_for('frontend.upload') }}';
             } else {
                 messageDiv.innerHTML = `<p class="error">${data.message}</p>`;

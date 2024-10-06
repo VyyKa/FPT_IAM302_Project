@@ -5,7 +5,7 @@ from app.models import User, UploadedFile
 
 app = create_app()
 
-# Tạo cơ sở dữ liệu nếu chưa tồn tại
+# Create the database if it doesn't exist
 with app.app_context():
     db.create_all()
 

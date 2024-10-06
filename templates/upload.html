@@ -22,9 +22,10 @@
                     <li id="username-display"></li>
                     <li><a href="{{ url_for('frontend.signin') }}">Sign In</a></li>
                     <li><a href="{{ url_for('frontend.signup') }}">Sign Up</a></li>
+                    <li><a href="#" id="logout-button">Logout</a></li> 
                     <li class="theme-switch-wrapper">
                         <button id="dark-mode-toggle" aria-label="Switch to dark mode">
-                            <img src="{{ url_for('static', filename='images/moon-icon.svg') }}" alt="Moon Icon">
+                            <img src="{{ url_for('static', filename='images/moon-icon.svg') }}" alt="Moon Icon" />
                         </button>
                     </li>
                 </ul>
@@ -59,8 +60,14 @@
         const username = localStorage.getItem('username');
         if (username) {
             document.getElementById('username-display').innerText = `Logged in as: ${username}`;
+            document.getElementById('logout-button').style.display = 'inline';  // Show Logout button
+            document.querySelector('a[href="{{ url_for("frontend.signin") }}"]').style.display = 'none';  // Hide Sign In and Sign Up buttons
+            document.querySelector('a[href="{{ url_for("frontend.signup") }}"]').style.display = 'none';  
+        } else {
+            document.getElementById('logout-button').style.display = 'none';  // Hide Logout button if not logged in
         }
 
+        // Handle the event when the upload file button is clicked
         document.getElementById('upload-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const files = document.getElementById('file').files;
@@ -73,7 +80,7 @@
             for (let i = 0; i < files.length; i++) {
                 formData.append('file', files[i]);
             }
-        
+
             const response = await fetch('{{ url_for("upload_bp.upload_files") }}', {
                 method: 'POST',
                 body: formData,
@@ -88,7 +95,33 @@
             } else {
                 flashDiv.innerHTML = `<p class="error">${data.message}</p>`;
             }
-        });        
+        });       
+        
+        // Handle logout
+        document.getElementById('logout-button').addEventListener('click', async function(e) {
+            e.preventDefault();
+
+            try {
+                const response = await fetch('/api/auth/logout', {
+                    method: 'POST'
+                });
+
+                const data = await response.json();
+                if (data.status === 'success') {
+                    // Remove token from localStorage
+                    localStorage.removeItem('access_token');
+                    localStorage.removeItem('refresh_token');
+                    localStorage.removeItem('username');  // Remove username if stored
+                    alert('Successfully logged out.');
+                    window.location.href = '{{ url_for('frontend.index') }}';  // Redirect to the homepage
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Error during logout:', error);
+                alert('An error occurred during logout.');
+            }
+        });
     </script>
 </body>
 

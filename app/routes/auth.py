@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, session
-from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity, unset_jwt_cookies
+from flask_jwt_extended import create_access_token, create_refresh_token
 from app.models import User
 from app import db
 from app.utils.response_utils import response_dict
@@ -19,6 +19,7 @@ def signin():
 
     user = User.query.filter_by(username=username).first()
     if user and check_password_hash(user.password, password):
+        session['user_id'] = user.id  # Store the user's ID in the session
         access_token = create_access_token(identity=user.id)
         refresh_token = create_refresh_token(identity=user.id)
         return jsonify(response_dict('success', 'Login successful', {
@@ -52,9 +53,7 @@ def signup():
     return jsonify(response_dict('success', 'User created successfully', {})), 201
 
 @auth_bp.route('/logout', methods=['POST'])
-@jwt_required()
 def logout():
-    response = jsonify(response_dict('success', 'Logged out successfully', {}))
-    unset_jwt_cookies(response)
-    session.clear()  # Clear the session
-    return response, 200
+    # Clear the session if it exists
+    session.clear()
+    return jsonify(response_dict('success', 'Logged out successfully', {})), 200
