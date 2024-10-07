@@ -1,0 +1,295 @@
+/* ============================
+   Base Reset
+============================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ============================
+   Root Variables for Light and Dark Modes
+============================ */
+:root {
+    /* Light mode colors */
+    --primary-color-light: #007acc;
+    --secondary-color-light: #005f99;
+    --background-light: #f0f4f8;
+    --text-color-light: #333;
+    --button-color-light: #006bb3;
+    --button-text-light: #fff;
+
+    /* Dark mode colors */
+    --primary-color-dark: #0a0a0a;
+    --secondary-color-dark: #1c1c1c;
+    --background-dark: #141414;
+    --text-color-dark: #d4d4d4;
+    --button-color-dark: #555;
+    --button-text-dark: #fff;
+
+    /* Additional colors */
+    --success-color: #28a745;
+    --error-color: #dc3545;
+
+    /* Common variables */
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+    --font-family: 'Arial', sans-serif;
+}
+
+/* ============================
+   Body Styles
+============================ */
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    background-color: var(--background-light);
+    color: var(--text-color-light);
+}
+
+body.dark-mode {
+    background-color: var(--background-dark);
+    color: var(--text-color-dark);
+}
+
+/* ============================
+   Header Styles
+============================ */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color-light);
+    padding: 1rem 2rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: background-color var(--transition-speed);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode header {
+    background-color: var(--primary-color-dark);
+}
+
+/* ============================
+   Navigation Styles
+============================ */
+nav {
+    flex-grow: 1;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+nav ul li {
+    margin-right: 1.5rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--button-text-light);
+    font-weight: 500;
+    transition: color var(--transition-speed), transform var(--transition-speed);
+}
+
+nav ul li a:hover {
+    color: var(--secondary-color-light);
+    transform: scale(1.05);
+}
+
+body.dark-mode nav ul li a:hover {
+    color: var(--secondary-color-dark);
+}
+
+/* ============================
+   Theme Switcher Styles
+============================ */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.theme-switch-wrapper button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.3rem;
+    transition: transform var(--transition-speed);
+}
+
+.theme-switch-wrapper img {
+    width: 24px;
+    height: 24px;
+    transition: filter var(--transition-speed);
+}
+
+body.dark-mode .theme-switch-wrapper img {
+    filter: invert(1);
+}
+
+/* ============================
+   Auth Container Styles
+============================ */
+.auth-container {
+    max-width: 400px; /* Increased max width */
+    margin: 5rem auto 2rem; /* Centered */
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+body.dark-mode .auth-container {
+    background-color: rgba(30, 30, 30, 0.9);
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+/* ============================
+   Form Styles
+============================ */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: inherit;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--primary-color-light);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea {
+    border-color: var(--secondary-color-dark);
+    background-color: var(--secondary-color-dark);
+    color: var(--text-color-dark);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--secondary-color-light);
+    box-shadow: 0 0 5px var(--secondary-color-light);
+}
+
+body.dark-mode .form-group input:focus,
+body.dark-mode .form-group textarea:focus {
+    border-color: var(--secondary-color-dark);
+    box-shadow: 0 0 5px var(--secondary-color-dark);
+}
+
+/* ============================
+   Button Styles
+============================ */
+button,
+input[type="submit"] {
+    background-color: var(--button-color-light);
+    color: var(--button-text-light);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+body.dark-mode button,
+body.dark-mode input[type="submit"] {
+    background-color: var(--button-color-dark);
+    color: var(--button-text-dark);
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: var(--secondary-color-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode button:hover,
+body.dark-mode input[type="submit"]:hover {
+    background-color: var(--secondary-color-dark);
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.2);
+}
+
+/* ============================
+   Upload Container Styles
+============================ */
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px); /* Adjust to center within the viewport */
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    width: 80%;
+    max-width: 600px; /* Limits the width of the form */
+    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.upload-container h2 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color-light);
+}
+
+.upload-container input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 2px solid var(--primary-color-light);
+    border-radius: var(--border-radius);
+}
+
+/* ============================
+   Flash Messages Styles
+============================ */
+.flash-messages {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    transition: background-color var(--transition-speed);
+}
+
+.success {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+}
+
+.error {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--error-color);
+    border: 1px solid var(--error-color);
+}
+
+/* ============================
+   Additional Navigation Styles
+============================ */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

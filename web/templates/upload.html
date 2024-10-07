@@ -1,33 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>File Uploader</title>
-        <link rel="stylesheet" href="/static/css/styles.css">
-    </head>
-    <body>
-        <header>
-            <div class="container">
-                <nav>
-                    <ul>
-                        <li><a href="{{ url_for('uploadfile') }}">Home</a></li>
-                        <li><a href="{{ url_for('login') }}">Login</a></li> 
-                        <li><a href="{{ url_for('signup') }}">Sign Up</a></li> 
-                    </ul>
-                </nav>
-            </div>
-        </header>
-        
-        <main>
-            <form
-                action="{{ url_for('uploadfile') }}"  
-                method="POST"
-                enctype="multipart/form-data">
-                <input type="file" name="file" multiple />
-                <input type="submit" value="Upload Files"/>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Upload your files to the platform">
+    <meta name="keywords" content="file upload, upload, user files">
+    <title>File Uploader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <ul class="nav-left">
+                    <li><a href="{{ url_for('frontend.index') }}">Home</a></li>
+                </ul>
+                <ul class="nav-right">
+                    <li id="username-display"></li>
+                    <li><a href="{{ url_for('frontend.signin') }}">Sign In</a></li>
+                    <li><a href="{{ url_for('frontend.signup') }}">Sign Up</a></li>
+                    <li><a href="#" id="logout-button">Logout</a></li> 
+                    <li class="theme-switch-wrapper">
+                        <button id="dark-mode-toggle" aria-label="Switch to dark mode">
+                            <img src="{{ url_for('static', filename='images/moon-icon.svg') }}" alt="Moon Icon" />
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="flash-messages" id="flash-messages">
+
+        </div>
+
+        <div class="upload-container">
+            <form id="upload-form" enctype="multipart/form-data">
+                <h2>Upload Your File</h2>
+                <input type="file" name="file" id="file" aria-label="Upload your file" multiple required />
+                <input type="submit" value="Upload Files" />
             </form>
-        </main>
-    </body>
+            <p>
+                By submitting data above, you are agreeing to our
+                <a href="https://cloud.google.com/terms/secops" target="_blank">Terms of Service</a> and
+                <a href="https://cloud.google.com/terms/secops/privacy-notice" target="_blank">Privacy Notice</a>,
+                and to the sharing of your Sample submission with the security community.
+                Please do not submit any personal information; we are not responsible for the contents of your submission.
+            </p>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/themeToggle.js') }}"></script>
+    <script>
+        // Get the username from localStorage and display it
+        const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('username-display').innerText = `Logged in as: ${username}`;
+            document.getElementById('logout-button').style.display = 'inline';  // Show Logout button
+            document.querySelector('a[href="{{ url_for("frontend.signin") }}"]').style.display = 'none';  // Hide Sign In and Sign Up buttons
+            document.querySelector('a[href="{{ url_for("frontend.signup") }}"]').style.display = 'none';  
+        } else {
+            document.getElementById('logout-button').style.display = 'none';  // Hide Logout button if not logged in
+        }
+
+        // Handle the event when the upload file button is clicked
+        document.getElementById('upload-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const files = document.getElementById('file').files;
+            if (files.length === 0) {
+                alert('Please select at least one file to upload.');
+                return;
+            }
+        
+            const formData = new FormData();
+            for (let i = 0; i < files.length; i++) {
+                formData.append('file', files[i]);
+            }
+
+            const response = await fetch('{{ url_for("upload_bp.upload_files") }}', {
+                method: 'POST',
+                body: formData,
+            });
+        
+            const data = await response.json();
+            const flashDiv = document.getElementById('flash-messages');
+        
+            if (data.status === 'success') {
+                flashDiv.innerHTML = `<p class="success">${data.message}</p>`;
+                document.getElementById('upload-form').reset();  // Reset form after successful upload
+            } else {
+                flashDiv.innerHTML = `<p class="error">${data.message}</p>`;
+            }
+        });       
+        
+        // Handle logout
+        document.getElementById('logout-button').addEventListener('click', async function(e) {
+            e.preventDefault();
+
+            try {
+                const response = await fetch('/api/auth/logout', {
+                    method: 'POST'
+                });
+
+                const data = await response.json();
+                if (data.status === 'success') {
+                    // Remove token from localStorage
+                    localStorage.removeItem('access_token');
+                    localStorage.removeItem('refresh_token');
+                    localStorage.removeItem('username');  // Remove username if stored
+                    alert('Successfully logged out.');
+                    window.location.href = '{{ url_for('frontend.index') }}';  // Redirect to the homepage
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Error during logout:', error);
+                alert('An error occurred during logout.');
+            }
+        });
+    </script>
+</body>
+
 </html>
