@@ -1,0 +1,218 @@
+2024-10-01 06:05:30,763 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 06:10:33,426 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 06:15:36,577 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 06:20:39,303 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 06:25:42,064 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 06:30:44,733 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 06:35:47,329 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 06:40:50,039 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 06:45:52,806 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 06:50:55,454 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 06:55:57,868 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 07:01:00,510 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 07:06:03,113 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 07:11:05,826 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 07:16:08,784 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 07:16:08,784 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 07:16:08,789 [root] CRITICAL: CuckooCriticalError: VirtualBox VBoxManage not found at specified path "/usr/bin/VBoxManage"
+2024-10-01 07:18:21,299 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 07:18:21,299 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 07:18:21,305 [root] CRITICAL: CuckooCriticalError: VirtualBox VBoxManage not found at specified path "/usr/bin/VBoxManage"
+2024-10-01 07:21:38,779 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 07:21:38,779 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 07:26:45,250 [root] CRITICAL: CuckooCriticalError: Please update your configuration. Unable to shut 'cuckoo1' down or find the machine in its proper state: Timeout hit while for machine cuckoo1 to change status
+2024-10-01 07:30:38,871 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 07:30:38,872 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 07:35:44,745 [root] CRITICAL: CuckooCriticalError: Please update your configuration. Unable to shut 'cuckoo1' down or find the machine in its proper state: Timeout hit while for machine cuckoo1 to change status
+2024-10-01 07:40:49,239 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 07:40:49,239 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 07:45:54,935 [root] CRITICAL: CuckooCriticalError: Please update your configuration. Unable to shut 'cuckoo1' down or find the machine in its proper state: Timeout hit while for machine cuckoo1 to change status
+2024-10-01 07:50:57,777 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 07:50:57,777 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 07:57:06,544 [root] CRITICAL: CuckooCriticalError: Please update your configuration. Unable to shut 'cuckoo1' down or find the machine in its proper state: Timeout hit while for machine cuckoo1 to change status
+2024-10-01 07:59:13,117 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 07:59:13,118 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 08:04:18,808 [root] CRITICAL: CuckooCriticalError: Please update your configuration. Unable to shut 'cuckoo1' down or find the machine in its proper state: Timeout hit while for machine cuckoo1 to change status
+2024-10-01 08:09:21,791 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 08:09:21,791 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 08:14:27,534 [root] CRITICAL: CuckooCriticalError: Please update your configuration. Unable to shut 'cuckoo1' down or find the machine in its proper state: Timeout hit while for machine cuckoo1 to change status
+2024-10-01 08:19:31,403 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 08:19:31,403 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 08:24:37,062 [root] CRITICAL: CuckooCriticalError: Please update your configuration. Unable to shut 'cybersec_default_1727711225143_35755' down or find the machine in its proper state: Timeout hit while for machine cybersec_default_1727711225143_35755 to change status
+2024-10-01 08:29:40,042 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 08:29:40,042 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 08:34:45,649 [root] CRITICAL: CuckooCriticalError: Please update your configuration. Unable to shut 'cybersec_default_1727711225143_35755' down or find the machine in its proper state: Timeout hit while for machine cybersec_default_1727711225143_35755 to change status
+2024-10-01 08:39:48,377 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 08:39:48,377 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 08:44:53,972 [root] CRITICAL: CuckooCriticalError: Please update your configuration. Unable to shut 'cybersec_default_1727711225143_35755' down or find the machine in its proper state: Timeout hit while for machine cybersec_default_1727711225143_35755 to change status
+2024-10-01 08:49:57,370 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 08:49:57,370 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 11:09:09,362 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 11:09:15,389 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.1.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 11:10:57,073 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 11:10:57,792 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 11:10:57,792 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 11:11:01,337 [root] CRITICAL: CuckooCriticalError: machinery virtualbox does not support machinery screenshots
+2024-10-01 11:13:36,383 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 11:13:37,071 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 11:13:37,072 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 11:13:37,496 [lib.cuckoo.core.machinery_manager] INFO: Loaded 1 machine
+2024-10-01 11:13:37,575 [lib.cuckoo.core.machinery_manager] INFO: max_vmstartup_count for BoundedSemaphore = 5
+2024-10-01 11:13:37,576 [lib.cuckoo.core.scheduler] INFO: Waiting for analysis tasks
+2024-10-01 11:20:58,351 [lib.cuckoo.core.machinery_manager] INFO: Task #1: found useable machine cybersec_default_1727711225143_35755 (arch=x64, platform=windows)
+2024-10-01 11:20:58,351 [lib.cuckoo.core.scheduler] INFO: Task #1: Processing task
+2024-10-01 11:20:58,375 [lib.cuckoo.core.analysis_manager] INFO: Task #1: Starting analysis of FILE '/tmp/cuckoo-tmp/upload_01r4feyx/doc.exe'
+2024-10-01 11:21:32,986 [lib.cuckoo.core.analysis_manager] INFO: Task #1: Enabled route 'none'.
+2024-10-01 11:21:32,987 [modules.auxiliary.QemuScreenshots] INFO: QEMU screenshots module loaded
+2024-10-01 11:21:32,990 [lib.cuckoo.common.integrations.parse_pe] ERROR: PE type not recognised: 'DOS Header magic not found.'
+2024-10-01 11:21:33,002 [lib.cuckoo.core.guest] INFO: Task #1: Starting analysis on guest (id=cybersec_default_1727711225143_35755, ip=192.168.23.133)
+2024-10-01 11:21:35,984 [lib.cuckoo.core.guest] INFO: Task #1: Guest is running CAPE Agent 0.18 (id=cybersec_default_1727711225143_35755, ip=192.168.23.133)
+2024-10-01 11:21:36,712 [lib.cuckoo.core.guest] INFO: Task #1: Uploading script files to guest (id=cybersec_default_1727711225143_35755, ip=192.168.23.133)
+2024-10-01 11:21:39,015 [lib.cuckoo.core.guest] INFO: Task #1: Analysis failed (id=cybersec_default_1727711225143_35755, ip=192.168.23.133)
+2024-10-01 11:21:40,290 [lib.cuckoo.core.analysis_manager] INFO: Task #1: Completed analysis successfully.
+2024-10-01 11:21:40,294 [lib.cuckoo.core.analysis_manager] INFO: Task #1: analysis procedure completed
+2024-10-01 11:22:52,052 [lib.cuckoo.core.scheduler] INFO: Task #2: Processing task
+2024-10-01 11:22:52,063 [lib.cuckoo.core.analysis_manager] INFO: Task #2: File already exists at '/opt/CAPEv2/storage/binaries/131f95c51cc819465fa1797f6ccacf9d494aaaff46fa3eac73ae63ffbdfd8267'
+2024-10-01 11:22:52,065 [lib.cuckoo.core.analysis_manager] INFO: Task #2: Completed analysis successfully.
+2024-10-01 11:22:52,068 [lib.cuckoo.core.analysis_manager] INFO: Task #2: analysis procedure completed
+2024-10-01 11:29:33,330 [lib.cuckoo.core.scheduler] INFO: received signal 'SIGTERM', waiting for remaining analysis to finish before stopping
+2024-10-01 11:29:33,693 [lib.cuckoo.core.scheduler] INFO: Waiting for running analyses to finish.
+2024-10-01 11:29:36,488 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 11:29:37,621 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 11:29:37,621 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 11:29:37,878 [lib.cuckoo.core.machinery_manager] INFO: Loaded 1 machine
+2024-10-01 11:29:37,899 [lib.cuckoo.core.machinery_manager] INFO: max_vmstartup_count for BoundedSemaphore = 5
+2024-10-01 11:29:37,900 [lib.cuckoo.core.scheduler] INFO: Waiting for analysis tasks
+2024-10-01 11:30:11,118 [lib.cuckoo.core.machinery_manager] INFO: Task #3: found useable machine cybersec_default_1727711225143_35755 (arch=x64, platform=windows)
+2024-10-01 11:30:11,118 [lib.cuckoo.core.scheduler] INFO: Task #3: Processing task
+2024-10-01 11:30:11,141 [lib.cuckoo.core.analysis_manager] INFO: Task #3: File already exists at '/opt/CAPEv2/storage/binaries/131f95c51cc819465fa1797f6ccacf9d494aaaff46fa3eac73ae63ffbdfd8267'
+2024-10-01 11:30:11,142 [lib.cuckoo.core.analysis_manager] INFO: Task #3: Starting analysis of FILE '/tmp/cuckoo-tmp/upload_on_h84qx/doc.exe'
+2024-10-01 11:30:26,152 [lib.cuckoo.core.analysis_manager] INFO: Task #3: Enabled route 'none'.
+2024-10-01 11:30:26,153 [modules.auxiliary.QemuScreenshots] INFO: QEMU screenshots module loaded
+2024-10-01 11:30:26,154 [lib.cuckoo.common.integrations.parse_pe] ERROR: PE type not recognised: 'DOS Header magic not found.'
+2024-10-01 11:30:26,164 [lib.cuckoo.core.guest] INFO: Task #3: Starting analysis on guest (id=cybersec_default_1727711225143_35755, ip=192.168.23.133)
+2024-10-01 11:30:29,268 [lib.cuckoo.core.guest] INFO: Task #3: Guest is running CAPE Agent 0.18 (id=cybersec_default_1727711225143_35755, ip=192.168.23.133)
+2024-10-01 11:30:30,010 [lib.cuckoo.core.guest] INFO: Task #3: Uploading script files to guest (id=cybersec_default_1727711225143_35755, ip=192.168.23.133)
+2024-10-01 11:30:33,278 [lib.cuckoo.core.guest] INFO: Task #3: Analysis failed (id=cybersec_default_1727711225143_35755, ip=192.168.23.133)
+2024-10-01 11:30:34,537 [lib.cuckoo.core.analysis_manager] INFO: Task #3: Completed analysis successfully.
+2024-10-01 11:30:34,539 [lib.cuckoo.core.analysis_manager] INFO: Task #3: analysis procedure completed
+2024-10-01 11:40:18,052 [lib.cuckoo.core.scheduler] INFO: received signal 'SIGTERM', waiting for remaining analysis to finish before stopping
+2024-10-01 11:40:18,193 [lib.cuckoo.core.scheduler] INFO: Waiting for running analyses to finish.
+2024-10-01 11:40:20,096 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 11:40:20,819 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 11:40:20,819 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 11:40:22,137 [lib.cuckoo.core.machinery_manager] INFO: Loaded 1 machine
+2024-10-01 11:40:22,154 [lib.cuckoo.core.machinery_manager] INFO: max_vmstartup_count for BoundedSemaphore = 5
+2024-10-01 11:40:22,155 [lib.cuckoo.core.scheduler] INFO: Waiting for analysis tasks
+2024-10-01 11:41:37,609 [lib.cuckoo.core.machinery_manager] INFO: Task #4: found useable machine cybersec_windows_10 (arch=x64, platform=windows)
+2024-10-01 11:41:37,610 [lib.cuckoo.core.scheduler] INFO: Task #4: Processing task
+2024-10-01 11:41:37,628 [lib.cuckoo.core.analysis_manager] INFO: Task #4: File already exists at '/opt/CAPEv2/storage/binaries/131f95c51cc819465fa1797f6ccacf9d494aaaff46fa3eac73ae63ffbdfd8267'
+2024-10-01 11:41:37,629 [lib.cuckoo.core.analysis_manager] INFO: Task #4: Starting analysis of FILE '/tmp/cuckoo-tmp/upload_u9jm71sb/doc.exe'
+2024-10-01 11:41:45,741 [lib.cuckoo.core.analysis_manager] INFO: Task #4: Enabled route 'none'.
+2024-10-01 11:41:45,742 [modules.auxiliary.QemuScreenshots] INFO: QEMU screenshots module loaded
+2024-10-01 11:41:45,742 [lib.cuckoo.common.integrations.parse_pe] ERROR: PE type not recognised: 'DOS Header magic not found.'
+2024-10-01 11:41:45,751 [lib.cuckoo.core.guest] INFO: Task #4: Starting analysis on guest (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 11:41:48,712 [lib.cuckoo.core.guest] INFO: Task #4: Guest is running CAPE Agent 0.18 (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 11:41:49,505 [lib.cuckoo.core.guest] INFO: Task #4: Uploading script files to guest (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 11:41:50,616 [lib.cuckoo.core.guest] INFO: Task #4: Analysis failed (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 11:41:51,856 [lib.cuckoo.core.analysis_manager] INFO: Task #4: Completed analysis successfully.
+2024-10-01 11:41:51,858 [lib.cuckoo.core.analysis_manager] INFO: Task #4: analysis procedure completed
+2024-10-01 11:47:27,478 [lib.cuckoo.core.scheduler] INFO: received signal 'SIGTERM', waiting for remaining analysis to finish before stopping
+2024-10-01 11:47:28,449 [lib.cuckoo.core.scheduler] INFO: Waiting for running analyses to finish.
+2024-10-01 11:47:31,108 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 11:47:32,165 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 11:47:32,165 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 11:47:33,489 [lib.cuckoo.core.machinery_manager] INFO: Loaded 1 machine
+2024-10-01 11:47:33,505 [lib.cuckoo.core.machinery_manager] INFO: max_vmstartup_count for BoundedSemaphore = 5
+2024-10-01 11:47:33,506 [lib.cuckoo.core.scheduler] INFO: Waiting for analysis tasks
+2024-10-01 11:47:45,579 [lib.cuckoo.core.machinery_manager] INFO: Task #5: found useable machine cybersec_windows_10 (arch=x64, platform=windows)
+2024-10-01 11:47:45,579 [lib.cuckoo.core.scheduler] INFO: Task #5: Processing task
+2024-10-01 11:47:45,599 [lib.cuckoo.core.analysis_manager] INFO: Task #5: File already exists at '/opt/CAPEv2/storage/binaries/131f95c51cc819465fa1797f6ccacf9d494aaaff46fa3eac73ae63ffbdfd8267'
+2024-10-01 11:47:45,600 [lib.cuckoo.core.analysis_manager] INFO: Task #5: Starting analysis of FILE '/tmp/cuckoo-tmp/upload_0kpj6il3/doc.exe'
+2024-10-01 11:47:53,214 [lib.cuckoo.core.analysis_manager] INFO: Task #5: Enabled route 'none'.
+2024-10-01 11:47:53,214 [modules.auxiliary.QemuScreenshots] INFO: QEMU screenshots module loaded
+2024-10-01 11:47:53,215 [lib.cuckoo.common.integrations.parse_pe] ERROR: PE type not recognised: 'DOS Header magic not found.'
+2024-10-01 11:47:53,226 [lib.cuckoo.core.guest] INFO: Task #5: Starting analysis on guest (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 11:47:56,168 [lib.cuckoo.core.guest] INFO: Task #5: Guest is running CAPE Agent 0.18 (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 11:47:56,906 [lib.cuckoo.core.guest] INFO: Task #5: Uploading script files to guest (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 11:47:58,409 [lib.cuckoo.core.guest] INFO: Task #5: Analysis failed (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 11:47:59,667 [lib.cuckoo.core.analysis_manager] INFO: Task #5: Completed analysis successfully.
+2024-10-01 11:47:59,669 [lib.cuckoo.core.analysis_manager] INFO: Task #5: analysis procedure completed
+2024-10-01 11:57:46,959 [lib.cuckoo.core.scheduler] INFO: received signal 'SIGTERM', waiting for remaining analysis to finish before stopping
+2024-10-01 11:57:47,325 [lib.cuckoo.core.scheduler] INFO: Waiting for running analyses to finish.
+2024-10-01 11:57:49,850 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 11:57:50,501 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 11:57:50,501 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 11:57:51,857 [lib.cuckoo.core.machinery_manager] INFO: Loaded 1 machine
+2024-10-01 11:57:51,873 [lib.cuckoo.core.machinery_manager] INFO: max_vmstartup_count for BoundedSemaphore = 5
+2024-10-01 11:57:51,875 [lib.cuckoo.core.scheduler] INFO: Waiting for analysis tasks
+2024-10-01 11:58:09,989 [lib.cuckoo.core.machinery_manager] INFO: Task #6: found useable machine cybersec_windows_10 (arch=x64, platform=windows)
+2024-10-01 11:58:09,989 [lib.cuckoo.core.scheduler] INFO: Task #6: Processing task
+2024-10-01 11:58:10,017 [lib.cuckoo.core.analysis_manager] INFO: Task #6: File already exists at '/opt/CAPEv2/storage/binaries/131f95c51cc819465fa1797f6ccacf9d494aaaff46fa3eac73ae63ffbdfd8267'
+2024-10-01 11:58:10,017 [lib.cuckoo.core.analysis_manager] INFO: Task #6: Starting analysis of FILE '/tmp/cuckoo-tmp/upload_kee2bmlb/doc.exe'
+2024-10-01 11:58:17,658 [lib.cuckoo.core.analysis_manager] INFO: Task #6: Enabled route 'none'.
+2024-10-01 11:58:17,658 [modules.auxiliary.QemuScreenshots] INFO: QEMU screenshots module loaded
+2024-10-01 11:58:17,659 [lib.cuckoo.common.integrations.parse_pe] ERROR: PE type not recognised: 'DOS Header magic not found.'
+2024-10-01 11:58:17,668 [lib.cuckoo.core.guest] INFO: Task #6: Starting analysis on guest (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 11:58:20,687 [lib.cuckoo.core.guest] INFO: Task #6: Guest is running CAPE Agent 0.18 (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 11:58:21,521 [lib.cuckoo.core.guest] INFO: Task #6: Uploading script files to guest (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 11:58:30,484 [lib.cuckoo.core.resultserver] INFO: Task 6: Process 7192 (parent 4564): cmd.exe, path C:\Windows\SysWOW64\cmd.exe
+2024-10-01 11:58:41,743 [lib.cuckoo.core.guest] INFO: Task #6: Analysis completed successfully (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 11:58:43,009 [lib.cuckoo.core.analysis_manager] INFO: Task #6: Completed analysis successfully.
+2024-10-01 11:58:43,011 [lib.cuckoo.core.analysis_manager] INFO: Task #6: analysis procedure completed
+2024-10-01 12:07:26,565 [lib.cuckoo.core.machinery_manager] INFO: Task #7: found useable machine cybersec_windows_10 (arch=x64, platform=windows)
+2024-10-01 12:07:26,565 [lib.cuckoo.core.scheduler] INFO: Task #7: Processing task
+2024-10-01 12:07:26,577 [lib.cuckoo.core.analysis_manager] INFO: Task #7: Starting analysis of FILE '/tmp/cuckoo-tmp/upload_f2kl9cek/a7e91c5f61c76363722d.exe'
+2024-10-01 12:07:34,637 [lib.cuckoo.core.analysis_manager] INFO: Task #7: Enabled route 'none'.
+2024-10-01 12:07:34,638 [modules.auxiliary.QemuScreenshots] INFO: QEMU screenshots module loaded
+2024-10-01 12:07:34,656 [lib.cuckoo.core.guest] INFO: Task #7: Starting analysis on guest (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 12:07:37,639 [lib.cuckoo.core.guest] INFO: Task #7: Guest is running CAPE Agent 0.18 (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 12:07:38,924 [lib.cuckoo.core.guest] INFO: Task #7: Uploading script files to guest (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 12:07:48,512 [lib.cuckoo.core.resultserver] INFO: Task 7: Process 7804 (parent 4564): a7e91c5f61c76363722d.exe, path C:\Windows\Temp\a7e91c5f61c76363722d.exe
+                                                                                                                                                                                                                                                                                                                                                             2024-10-01 15:30:00,450 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 15:30:10,146 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.23.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 15:35:13,221 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 15:35:14,285 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.23.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 15:40:16,195 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 15:40:16,820 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.23.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 15:45:18,624 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 15:45:19,401 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.23.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 15:50:21,098 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 15:50:21,869 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.23.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 15:52:08,285 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 15:52:08,895 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 15:52:08,895 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 15:52:09,177 [lib.cuckoo.core.machinery_manager] INFO: Loaded 1 machine
+2024-10-01 15:52:09,222 [lib.cuckoo.core.machinery_manager] INFO: max_vmstartup_count for BoundedSemaphore = 5
+2024-10-01 15:52:09,223 [lib.cuckoo.core.scheduler] INFO: Waiting for analysis tasks
+2024-10-01 16:05:38,193 [lib.cuckoo.core.scheduler] INFO: received signal 'SIGTERM', waiting for remaining analysis to finish before stopping
+2024-10-01 16:05:39,026 [lib.cuckoo.core.scheduler] INFO: Waiting for running analyses to finish.
+2024-10-01 16:05:40,800 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 16:05:41,443 [lib.cuckoo.core.machinery_manager] INFO: Using MachineryManager[virtualbox] with max_machines_count=10
+2024-10-01 16:05:41,443 [lib.cuckoo.core.scheduler] INFO: Creating scheduler with max_analysis_count=unlimited
+2024-10-01 16:05:41,688 [lib.cuckoo.core.machinery_manager] INFO: Loaded 1 machine
+2024-10-01 16:05:41,704 [lib.cuckoo.core.machinery_manager] INFO: max_vmstartup_count for BoundedSemaphore = 5
+2024-10-01 16:05:41,706 [lib.cuckoo.core.scheduler] INFO: Waiting for analysis tasks
+2024-10-01 16:08:30,803 [lib.cuckoo.core.machinery_manager] INFO: Task #40: found useable machine cybersec_windows_10 (arch=x64, platform=windows)
+2024-10-01 16:08:30,803 [lib.cuckoo.core.scheduler] INFO: Task #40: Processing task
+2024-10-01 16:08:30,825 [lib.cuckoo.core.analysis_manager] INFO: Task #40: File already exists at '/opt/CAPEv2/storage/binaries/a7e91c5f61c76363722d1e31fa302174ea041cab8470b40c8c65cc6524bbd6e0'
+2024-10-01 16:08:30,826 [lib.cuckoo.core.analysis_manager] INFO: Task #40: Starting analysis of FILE '/tmp/cuckoo-tmp/upload_saxnwn7a/a7e91c5f61c76363722d.exe'
+2024-10-01 16:09:29,205 [lib.cuckoo.core.analysis_manager] INFO: Task #40: Enabled route 'none'.
+2024-10-01 16:09:29,206 [modules.auxiliary.QemuScreenshots] INFO: QEMU screenshots module loaded
+2024-10-01 16:09:29,230 [lib.cuckoo.core.guest] INFO: Task #40: Starting analysis on guest (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 16:09:32,506 [lib.cuckoo.core.guest] INFO: Task #40: Guest is running CAPE Agent 0.18 (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 16:09:33,672 [lib.cuckoo.core.guest] INFO: Task #40: Uploading script files to guest (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 16:09:51,660 [lib.cuckoo.core.resultserver] INFO: Task 40: Process 7588 (parent 4564): a7e91c5f61c76363722d.exe, path C:\Windows\Temp\a7e91c5f61c76363722d.exe
+2024-10-01 16:10:24,436 [lib.cuckoo.core.guest] INFO: Task #40: Analysis completed successfully (id=cybersec_windows_10, ip=192.168.23.133)
+2024-10-01 16:10:25,731 [lib.cuckoo.core.analysis_manager] INFO: Task #40: Completed analysis successfully.
+2024-10-01 16:10:25,733 [lib.cuckoo.core.analysis_manager] INFO: Task #40: analysis procedure completed
+2024-10-01 16:32:35,333 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 16:32:37,627 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.23.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 16:37:40,152 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 16:37:41,014 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.23.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 16:42:43,024 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 16:42:43,708 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.23.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 16:47:45,413 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 16:47:46,221 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.23.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP
+2024-10-01 23:47:10,596 [modules.auxiliary.QemuScreenshots] ERROR: No module named 'libvirt'
+2024-10-01 23:47:11,750 [root] CRITICAL: CuckooCriticalError: Unable to bind ResultServer on 192.168.23.1:2042 [Errno 99] Cannot assign requested address. This usually happens when you start Cuckoo without bringing up the virtual interface associated with the ResultServer IP address. Please refer to https://cuckoo.sh/docs/faq/#troubles-problem for more informationOne more reason this might happen is if you don't correctly set the IP of the resultserver in cuckoo.conf.Make sure the resultserver IP is set to the host IP

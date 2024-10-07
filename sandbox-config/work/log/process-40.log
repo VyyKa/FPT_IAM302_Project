@@ -1,0 +1,5 @@
+2024-10-01 16:10:31,223 [Task 40] [lib.cuckoo.common.integrations.virustotal] ERROR: VT: Request failed
+2024-10-01 16:10:32,051 [Task 40] [lib.cuckoo.common.integrations.capa] ERROR: CAPA ValidationError 1 validation error for CapeReport
+behavior.processes.0.file_activities
+  Extra inputs are not permitted [type=extra_forbidden, input_value={'read_files': [], 'write... [], 'delete_files': []}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.4/v/extra_forbidden
