@@ -5,3 +5,5 @@ web/uploads/**
 web/instance/**
 
 web/venv/**
+
+diagrams/venv/**
