@@ -4,13 +4,14 @@ from diagrams.digitalocean.network import ManagedVpn, InternetGateway
 from diagrams.generic.os import Windows, LinuxGeneral
 from diagrams.generic.virtualization import Virtualbox
 from diagrams.generic.compute import Rack
+from diagrams.aws.ml import MachineLearning
 from diagrams.custom import Custom
 from diagrams.aws.database import RDS
 from diagrams.aws.network import ELB
 
 graph_attr = {
     "pad": "2.0",
-    "splines": "ortho",
+    "splines": "ortho", # curved OR ortho
     "nodesep": "0.60",
     "ranksep": "0.75",
     "fontname": "Sans-Serif",
@@ -59,6 +60,8 @@ with Diagram(
 
         api = Containers("UI/API")
 
+        ml = MachineLearning("ML")
+
     with Cluster("Virtualization"):
         with Cluster("Guest VMs", direction="TB"):
             guests = [Windows("Windows 10"), LinuxGeneral("Linux")]
@@ -68,7 +71,7 @@ with Diagram(
     # Edge
     virtualbox >> Edge(reverse=True) >> hypervisor >> Edge(reverse=True) >> guests
 
-    api >> Edge(reverse=True) >> cuckoo
+    api >> Edge(label="send request") >> cuckoo >> Edge(label="report") >> api
 
     (
         vagrant
@@ -77,7 +80,7 @@ with Diagram(
         >> Edge(label="socket\ncommunication", reverse=True, color="darkorange")
         >> socket_server
         >> Edge(label="socket\ncommunication", reverse=True, color="darkorange")
-        << cuckoo
+        << cuckoo >> Edge(label="report", color="darkgreen") >> ml >> Edge(color="darkgreen") >> api
     )
 
     (
