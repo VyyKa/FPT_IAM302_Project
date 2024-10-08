@@ -202,15 +202,15 @@ setup_capev2_guest_vm() {
     wget https://gist.githubusercontent.com/nquangit/83633b69f28757217b1222d112b1a4c3/raw/67027000fd5f89b5a061c6a916b0d5c9ef3ad66a/Vagrant -O Vagrantfile
 
     # Replace the placeholder with the actual values
-    sed -i "s/REPLACE_VM_NAME/$VM_NAME/g" Vagrant
-    sed -i "s/REPLACE_VM_CPU/$VM_CPUS/g" Vagrant
-    sed -i "s/REPLACE_VM_RAM/$VM_RAM/g" Vagrant
-    sed -i "s/REPLACE_VM_NETWORK/$VM_NETWORK/g" Vagrant
-    sed -i "s/REPLACE_VM_ADAPTER/$VM_ADAPTER/g" Vagrant
-    sed -i "s/REPLACE_VM_IP/$VM_IP/g" Vagrant
-    sed -i "s/REPLACE_VM_SUBNET/$VM_SUBNET/g" Vagrant
-    sed -i "s/REPLACE_VM_GW/$VM_GW/g" Vagrant
-    sed -i "s/REPLACE_VM_DNS/$VM_DNS/g" Vagrant
+    sed -i "s/REPLACE_VM_NAME/$VM_NAME/g" Vagrantfile
+    sed -i "s/REPLACE_VM_CPU/$VM_CPUS/g" Vagrantfile
+    sed -i "s/REPLACE_VM_RAM/$VM_RAM/g" Vagrantfile
+    sed -i "s/REPLACE_VM_NETWORK/$VM_NETWORK/g" Vagrantfile
+    sed -i "s/REPLACE_VM_ADAPTER/$VM_ADAPTER/g" Vagrantfile
+    sed -i "s/REPLACE_VM_IP/$VM_IP/g" Vagrantfile
+    sed -i "s/REPLACE_VM_SUBNET/$VM_SUBNET/g" Vagrantfile
+    sed -i "s/REPLACE_VM_GW/$VM_GW/g" Vagrantfile
+    sed -i "s/REPLACE_VM_DNS/$VM_DNS/g" Vagrantfile
 
     # Start the VM
     echo -e "${BLUE}Starting the CAPEv2 Guest VM. Waiting...${NC}"
