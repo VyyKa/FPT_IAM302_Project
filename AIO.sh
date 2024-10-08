@@ -30,13 +30,13 @@ CURRENT_USER=${SUDO_USER:-$(whoami)}
 
 # List of dependencies
 dependencies=(
+    "virtualbox"
     "curl"
     "git"
     "wget"
     "vim"
     "build-essential"
     "vagrant"
-    "virtualbox"
     "ovmf"
 )
 
