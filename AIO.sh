@@ -214,7 +214,7 @@ setup_capev2_guest_vm() {
 
     # Start the VM
     echo -e "${BLUE}Starting the CAPEv2 Guest VM. Waiting...${NC}"
-    vagrant up --provider=virtualbox --provision
+    sudo -u $CURRENT_USER vagrant up --provider=virtualbox --provision
 
     # Notify user that the CAPEv2 Guest VM is set up
     echo -e "${GREEN}CAPEv2 Guest VM is set up.${NC}"
