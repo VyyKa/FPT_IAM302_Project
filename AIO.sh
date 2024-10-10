@@ -126,9 +126,9 @@ install_vagrant_plugins() {
     # Install Vagrant plugins
     vagrant plugin install vagrant-reload > /dev/null 2>&1
     vagrant plugin install vagrant-vbguest > /dev/null 2>&1
-    vagrant plugin install vagrant-winrm > /dev/null 2>&1
-    vagrant plugin install vagrant-winrm-fs > /dev/null 2>&1
-    vagrant plugin install vagrant-winrm-elevated > /dev/null 2>&1
+    vagrant plugin install winrm > /dev/null 2>&1
+    vagrant plugin install winrm-fs > /dev/null 2>&1
+    vagrant plugin install winrm-elevated > /dev/null 2>&1
     
     # Notify user that the plugins are installed
     echo -e "${GREEN}All Vagrant plugins are installed.${NC}"
