@@ -132,7 +132,7 @@ install_vagrant_plugins() {
     )
 
     # Check if Vagrant is installed with vagrant plugin list
-    if ! vagrant plugin list > /dev/null 2>&1; then
+    if ! sudo -u $CURRENT_USER vagrant plugin list > /dev/null 2>&1; then
         echo -e "${RED}Vagrant is not installed. Please install Vagrant first.${NC}"
         exit 1
     fi
@@ -145,7 +145,7 @@ install_vagrant_plugins() {
             echo -e "${GREEN}✔ $plugin is already installed.${NC}"
         else
             echo -e "${YELLOW}➜ Installing $plugin...${NC}"
-            vagrant plugin install "$plugin" > /dev/null 2>&1
+            sudo -u $CURRENT_USER vagrant plugin install "$plugin" > /dev/null 2>&1
             echo -e "${GREEN}✔ $plugin is installed.${NC}"
         fi
     done
@@ -158,12 +158,21 @@ install_vagrant_plugins() {
 install_docker() {
     echo -e "${BLUE}Installing Docker...${NC}"
     
-    # Install Docker
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    chown "$CURRENT_USER":"$CURRENT_USER" get-docker.sh
-    sh get-docker.sh > /dev/null 2>&1
-    rm get-docker.sh
-    
+    # Check if Docker is already installed
+    if command -v docker > /dev/null; then
+        echo -e "${GREEN}✔ Docker is already installed.${NC}"
+    else
+        echo -e "${YELLOW}➜ Installing Docker...${NC}"
+        # Install Docker
+        curl -fsSL https://get.docker.com -o get-docker.sh
+        chown "$CURRENT_USER":"$CURRENT_USER" get-docker.sh
+        sh get-docker.sh > /dev/null 2>&1
+        rm get-docker.sh
+
+        # Notify user that Docker is installed
+        echo -e "${GREEN}✔ Docker is installed.${NC}"
+    fi
+
     # Add user to docker group
     usermod -aG docker "$CURRENT_USER"
     
@@ -175,6 +184,7 @@ install_docker() {
 create_host_only_network() {
     echo -e "${BLUE}Creating host-only network in VirtualBox...${NC}"
     
+    # Check to allow all networks address to use by the host-only network
     if grep -q "* 0.0.0.0/0 ::/0" /etc/vbox/networks.conf > /dev/null; then
         echo "Networks are already configured."
     else
