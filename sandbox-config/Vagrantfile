@@ -13,6 +13,10 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "gusztavvargadr/windows-10"
+  config.vm.boot_timeout = 99999999
+  
+  # WinRM
+  # config.winrm.host = "REPLACE_VM_IP"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -69,12 +73,12 @@ Vagrant.configure("2") do |config|
   # SHELL
   
   config.vm.provider "virtualbox" do |vb|
-    vb.name = "cybersec_windows_10"
-    vb.cpus = 2
-    vb.memory = "4096"
+    vb.name = "REPLACE_VM_NAME"
+    vb.cpus = REPLACE_VM_CPU
+    vb.memory = "REPLACE_VM_RAM"
 
     # Network config
-    config.vm.network "private_network", :type => 'dhcp', :name => 'vboxnet0', :adapter => 2
+    config.vm.network "private_network", :type => 'dhcp', :name => 'REPLACE_VM_NETWORK', :adapter => 2
   end
 
   config.vm.provision "shell", inline: <<-SHELL
@@ -148,12 +152,12 @@ Vagrant.configure("2") do |config|
     Set-MpPreference -DisableBlockAtFirstSeen $true
     Set-MpPreference -DisableIntrusionPreventionSystem $true
 
-    # Replace 'Ethernet 2' with the actual name of your second Ethernet adapter
-    $adapterName = "Ethernet 2"
-    $ipAddress = "192.168.23.133"
-    $subnetMask = "255.255.255.0"
-    $defaultGateway = "192.168.23.1"  # Adjust this based on your network configuration
-    $dnsServer = "192.168.23.1"  # You can specify your preferred DNS server
+    # Replace 'REPLACE_VM_ADAPTER' with the actual name of your Ethernet adapter
+    $adapterName = "REPLACE_VM_ADAPTER"
+    $ipAddress = "REPLACE_VM_IP"
+    $subnetMask = "REPLACE_VM_SUBNET"
+    $defaultGateway = "REPLACE_VM_GW"  # Adjust this based on your network configuration
+    $dnsServer = "REPLACE_VM_DNS"  # You can specify your preferred DNS server
 
     # Set the static IP address
     New-NetIPAddress -InterfaceAlias $adapterName -IPAddress $ipAddress -PrefixLength 24 -DefaultGateway $defaultGateway
@@ -178,3 +182,4 @@ Vagrant.configure("2") do |config|
   SHELL
 
 end
+
