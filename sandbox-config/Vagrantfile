@@ -86,7 +86,7 @@ Vagrant.configure("2") do |config|
     Set-Service -Name wuauserv -StartupType Disabled
 
     # Check python exist
-    $pythonCheck = Get-Command python -ErrorAction SilentlyContinue
+    $pythonCheck = & python --version 2>$null
     
     if (-Not $pythonCheck) {
       # Download python
