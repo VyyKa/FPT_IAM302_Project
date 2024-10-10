@@ -137,7 +137,7 @@ install_vagrant_plugins() {
         exit 1
     fi
 
-    installed_plugins=$(vagrant plugin list)
+    installed_plugins=$(sudo -u $CURRENT_USER vagrant plugin list)
 
     # Check if the plugins are already installed
     for plugin in "${plugins[@]}"; do
