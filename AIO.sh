@@ -254,7 +254,15 @@ setup_capev2_guest_vm() {
     # Start the VM
     echo -e "${BLUE}Starting the CAPEv2 Guest VM. Waiting...${NC}"
     chown $CURRENT_USER:$CURRENT_USER Vagrantfile
-    sudo -u $CURRENT_USER vagrant up --provider=virtualbox --provision
+    sudo -u $CURRENT_USER vagrant up --provider=virtualbox
+
+    # Install the guest additions
+    echo -e "${BLUE}Installing the VirtualBox Guest Additions...${NC}"
+    sudo -u $CURRENT_USER vagrant vbguest --do install --auto-reboot
+
+    # Run the provisioning script
+    echo -e "${BLUE}Running the provisioning script...${NC}"
+    sudo -u $CURRENT_USER vagrant provision
 
     # Notify user that the CAPEv2 Guest VM is set up
     echo -e "${GREEN}CAPEv2 Guest VM is set up.${NC}"
