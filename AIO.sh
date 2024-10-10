@@ -123,7 +123,7 @@ install_dependencies() {
 install_vagrant_plugins() {
     echo -e "${BLUE}Installing Vagrant plugins...${NC}"
     
-    plugins = (
+    plugins=(
         "vagrant-reload"
         "vagrant-vbguest"
         "winrm"
