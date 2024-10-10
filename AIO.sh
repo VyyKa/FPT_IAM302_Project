@@ -123,13 +123,33 @@ install_dependencies() {
 install_vagrant_plugins() {
     echo -e "${BLUE}Installing Vagrant plugins...${NC}"
     
-    # Install Vagrant plugins
-    vagrant plugin install vagrant-reload > /dev/null 2>&1
-    vagrant plugin install vagrant-vbguest > /dev/null 2>&1
-    vagrant plugin install winrm > /dev/null 2>&1
-    vagrant plugin install winrm-fs > /dev/null 2>&1
-    vagrant plugin install winrm-elevated > /dev/null 2>&1
-    
+    plugins = (
+        "vagrant-reload"
+        "vagrant-vbguest"
+        "winrm"
+        "winrm-fs"
+        "winrm-elevated"
+    )
+
+    # Check if Vagrant is installed with vagrant plugin list
+    if ! vagrant plugin list > /dev/null 2>&1; then
+        echo -e "${RED}Vagrant is not installed. Please install Vagrant first.${NC}"
+        exit 1
+    fi
+
+    installed_plugins=$(vagrant plugin list)
+
+    # Check if the plugins are already installed
+    for plugin in "${plugins[@]}"; do
+        if echo "$installed_plugins" | grep -q "$plugin"; then
+            echo -e "${GREEN}✔ $plugin is already installed.${NC}"
+        else
+            echo -e "${YELLOW}➜ Installing $plugin...${NC}"
+            vagrant plugin install "$plugin" > /dev/null 2>&1
+            echo -e "${GREEN}✔ $plugin is installed.${NC}"
+        fi
+    done
+
     # Notify user that the plugins are installed
     echo -e "${GREEN}All Vagrant plugins are installed.${NC}"
 }
@@ -140,6 +160,7 @@ install_docker() {
     
     # Install Docker
     curl -fsSL https://get.docker.com -o get-docker.sh
+    chown "$CURRENT_USER":"$CURRENT_USER" get-docker.sh
     sh get-docker.sh > /dev/null 2>&1
     rm get-docker.sh
     
@@ -154,6 +175,13 @@ install_docker() {
 create_host_only_network() {
     echo -e "${BLUE}Creating host-only network in VirtualBox...${NC}"
     
+    if grep -q "* 0.0.0.0/0 ::/0" /etc/vbox/networks.conf; then
+        echo "Networks are already configured."
+    else
+        echo "Configuring networks..."
+        echo "* 0.0.0.0/0 ::/0" >> /etc/vbox/networks.conf
+    fi
+
     # Check if the host-only network exists
     if VBoxManage list hostonlyifs | grep -q "Name:            $HOST_ONLY_NETWORK"; then
         echo "Host-only network '$HOST_ONLY_NETWORK' already exists. Removing..."
@@ -162,7 +190,7 @@ create_host_only_network() {
     
     # Create a new host-only network
     VBoxManage hostonlyif create
-    VBoxManage hostonlyif ipconfig "$HOST_ONLY_NETWORK" --ip "$HOST_ONLY_IP" --netmask "$HOST_ONLY_NETMASK" --dhcp off
+    VBoxManage hostonlyif ipconfig "$HOST_ONLY_NETWORK" --ip "$HOST_ONLY_IP" --netmask "$HOST_ONLY_NETMASK" --dhcp
     
     # Notify user that the host-only network is created
     echo -e "${GREEN}Host-only network '$HOST_ONLY_NETWORK' is created with IP: $HOST_ONLY_IP.${NC}"
@@ -214,6 +242,7 @@ setup_capev2_guest_vm() {
 
     # Start the VM
     echo -e "${BLUE}Starting the CAPEv2 Guest VM. Waiting...${NC}"
+    chown $CURRENT_USER:$CURRENT_USER Vagrantfile
     sudo -u $CURRENT_USER vagrant up --provider=virtualbox --provision
 
     # Notify user that the CAPEv2 Guest VM is set up
@@ -263,6 +292,9 @@ prepare_capev2_docker() {
     resultserver_ip = $HOST_ONLY_IP
 EOF
 
+    # change ownership of the work directory
+    chown -R $CURRENT_USER:$CURRENT_USER work
+
     # Notify user that the configuration is prepared
     echo -e "${GREEN}Configuration for CAPEv2 on Docker is prepared.${NC}"
 }
@@ -284,6 +316,9 @@ setup_capev2() {
     
     # Pull the latest Docker images
     docker pull celyrin/cape:latest
+
+    # Change ownership of the cape-docker directory
+    chown -R $CURRENT_USER:$CURRENT_USER .
 
     # Notify user that CAPEv2 is set up
     echo -e "${GREEN}CAPEv2 is set up on Docker.${NC}"
