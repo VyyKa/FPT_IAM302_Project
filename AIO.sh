@@ -175,10 +175,11 @@ install_docker() {
 create_host_only_network() {
     echo -e "${BLUE}Creating host-only network in VirtualBox...${NC}"
     
-    if grep -q "* 0.0.0.0/0 ::/0" /etc/vbox/networks.conf; then
+    if grep -q "* 0.0.0.0/0 ::/0" /etc/vbox/networks.conf > /dev/null; then
         echo "Networks are already configured."
     else
         echo "Configuring networks..."
+        mkdir -p /etc/vbox
         echo "* 0.0.0.0/0 ::/0" >> /etc/vbox/networks.conf
     fi
 
