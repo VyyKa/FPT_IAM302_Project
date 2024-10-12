@@ -71,7 +71,7 @@ with Diagram(
     # Edge
     virtualbox >> Edge(reverse=True) >> hypervisor >> Edge(reverse=True) >> guests
 
-    api >> Edge(label="send request") >> cuckoo >> Edge(label="report") >> api
+    api >> Edge(label="send request") >> cuckoo #>> Edge(label="report") >> api
 
     (
         vagrant
