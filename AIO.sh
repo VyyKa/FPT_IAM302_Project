@@ -270,6 +270,13 @@ setup_capev2_guest_vm() {
     # Notify user that the CAPEv2 Guest VM is set up
     echo -e "${GREEN}CAPEv2 Guest VM is set up.${NC}"
 
+    # Check if the snapshot already exists
+    if sudo -u $CURRENT_USER VBoxManage snapshot "$VM_NAME" list | grep -q "$VM_SNAPSHOT"; then
+        echo -e "${YELLOW}➜ Snapshot '$VM_SNAPSHOT' already exists.${NC}"
+        echo -e "${YELLOW}➜ Removing the existing snapshot...${NC}"
+        sudo -u $CURRENT_USER VBoxManage snapshot "$VM_NAME" delete "$VM_SNAPSHOT"
+    fi
+
     # Snapshot the VM
     echo -e "${BLUE}Taking a snapshot of the CAPEv2 Guest VM...${NC}"
     sudo -u $CURRENT_USER VBoxManage snapshot "$VM_NAME" take "$VM_SNAPSHOT" --pause
