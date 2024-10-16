@@ -16,10 +16,12 @@ $script = <<-SCRIPT
     Write-Host "Windows Update disabled"
 
     # Check python exist
+    Write-Host "Checking if Python is installed..."
     $pythonCheck = & python --version 2>$null
     
     if (-Not $pythonCheck) {
       # Download python
+      Write-Host "Python not installed. Installing Python..."
       Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.8.0/python-3.8.0.exe" -OutFile "C:\\python-3.8.0.exe"
       
       # Install python as Administrator

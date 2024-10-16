@@ -329,7 +329,7 @@ setup_capev2() {
     if [ -d "cape-docker" ]; then
         echo -e "${YELLOW}➜ CAPEv2 repository already exists.${NC}"
         echo -e "${YELLOW}➜ Updating the CAPEv2 repository...${NC}"
-        cd cape-docker || error_message "CAPEv2 repository not found." && exit 1
+        cd cape-docker || error_message "CAPEv2 repository not found." || exit 1
         git pull
         git submodule update --init --recursive
         cd $BASE_DIR
@@ -340,7 +340,7 @@ setup_capev2() {
     fi
 
     # Change directory to the CAPEv2 repository
-    cd cape-docker || error_message "CAPEv2 repository not found." && exit 1
+    cd cape-docker || error_message "CAPEv2 repository not found." || exit 1
 
     # Build the vbox-server
     echo -e "${BLUE}Building the vbox-server...${NC}"
@@ -388,6 +388,7 @@ EOF
     cd $BASE_DIR
 
     # Start run the CAPEv2 on Docker
+    echo -e "${BLUE}Starting CAPEv2 on Docker...${NC}"
     docker run -d --privileged \
         -v $(realpath ./vbox.sock):/opt/vbox/vbox.sock \
         --cap-add SYS_ADMIN -v /sys/fs/cgroup:/sys/fs/cgroup:rw --cgroupns=host\
