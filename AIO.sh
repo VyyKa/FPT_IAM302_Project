@@ -472,4 +472,4 @@ main() {
     rerun_cape
 }
 
-main($@)
+main "$@"
