@@ -38,6 +38,7 @@ dependencies=(
     "build-essential"
     "vagrant"
     "ovmf"
+    "golang"
 )
 
 # Colors for formatting
@@ -324,8 +325,19 @@ EOF
 setup_capev2() {
     echo -e "${BLUE}Setting up CAPEv2 on Docker...${NC}"
     
-    # Clone the CAPEv2 repository
-    git clone --recurse-submodules https://github.com/nquangit/cape-docker
+    # Check if the CAPEv2 repository already exists
+    if [ -d "cape-docker" ]; then
+        echo -e "${YELLOW}➜ CAPEv2 repository already exists.${NC}"
+        echo -e "${YELLOW}➜ Updating the CAPEv2 repository...${NC}"
+        cd cape-docker || error_message "CAPEv2 repository not found." && exit 1
+        git pull
+        git submodule update --init --recursive
+        cd $BASE_DIR
+    else
+        # Clone the CAPEv2 repository
+        echo -e "${YELLOW}➜ Cloning the CAPEv2 repository...${NC}"
+        git clone --recurse-submodules https://github.com/nquangit/cape-docker.git
+    fi
 
     # Change directory to the CAPEv2 repository
     cd cape-docker || error_message "CAPEv2 repository not found." && exit 1
@@ -334,11 +346,55 @@ setup_capev2() {
     echo -e "${BLUE}Building the vbox-server...${NC}"
     make vbox-server
     
+    # Set up the vbox-server run as a service
+    echo -e "${BLUE}Setting up the vbox-server as a service...${NC}"
+    # Check if the vbox-socket-server service already exists
+    if [ -f "/etc/systemd/system/vbox-socket-server.service" ]; then
+        echo -e "${YELLOW}➜ vbox-socket-server service already exists.${NC}"
+        echo -e "${YELLOW}➜ Reloading systemd services...${NC}"
+        systemctl daemon-reload
+    else
+        # Create the vbox-socket-server service
+        cat <<EOF > /etc/systemd/system/vbox-socket-server.service
+    [Unit]
+    Description=CAPEv2 vbox-socket-server
+    After=network.target
+
+    [Service]
+    Type=simple
+    ExecStart=$BASE_DIR/cape-docker/bin/vbox-server
+    Restart=always
+    RestartSec=3
+    User=$CURRENT_USER
+    Group=$CURRENT_USER
+
+    [Install]
+    WantedBy=multi-user.target
+EOF
+
+        # Reload systemd services
+        systemctl daemon-reload
+    fi
+
+    # Start and enable the vbox-socket-server service
+    systemctl start vbox-socket-server
+    systemctl enable vbox-socket-server
+
     # Pull the latest Docker images
-    docker pull celyrin/cape:latest
+    sudo -u $CURRENT_USER docker pull celyrin/cape:latest
 
     # Change ownership of the cape-docker directory
     chown -R $CURRENT_USER:$CURRENT_USER .
+    cd $BASE_DIR
+
+    # Start run the CAPEv2 on Docker
+    docker run -d --privileged \
+        -v $(realpath ./vbox.sock):/opt/vbox/vbox.sock \
+        --cap-add SYS_ADMIN -v /sys/fs/cgroup:/sys/fs/cgroup:rw --cgroupns=host\
+        --tmpfs /run --tmpfs /run/lock \
+        --net=host --cap-add=NET_RAW --cap-add=NET_ADMIN \
+        --cap-add=SYS_NICE -v $(realpath ./work):/work \
+        --name cape celyrin/cape:latest
 
     # Notify user that CAPEv2 is set up
     echo -e "${GREEN}CAPEv2 is set up on Docker.${NC}"
