@@ -238,7 +238,7 @@ setup_capev2_guest_vm() {
     echo -e "${BLUE}Setting up CAPEv2 Guest VM...${NC}"
     
     # wget sample VM Vagrant file
-    wget https://gist.githubusercontent.com/nquangit/83633b69f28757217b1222d112b1a4c3/raw/7f70159ffec4faa339f176c642dd94d4abd5e112/Vagrant -O Vagrantfile
+    wget https://gist.githubusercontent.com/nquangit/83633b69f28757217b1222d112b1a4c3/raw/59d8b9f2d0f2a1a4f043e545b10ca1052d957fab/Vagrant -O Vagrantfile
 
     # Replace the placeholder with the actual values
     sed -i "s/REPLACE_VM_NAME/$VM_NAME/g" Vagrantfile

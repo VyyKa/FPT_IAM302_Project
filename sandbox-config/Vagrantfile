@@ -202,7 +202,7 @@ Vagrant.configure("2") do |config|
     foreach ($package in $packagesClientExtensions) {
         DISM /Online /NoRestart /Add-Package:"$($package.FullName)"
     }
-  SHELL
+  SHELL, privileged: true
 
 end
 
