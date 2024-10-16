@@ -459,3 +459,5 @@ setup_capev2
 
 # Prepare configuration for CAPEv2 on Docker
 override_cape_config
+
+rerun_cape
