@@ -87,7 +87,7 @@ Vagrant.configure("2") do |config|
     Write-Host "Firewall disabled"
 
     # Disable UAC
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "EnableLUA" -Value 0
+    Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System" -Name "EnableLUA" -Value 0
 
     # Windows Update
     Stop-Service -Name wuauserv -Force
