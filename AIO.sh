@@ -346,9 +346,19 @@ EOF
     chown -R $CURRENT_USER:$CURRENT_USER .
     cd $BASE_DIR
 
+    # Check if the container already exists
+    if sudo -u $CURRENT_USER docker ps -a --format '{{.Names}}' | grep -q "cape"; then
+        echo -e "${YELLOW}➜ CAPEv2 container already exists.${NC}"
+        echo -e "${YELLOW}➜ Removing the existing CAPEv2 container...${NC}"
+        sudo -u $CURRENT_USER docker rm -f cape
+    fi
+
+    # Remove old files in work directory
+    rm -rf work
+
     # Start run the CAPEv2 on Docker
     echo -e "${BLUE}Starting CAPEv2 on Docker...${NC}"
-    docker run -d --privileged \
+    sudo -u $CURRENT_USER docker run -d --privileged \
         -v $(realpath ./vbox.sock):/opt/vbox/vbox.sock \
         --cap-add SYS_ADMIN -v /sys/fs/cgroup:/sys/fs/cgroup:rw --cgroupns=host\
         --tmpfs /run --tmpfs /run/lock \
@@ -360,9 +370,15 @@ EOF
     echo -e "${GREEN}CAPEv2 is set up on Docker.${NC}"
 }
 
-
 # Prepare configuration for CAPEv2 on Docker
 override_cape_config() {
+    # While loop to check if the work/conf directory exists
+    while [ ! -d "work/conf" ]; do
+        echo -e "${YELLOW}work/conf directory not found.${NC} Waiting..."
+        sleep 1
+        echo -e "${YELLOW}Checking the work/conf directory...${NC}"
+    done
+
     echo -e "${BLUE}Preparing configuration for CAPEv2 on Docker...${NC}"
     
     # Backup the default configuration files
