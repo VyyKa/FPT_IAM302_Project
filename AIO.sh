@@ -270,7 +270,7 @@ setup_capev2_guest_vm() {
 
     # Snapshot the VM
     echo -e "${BLUE}Taking a snapshot of the CAPEv2 Guest VM...${NC}"
-    VBoxManage snapshot "$VM_NAME" take "$VM_SNAPSHOT" --pause
+    sudo -u $CURRENT_USER VBoxManage snapshot "$VM_NAME" take "$VM_SNAPSHOT" --pause
 
     # Notify user that the snapshot is taken
     echo -e "${GREEN}Snapshot '$VM_SNAPSHOT' taken for VM '$VM_NAME'.${NC}"

@@ -86,7 +86,7 @@ $script = <<-SCRIPT
     Set-MpPreference -MAPSReporting Disabled
     Set-MpPreference -SubmitSamplesConsent 2
 
-    Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\Windows Defender\\Features" -Name "TamperProtection" -Value 0
+    # Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\Windows Defender\\Features" -Name "TamperProtection" -Value 0
     Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender" -Name "DisableAntiSpyware" -Value 1
 
     # Disable various security features (if applicable)
