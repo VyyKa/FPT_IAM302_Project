@@ -423,7 +423,7 @@ resultserver_ip = $HOST_ONLY_IP
 EOF
 
     # change ownership of the work directory
-    chown -R $CURRENT_USER:$CURRENT_USER work
+    # chown -R $CURRENT_USER:$CURRENT_USER work
 
     # Notify user that the configuration is prepared
     echo -e "${GREEN}Configuration for CAPEv2 on Docker is prepared.${NC}"
