@@ -132,7 +132,6 @@ install_vagrant_plugins() {
         "winrm"
         "winrm-fs"
         "winrm-elevated"
-        "vagrant-windows"
     )
 
     # Check if Vagrant is installed with vagrant plugin list
