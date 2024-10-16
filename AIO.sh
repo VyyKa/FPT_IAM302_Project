@@ -358,7 +358,7 @@ EOF
 
     # Start run the CAPEv2 on Docker
     echo -e "${BLUE}Starting CAPEv2 on Docker...${NC}"
-    sudo -u $CURRENT_USER docker run -d --privileged \
+    sudo -u $CURRENT_USER docker run -d \
         -v $(realpath ./vbox.sock):/opt/vbox/vbox.sock \
         --cap-add SYS_ADMIN -v /sys/fs/cgroup:/sys/fs/cgroup:rw --cgroupns=host\
         --tmpfs /run --tmpfs /run/lock \
@@ -375,7 +375,7 @@ override_cape_config() {
     # While loop to check if the work/conf directory exists
     while [ ! -d "work/conf" ]; do
         echo -e "${YELLOW}work/conf directory not found.${NC} Waiting..."
-        sleep 1
+        sleep 3
         echo -e "${YELLOW}Checking the work/conf directory...${NC}"
     done
 
@@ -420,6 +420,12 @@ EOF
 
     # Notify user that the configuration is prepared
     echo -e "${GREEN}Configuration for CAPEv2 on Docker is prepared.${NC}"
+}
+
+rerun_cape() {
+    # Restart cape service on docker
+    echo -e "${BLUE}Restarting CAPEv2 on Docker...${NC}"
+    sudo -u $CURRENT_USER docker exec -it cape /bin/bash -c "systemctl restart cape"
 }
 
 # MAIN SCRIPT
