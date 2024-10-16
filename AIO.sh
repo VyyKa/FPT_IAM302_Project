@@ -8,7 +8,7 @@ fi
 
 BASE_DIR=$(pwd)
 
-VAGRANTFILE_URL="https://gist.githubusercontent.com/nquangit/83633b69f28757217b1222d112b1a4c3/raw/34fc516070d4e61d42f378cfde72359ba5009946/Vagrant"
+VAGRANTFILE_URL="https://gist.githubusercontent.com/nquangit/83633b69f28757217b1222d112b1a4c3/raw/c6e81b578ba1b4672cec7a4f22b89e3514956d58/Vagrant"
 
 # VM variables
 VM_NAME="cybersec_windows_10"

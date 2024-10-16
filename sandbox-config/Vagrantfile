@@ -4,130 +4,128 @@
 # Provision script for Windows 10
 $script = <<-SCRIPT
 # Disable Firewall
-    Set-NetFirewallProfile -All -Enabled False
-    Write-Host "Firewall disabled"
+Set-NetFirewallProfile -All -Enabled False
+Write-Host "Firewall disabled"
 
-    # Disable UAC
-    Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System" -Name "EnableLUA" -Value 0
+# Disable UAC
+Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System" -Name "EnableLUA" -Value 0
 
-    # Windows Update
-    Stop-Service -Name wuauserv -Force
-    Set-Service -Name wuauserv -StartupType Disabled
-    Write-Host "Windows Update disabled"
+# Windows Update
+Stop-Service -Name wuauserv -Force
+Set-Service -Name wuauserv -StartupType Disabled
+Write-Host "Windows Update disabled"
 
-    # Check python exist
-    Write-Host "Checking if Python is installed..."
-    $pythonCheck = & python --version 2>$null
-    
-    if (-Not $pythonCheck) {
-      # Download python
-      Write-Host "Python not installed. Installing Python..."
-      Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.8.0/python-3.8.0.exe" -OutFile "C:\\python-3.8.0.exe"
-      
-      # Install python as Administrator
-      Start-Process "C:\\python-3.8.0.exe" -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1" -Verb RunAs -Wait
-      
-      # Optionally remove the installer after installation
-      Remove-Item "C:\\python-3.8.0.exe"
+# Check python exist
+Write-Host "Checking if Python is installed..."
+$pythonCheck = & python --version 2>$null
 
-      Write-Host "Python installed"
-    } else {
-      Write-Host "Python exist"
-    }
+if (-Not $pythonCheck) {
+    # Download python
+    Write-Host "Python not installed. Installing Python..."
+    Invoke-WebRequest -Uri "https://www.python.org/ftp/python/3.8.0/python-3.8.0.exe" -OutFile "C:\\python-3.8.0.exe"
 
-    Write-Host "Installing Python modules..."
-    # Python install module
-    python -m pip install --upgrade pip
-    python -m pip install Pillow==9.5.0
-    python -m pip install etw
-    python -m pip install numpy
-    python -m pip install pywintrace
+    # Install python as Administrator
+    Start-Process "C:\\python-3.8.0.exe" -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1" -Verb RunAs -Wait
 
-    # Download and run the agent
-    Write-Host "Downloading the agent and creating a scheduled task..."
-    # Define the file path and task name
-    $filePath = "C:\\my_secret.pyw"
-    $taskName = "RunMySecretAgent"
+    # Optionally remove the installer after installation
+    Remove-Item "C:\\python-3.8.0.exe"
 
-    # Check if the file exists
-    if (Test-Path $filePath) {
-        Write-Host "File already exists. Exiting..."
-    } else {
-        Write-Host "Downloading the agent..."
-        # Download the agent
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/agent/agent.py" -OutFile $filePath
+    Write-Host "Python installed"
+} else {
+    Write-Host "Python exist"
+}
 
-        Write-Host "Agent downloaded to $filePath."
-    }
+Write-Host "Installing Python modules..."
+# Python install module
+python -m pip install --upgrade pip
+python -m pip install Pillow==9.5.0
+python -m pip install etw
+python -m pip install numpy
+python -m pip install pywintrace
 
-    Write-Host "Creating a scheduled task to run the agent at logon..."
+# Download and run the agent
+Write-Host "Downloading the agent and creating a scheduled task..."
+# Define the file path and task name
+$filePath = "C:\\my_secret.pyw"
+$taskName = "RunMySecretAgent"
 
-    # Check if the scheduled task already exists
-    if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
-        Write-Host "Task '$taskName' already exists. No need to create it again."
-    } else {
-        # Create a scheduled task to run the script at logon with highest privileges
-        $action = New-ScheduledTaskAction -Execute "pythonw.exe" -Argument $filePath
-        $trigger = New-ScheduledTaskTrigger -AtLogOn
-        $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
-        Register-ScheduledTask -Action $action -Trigger $trigger -Principal $principal -TaskName $taskName -Description "Run my secret agent at logon"
+# Check if the file exists
+if (Test-Path $filePath) {
+    Write-Host "File already exists. Exiting..."
+} else {
+    Write-Host "Downloading the agent..."
+    # Download the agent
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/agent/agent.py" -OutFile $filePath
 
-        Write-Host "Download completed and scheduled task created."
-    }
+    Write-Host "Agent downloaded to $filePath."
+}
 
-    # Reduce Overall Noise
-    $scriptPath = "C:\\disable_win7noise.bat"
-    # Download the script
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/kevoreilly/CAPEv2/master/installer/disable_win7noise.bat" -OutFile $scriptPath
-    # Run the script with elevated privileges
-    Start-Process -FilePath $scriptPath -Verb RunAs
+Write-Host "Creating a scheduled task to run the agent at logon..."
 
-    # Disable real-time protection
-    Set-MpPreference -DisableRealtimeMonitoring $true
-    Set-MpPreference -DisableScanningNetworkFiles $true
-    Set-MpPreference -MAPSReporting Disabled
-    Set-MpPreference -SubmitSamplesConsent 2
+# Check if the scheduled task already exists
+if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
+    Write-Host "Task '$taskName' already exists. No need to create it again."
+} else {
+    # Create a scheduled task to run the script at logon with highest privileges
+    $action = New-ScheduledTaskAction -Execute "pythonw.exe" -Argument $filePath
+    $trigger = New-ScheduledTaskTrigger -AtLogOn
+    $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
+    Register-ScheduledTask -Action $action -Trigger $trigger -Principal $principal -TaskName $taskName -Description "Run my secret agent at logon"
+    Write-Host "Download completed and scheduled task created."
+}
 
-    # Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\Windows Defender\\Features" -Name "TamperProtection" -Value 0
-    Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender" -Name "DisableAntiSpyware" -Value 1
+# Reduce Overall Noise
+$scriptPath = "C:\\disable_win7noise.bat"
+# Download the script
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/kevoreilly/CAPEv2/master/installer/disable_win7noise.bat" -OutFile $scriptPath
+# Run the script with elevated privileges
+Start-Process -FilePath $scriptPath -Verb RunAs
 
-    # Disable various security features (if applicable)
-    Set-MpPreference -DisableBehaviorMonitoring $true
-    Set-MpPreference -DisableScriptScanning $true
-    Set-MpPreference -DisableAutoExclusions $true
-    Set-MpPreference -DisableBlockAtFirstSeen $true
-    Set-MpPreference -DisableIntrusionPreventionSystem $true
+# Disable real-time protection
+Set-MpPreference -DisableRealtimeMonitoring $true
+Set-MpPreference -DisableScanningNetworkFiles $true
+Set-MpPreference -MAPSReporting Disabled
+Set-MpPreference -SubmitSamplesConsent 2
 
-    # Disable Windows Defender
-    sc stop WinDefend
+Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender" -Name "DisableAntiSpyware" -Value 1
 
-    # Replace 'REPLACE_VM_ADAPTER' with the actual name of your Ethernet adapter
-    $adapterName = "REPLACE_VM_ADAPTER"
-    $ipAddress = "REPLACE_VM_IP"
-    $subnetMask = "REPLACE_VM_SUBNET"
-    $defaultGateway = "REPLACE_VM_GW"  # Adjust this based on your network configuration
-    $dnsServer = "REPLACE_VM_DNS"  # You can specify your preferred DNS server
+# Disable various security features (if applicable)
+Set-MpPreference -DisableBehaviorMonitoring $true
+Set-MpPreference -DisableScriptScanning $true
+Set-MpPreference -DisableAutoExclusions $true
+Set-MpPreference -DisableBlockAtFirstSeen $true
+Set-MpPreference -DisableIntrusionPreventionSystem $true
 
-    # Set the static IP address
-    New-NetIPAddress -InterfaceAlias $adapterName -IPAddress $ipAddress -PrefixLength 24 -DefaultGateway $defaultGateway
+# Disable Windows Defender
+sc stop WinDefend
 
-    # Set the DNS server
-    Set-DnsClientServerAddress -InterfaceAlias $adapterName -ServerAddresses $dnsServer
+# Replace 'REPLACE_VM_ADAPTER' with the actual name of your Ethernet adapter
+$adapterName = "REPLACE_VM_ADAPTER"
+$ipAddress = "REPLACE_VM_IP"
+$subnetMask = "REPLACE_VM_SUBNET"
+$defaultGateway = "REPLACE_VM_GW"  # Adjust this based on your network configuration
+$dnsServer = "REPLACE_VM_DNS"  # You can specify your preferred DNS server
 
-    Write-Output "Static IP address set to $ipAddress on adapter $adapterName."
-    
-    # Disable Noisy Network Services
-    netsh interface teredo set state disabled
+# Set the static IP address
+New-NetIPAddress -InterfaceAlias $adapterName -IPAddress $ipAddress -PrefixLength 24 -DefaultGateway $defaultGateway
 
-    $packagesClientTools = Get-ChildItem -Path "$env:SystemRoot\\servicing\\Packages" -Filter "Microsoft-Windows-GroupPolicy-ClientTools-Package~*.mum"
-    foreach ($package in $packagesClientTools) {
-        DISM /Online /NoRestart /Add-Package:"$($package.FullName)"
-    }
+# Set the DNS server
+Set-DnsClientServerAddress -InterfaceAlias $adapterName -ServerAddresses $dnsServer
 
-    $packagesClientExtensions = Get-ChildItem -Path "$env:SystemRoot\\servicing\\Packages" -Filter "Microsoft-Windows-GroupPolicy-ClientExtensions-Package~*.mum"
-    foreach ($package in $packagesClientExtensions) {
-        DISM /Online /NoRestart /Add-Package:"$($package.FullName)"
-    }
+Write-Output "Static IP address set to $ipAddress on adapter $adapterName."
+
+# Disable Noisy Network Services
+netsh interface teredo set state disabled
+
+$packagesClientTools = Get-ChildItem -Path "$env:SystemRoot\\servicing\\Packages" -Filter "Microsoft-Windows-GroupPolicy-ClientTools-Package~*.mum"
+foreach ($package in $packagesClientTools) {
+    DISM /Online /NoRestart /Add-Package:"$($package.FullName)"
+}
+
+$packagesClientExtensions = Get-ChildItem -Path "$env:SystemRoot\\servicing\\Packages" -Filter "Microsoft-Windows-GroupPolicy-ClientExtensions-Package~*.mum"
+foreach ($package in $packagesClientExtensions) {
+    DISM /Online /NoRestart /Add-Package:"$($package.FullName)"
+}
 SCRIPT
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
@@ -213,4 +211,3 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: $script, privileged: true
 
 end
-
