@@ -400,7 +400,7 @@ override_cape_config() {
     # Replace the placeholder with the actual values
     echo -e "${BLUE}Replacing the placeholder with the actual values...${NC}"
     sed -i "s/machinery = kvm/machinery = virtualbox/g" work/conf/cuckoo.conf
-    sed -i "s/ip = .*/ip = $HOST_ONLY_IP#/g" work/conf/cuckoo.conf
+    sed -i "s/ip = .*/ip = $HOST_ONLY_IP/g" work/conf/cuckoo.conf
 
     # interface = virbr1 to interface = $VM_NETWORK
     sed -i "s/interface = virbr1/interface = $VM_NETWORK/g" work/conf/auxiliary.conf
