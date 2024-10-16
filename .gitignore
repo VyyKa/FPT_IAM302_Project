@@ -9,3 +9,7 @@ web/venv/**
 diagrams/venv/**
 
 **/venv/**
+
+machine-learning/dataset/**/*.json
+
+machine-learning/results/**

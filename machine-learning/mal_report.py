@@ -36,15 +36,30 @@ class MalwareDataset(torch.utils.data.Dataset):
 
 # Hàm chính
 def main(report_folder_path):
+    clean_path = os.path.join(report_folder_path, 'clean')
+    malicious_path = os.path.join(report_folder_path, 'malicious')
+
     # Lấy tất cả các file JSON trong thư mục
-    report_files = [os.path.join(report_folder_path, file) for file in os.listdir(report_folder_path) if file.endswith('.json')]
+    clean_files = [os.path.join(clean_path, file) for file in os.listdir(clean_path) if file.endswith('.json')]
+    malicious_files = [os.path.join(malicious_path, file) for file in os.listdir(malicious_path) if file.endswith('.json')]
+
+    report_files = clean_files + malicious_files
     
     # Chuẩn bị dữ liệu
     data = []
     labels = []
 
+    # Lặp qua tất cả các báo cáo không mã độc
+    for report_file_path in clean_files:
+        # Đọc báo cáo
+        report = read_report(report_file_path)
+        
+        # Trích xuất đặc trưng từ báo cáo và thêm vào dữ liệu
+        data.append(extract_text_features(report))
+        labels.append(0)  # Gán nhãn (1 cho mã độc, 0 cho không mã độc), điều chỉnh nhãn nếu cần thiết
+
     # Lặp qua tất cả các báo cáo mã độc
-    for report_file_path in report_files:
+    for report_file_path in malicious_files:
         # Đọc báo cáo
         report = read_report(report_file_path)
         
