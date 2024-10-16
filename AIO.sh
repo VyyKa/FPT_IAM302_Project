@@ -8,6 +8,8 @@ fi
 
 BASE_DIR=$(pwd)
 
+VAGRANTFILE_URL="https://gist.githubusercontent.com/nquangit/83633b69f28757217b1222d112b1a4c3/raw/34fc516070d4e61d42f378cfde72359ba5009946/Vagrant"
+
 # VM variables
 VM_NAME="cybersec_windows_10"
 VM_SNAPSHOT="snapshot1"
@@ -240,7 +242,7 @@ setup_capev2_guest_vm() {
     echo -e "${BLUE}Setting up CAPEv2 Guest VM...${NC}"
     
     # wget sample VM Vagrant file
-    wget https://gist.githubusercontent.com/nquangit/83633b69f28757217b1222d112b1a4c3/raw/c3f46737c33cd868780199c3f9e68cc906e6be77/Vagrant -O Vagrantfile
+    wget $VAGRANTFILE_URL -O Vagrantfile
 
     # Replace the placeholder with the actual values
     sed -i "s/REPLACE_VM_NAME/$VM_NAME/g" Vagrantfile
@@ -275,49 +277,6 @@ setup_capev2_guest_vm() {
 
     # Notify user that the snapshot is taken
     echo -e "${GREEN}Snapshot '$VM_SNAPSHOT' taken for VM '$VM_NAME'.${NC}"
-}
-
-# Prepare configuration for CAPEv2 on Docker
-prepare_capev2_docker() {
-    echo -e "${BLUE}Preparing configuration for CAPEv2 on Docker...${NC}"
-    
-    # Create a directory for CAPEv2 configuration
-    mkdir -p work/conf
-
-    # Download the CAPEv2 configuration files
-    wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/cuckoo.conf.default -O work/conf/cuckoo.conf
-    wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/auxiliary.conf.default -O work/conf/auxiliary.conf
-    
-    # Replace the placeholder with the actual values
-    sed -i "s/machinery = kvm/machinery = virtualbox/g" work/conf/cuckoo.conf
-    sed -i "s/ip = \*/ip = $HOST_ONLY_IP #/g" work/conf/cuckoo.conf
-
-    # interface = virbr1 to interface = $VM_NETWORK
-    sed -i "s/interface = virbr1/interface = $VM_NETWORK/g" work/conf/cuckoo.conf
-
-    # Create the virtualbox.conf file
-    cat <<EOF > work/conf/virtualbox.conf
-    [virtualbox]
-    mode = gui
-    path = /usr/bin/VBoxManage
-    interface = $VM_NETWORK
-    machines = $VM_NAME
-
-    [$VM_NAME]
-    label = $VM_NAME
-    platform = windows
-    ip = $VM_IP
-    snapshot = $VM_SNAPSHOT
-    arch = x64
-    interface = $VM_NETWORK
-    resultserver_ip = $HOST_ONLY_IP
-EOF
-
-    # change ownership of the work directory
-    chown -R $CURRENT_USER:$CURRENT_USER work
-
-    # Notify user that the configuration is prepared
-    echo -e "${GREEN}Configuration for CAPEv2 on Docker is prepared.${NC}"
 }
 
 
@@ -356,20 +315,21 @@ setup_capev2() {
     else
         # Create the vbox-socket-server service
         cat <<EOF > /etc/systemd/system/vbox-socket-server.service
-    [Unit]
-    Description=CAPEv2 vbox-socket-server
-    After=network.target
+[Unit]
+Description=CAPEv2 vbox-socket-server
+After=network.target
 
-    [Service]
-    Type=simple
-    ExecStart=$BASE_DIR/cape-docker/bin/vbox-server
-    Restart=always
-    RestartSec=3
-    User=$CURRENT_USER
-    Group=$CURRENT_USER
+[Service]
+Type=simple
+ExecStart=$BASE_DIR/cape-docker/bin/vbox-server
+WorkingDirectory=$BASE_DIR
+Restart=always
+RestartSec=3
+User=$CURRENT_USER
+Group=$CURRENT_USER
 
-    [Install]
-    WantedBy=multi-user.target
+[Install]
+WantedBy=multi-user.target
 EOF
 
         # Reload systemd services
@@ -401,6 +361,52 @@ EOF
     echo -e "${GREEN}CAPEv2 is set up on Docker.${NC}"
 }
 
+
+# Prepare configuration for CAPEv2 on Docker
+override_cape_config() {
+    echo -e "${BLUE}Preparing configuration for CAPEv2 on Docker...${NC}"
+    
+    # Backup the default configuration files
+    mv work/conf/cuckoo.conf work/conf/cuckoo.conf.old
+    mv work/conf/auxiliary.conf work/conf/auxiliary.conf.old
+    mv work/conf/virtualbox.conf work/conf/virtualbox.conf.old
+
+    # Download the CAPEv2 configuration files
+    wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/cuckoo.conf.default -O work/conf/cuckoo.conf
+    wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/auxiliary.conf.default -O work/conf/auxiliary.conf
+    
+    # Replace the placeholder with the actual values
+    sed -i "s/machinery = kvm/machinery = virtualbox/g" work/conf/cuckoo.conf
+    sed -i "s/ip = \*/ip = $HOST_ONLY_IP #/g" work/conf/cuckoo.conf
+
+    # interface = virbr1 to interface = $VM_NETWORK
+    sed -i "s/interface = virbr1/interface = $VM_NETWORK/g" work/conf/cuckoo.conf
+
+    # Create the virtualbox.conf file
+    cat <<EOF > work/conf/virtualbox.conf
+[virtualbox]
+mode = gui
+path = /usr/bin/VBoxManage
+interface = $VM_NETWORK
+machines = $VM_NAME
+
+[$VM_NAME]
+label = $VM_NAME
+platform = windows
+ip = $VM_IP
+snapshot = $VM_SNAPSHOT
+arch = x64
+interface = $VM_NETWORK
+resultserver_ip = $HOST_ONLY_IP
+EOF
+
+    # change ownership of the work directory
+    chown -R $CURRENT_USER:$CURRENT_USER work
+
+    # Notify user that the configuration is prepared
+    echo -e "${GREEN}Configuration for CAPEv2 on Docker is prepared.${NC}"
+}
+
 # MAIN SCRIPT
 
 # Check for apt package manager
@@ -427,8 +433,8 @@ create_host_only_network
 # Set up CAPEv2 Guest VM
 setup_capev2_guest_vm
 
-# Prepare configuration for CAPEv2 on Docker
-prepare_capev2_docker
-
 # Set up CAPEv2 on Docker
 setup_capev2
+
+# Prepare configuration for CAPEv2 on Docker
+override_cape_config
