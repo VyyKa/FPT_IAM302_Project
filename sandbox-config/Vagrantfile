@@ -84,10 +84,15 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     # Disable Firewall
     Set-NetFirewallProfile -All -Enabled False
+    Write-Host "Firewall disabled"
+
+    # Disable UAC
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "EnableLUA" -Value 0
 
     # Windows Update
     Stop-Service -Name wuauserv -Force
     Set-Service -Name wuauserv -StartupType Disabled
+    Write-Host "Windows Update disabled"
 
     # Check python exist
     $pythonCheck = & python --version 2>$null
@@ -100,11 +105,14 @@ Vagrant.configure("2") do |config|
       Start-Process "C:\\python-3.8.0.exe" -ArgumentList "/quiet InstallAllUsers=1 PrependPath=1" -Verb RunAs -Wait
       
       # Optionally remove the installer after installation
-      Remove-Item "C:\\python-3.6.10-full.exe"
+      Remove-Item "C:\\python-3.8.0.exe"
+
+      Write-Host "Python installed"
     } else {
       Write-Host "Python exist"
     }
 
+    Write-Host "Installing Python modules..."
     # Python install module
     python -m pip install --upgrade pip
     python -m pip install Pillow==9.5.0
@@ -112,6 +120,8 @@ Vagrant.configure("2") do |config|
     python -m pip install numpy
     python -m pip install pywintrace
 
+    # Download and run the agent
+    Write-Host "Downloading the agent and creating a scheduled task..."
     # Define the file path and task name
     $filePath = "C:\\my_secret.pyw"
     $taskName = "RunMySecretAgent"
@@ -120,9 +130,14 @@ Vagrant.configure("2") do |config|
     if (Test-Path $filePath) {
         Write-Host "File already exists. Exiting..."
     } else {
+        Write-Host "Downloading the agent..."
         # Download the agent
         Invoke-WebRequest -Uri "https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/agent/agent.py" -OutFile $filePath
+
+        Write-Host "Agent downloaded to $filePath."
     }
+
+    Write-Host "Creating a scheduled task to run the agent at logon..."
 
     # Check if the scheduled task already exists
     if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
@@ -146,9 +161,17 @@ Vagrant.configure("2") do |config|
 
     # Disable real-time protection
     Set-MpPreference -DisableRealtimeMonitoring $true
+    Set-MpPreference -DisableScanningNetworkFiles $true
+    Set-MpPreference -MAPSReporting Disabled
+    Set-MpPreference -SubmitSamplesConsent 2
+
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Defender\Features" -Name "TamperProtection" -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Value 1
 
     # Disable various security features (if applicable)
     Set-MpPreference -DisableBehaviorMonitoring $true
+    Set-MpPreference -DisableScriptScanning $true
+    Set-MpPreference -DisableAutoExclusions $true
     Set-MpPreference -DisableBlockAtFirstSeen $true
     Set-MpPreference -DisableIntrusionPreventionSystem $true
 
