@@ -76,7 +76,7 @@ $script = <<-SCRIPT
     }
 
     # Reduce Overall Noise
-    $scriptPath = "C:\disable_win7noise.bat"
+    $scriptPath = "C:\\disable_win7noise.bat"
     # Download the script
     Invoke-WebRequest -Uri "https://raw.githubusercontent.com/kevoreilly/CAPEv2/master/installer/disable_win7noise.bat" -OutFile $scriptPath
     # Run the script with elevated privileges
