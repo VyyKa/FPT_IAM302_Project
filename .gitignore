@@ -7,3 +7,5 @@ web/instance/**
 web/venv/**
 
 diagrams/venv/**
+
+**/venv/**
