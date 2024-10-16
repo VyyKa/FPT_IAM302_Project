@@ -379,9 +379,9 @@ EOF
 
 # Prepare configuration for CAPEv2 on Docker
 override_cape_config() {
-    # While loop to check if the work/conf directory exists
-    while [ ! -d "work/conf" ]; do
-        echo -e "${YELLOW}work/conf directory not found.${NC} Waiting..."
+    # While loop to check if the work/conf/cuckoo.conf file exists
+    while [ ! -f "work/conf/cuckoo.conf" ]; do
+        echo -e "${YELLOW}work/conf/cuckoo.conf directory not found.${NC} Waiting..."
         sleep 3
         echo -e "${YELLOW}Checking the work/conf directory...${NC}"
     done
@@ -398,11 +398,12 @@ override_cape_config() {
     wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/auxiliary.conf.default -O work/conf/auxiliary.conf
     
     # Replace the placeholder with the actual values
+    echo -e "${BLUE}Replacing the placeholder with the actual values...${NC}"
     sed -i "s/machinery = kvm/machinery = virtualbox/g" work/conf/cuckoo.conf
     sed -i "s/ip = \*/ip = $HOST_ONLY_IP #/g" work/conf/cuckoo.conf
 
     # interface = virbr1 to interface = $VM_NETWORK
-    sed -i "s/interface = virbr1/interface = $VM_NETWORK/g" work/conf/cuckoo.conf
+    sed -i "s/interface = virbr1/interface = $VM_NETWORK/g" work/conf/auxiliary.conf
 
     # Create the virtualbox.conf file
     cat <<EOF > work/conf/virtualbox.conf
@@ -436,35 +437,39 @@ rerun_cape() {
 }
 
 # MAIN SCRIPT
+main() {
+        
+    # Check for apt package manager
+    check_apt
 
-# Check for apt package manager
-check_apt
+    # Check for hardware virtualization support
+    check_virtualization
 
-# Check for hardware virtualization support
-check_virtualization
+    # Install dependencies
+    install_dependencies
 
-# Install dependencies
-install_dependencies
+    # Install Vagrant plugins
+    install_vagrant_plugins
 
-# Install Vagrant plugins
-install_vagrant_plugins
+    # Install Docker
+    install_docker
 
-# Install Docker
-install_docker
+    # Start and enable services
+    start_services
 
-# Start and enable services
-start_services
+    # Create a new host-only network in VirtualBox
+    create_host_only_network
 
-# Create a new host-only network in VirtualBox
-create_host_only_network
+    # Set up CAPEv2 Guest VM
+    setup_capev2_guest_vm
 
-# Set up CAPEv2 Guest VM
-setup_capev2_guest_vm
+    # Set up CAPEv2 on Docker
+    setup_capev2
 
-# Set up CAPEv2 on Docker
-setup_capev2
+    # Prepare configuration for CAPEv2 on Docker
+    override_cape_config
 
-# Prepare configuration for CAPEv2 on Docker
-override_cape_config
+    rerun_cape
+}
 
-rerun_cape
+main($@)
