@@ -96,6 +96,9 @@ $script = <<-SCRIPT
     Set-MpPreference -DisableBlockAtFirstSeen $true
     Set-MpPreference -DisableIntrusionPreventionSystem $true
 
+    # Disable Windows Defender
+    sc stop WinDefend
+
     # Replace 'REPLACE_VM_ADAPTER' with the actual name of your Ethernet adapter
     $adapterName = "REPLACE_VM_ADAPTER"
     $ipAddress = "REPLACE_VM_IP"
