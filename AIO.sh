@@ -274,7 +274,12 @@ setup_capev2_guest_vm() {
     if sudo -u $CURRENT_USER VBoxManage snapshot "$VM_NAME" list | grep -q "$VM_SNAPSHOT"; then
         echo -e "${YELLOW}➜ Snapshot '$VM_SNAPSHOT' already exists.${NC}"
         echo -e "${YELLOW}➜ Removing the existing snapshot...${NC}"
-        sudo -u $CURRENT_USER VBoxManage snapshot "$VM_NAME" delete "$VM_SNAPSHOT"
+        
+        # List all snapshots and delete those that match the name
+        for snapshot in $(sudo -u $CURRENT_USER VBoxManage snapshot "$VM_NAME" list | awk '{print $1}' | grep "$VM_SNAPSHOT"); do
+            sudo -u $CURRENT_USER VBoxManage snapshot "$VM_NAME" delete "$snapshot"
+            echo -e "${GREEN}➜ Deleted snapshot: '$snapshot'${NC}"
+        done
     fi
 
     # Snapshot the VM
