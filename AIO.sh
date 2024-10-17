@@ -85,8 +85,8 @@ check_internet() {
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             # Fix the DNS issue automatically
             echo -e "${BLUE}Fixing the DNS issue...${NC}"
-            echo "nameserver 1.1.1.1" > /etc/resolv.conf
-            echo "nameserver 1.0.0.1" >> /etc/resolv.conf
+            echo "nameserver 8.8.8.8" > /etc/resolv.conf
+            echo "nameserver 8.8.4.4" >> /etc/resolv.conf
             echo -e "${GREEN}✔ DNS issue is fixed.${NC}"
             # Recheck the internet connection
             check_internet
@@ -436,13 +436,13 @@ override_cape_config() {
     echo -e "${BLUE}Preparing configuration for CAPEv2 on Docker...${NC}"
     
     # Backup the default configuration files
-    mv work/conf/cuckoo.conf work/conf/cuckoo.conf.old
-    mv work/conf/auxiliary.conf work/conf/auxiliary.conf.old
+    cp work/conf/cuckoo.conf work/conf/cuckoo.conf.old
+    cp work/conf/auxiliary.conf work/conf/auxiliary.conf.old
     mv work/conf/virtualbox.conf work/conf/virtualbox.conf.old
 
     # Download the CAPEv2 configuration files
-    wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/cuckoo.conf.default -O work/conf/cuckoo.conf || error_message "Failed to download cuckoo.conf.default" || exit 1
-    wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/auxiliary.conf.default -O work/conf/auxiliary.conf || error_message "Failed to download auxiliary.conf.default" || exit 1
+    # wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/cuckoo.conf.default -O work/conf/cuckoo.conf || error_message "Failed to download cuckoo.conf.default" || exit 1
+    # wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/auxiliary.conf.default -O work/conf/auxiliary.conf || error_message "Failed to download auxiliary.conf.default" || exit 1
     
     # Replace the placeholder with the actual values
     echo -e "${BLUE}Replacing the placeholder with the actual values...${NC}"
@@ -483,6 +483,9 @@ EOF
 }
 
 rerun_cape() {
+    # Install optional dependencies
+    echo -e "${BLUE}Installing optional dependencies...${NC}"
+    sudo -u cape poetry run pip install -r extra/optional_dependencies.txt
     # Restart cape service on docker
     echo -e "${BLUE}Restarting CAPEv2 on Docker...${NC}"
     sudo -u $CURRENT_USER docker exec -it cape /bin/bash -c "systemctl restart cape"
