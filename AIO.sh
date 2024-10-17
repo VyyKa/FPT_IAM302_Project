@@ -41,6 +41,7 @@ dependencies=(
     "vagrant"
     "ovmf"
     "golang"
+    "net-tools"
 )
 
 # Colors for formatting
@@ -70,6 +71,41 @@ install_message() {
 
 error_message() {
     echo -e "${RED}✘ Failed to install $1.${NC}"
+}
+
+# Check if the system has internet connection
+check_internet() {
+    ping_output=$(ping -c 1 google.com 2>&1)
+    # Check if the ping Temporary failure in name resolution
+    if [[ $ping_output == *"Temporary failure in name resolution"* ]]; then
+        # Notify DNS issue
+        echo -e "${RED}✘ DNS issue detected.${NC}"
+        # Read the user input to automatically fix the DNS issue
+        read -p "Do you want to fix the DNS issue automatically? (y/n): " -r
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            # Fix the DNS issue automatically
+            echo -e "${BLUE}Fixing the DNS issue...${NC}"
+            echo "nameserver 1.1.1.1" > /etc/resolv.conf
+            echo "nameserver 1.0.0.1" >> /etc/resolv.conf
+            echo -e "${GREEN}✔ DNS issue is fixed.${NC}"
+            # Recheck the internet connection
+            check_internet
+        else
+            # Notify the user to fix the DNS issue manually
+            echo -e "${RED}✘ Please fix the DNS issue manually.${NC}"
+            exit 1
+        fi
+    else
+        # Check if the ping is successful
+        if [[ $ping_output == *"1 packets transmitted, 1 received"* ]]; then
+            # Notify the user that the internet connection is available
+            echo -e "${GREEN}✔ Internet connection is available.${NC}"
+        else
+            # Notify the user that the internet connection is not available
+            echo -e "${RED}✘ Internet connection is not available.${NC}"
+            exit 1
+        fi
+    fi
 }
 
 # Function to check if apt package manager is available
@@ -205,6 +241,8 @@ create_host_only_network() {
     # Create a new host-only network
     VBoxManage hostonlyif create
     VBoxManage hostonlyif ipconfig "$HOST_ONLY_NETWORK" --ip "$HOST_ONLY_IP" --netmask "$HOST_ONLY_NETMASK"
+    # Set the ip address for the host machine
+    ifconfig "$HOST_ONLY_NETWORK" "$HOST_ONLY_IP" netmask "$HOST_ONLY_NETMASK" up
     
     # Notify user that the host-only network is created
     echo -e "${GREEN}Host-only network '$HOST_ONLY_NETWORK' is created with IP: $HOST_ONLY_IP.${NC}"
@@ -241,7 +279,7 @@ setup_capev2_guest_vm() {
     echo -e "${BLUE}Setting up CAPEv2 Guest VM...${NC}"
     
     # wget sample VM Vagrant file
-    wget $VAGRANTFILE_URL -O Vagrantfile
+    wget $VAGRANTFILE_URL -O Vagrantfile || error_message "Failed to download Vagrantfile" || exit 1
 
     # Replace the placeholder with the actual values
     sed -i "s/REPLACE_VM_NAME/$VM_NAME/g" Vagrantfile
@@ -310,7 +348,7 @@ setup_capev2() {
     else
         # Clone the CAPEv2 repository
         echo -e "${YELLOW}➜ Cloning the CAPEv2 repository...${NC}"
-        git clone --recurse-submodules https://github.com/nquangit/cape-docker.git
+        git clone --recurse-submodules https://github.com/nquangit/cape-docker.git || error_message "Failed to clone the CAPEv2 repository." || exit 1
     fi
 
     # Change directory to the CAPEv2 repository
@@ -403,8 +441,8 @@ override_cape_config() {
     mv work/conf/virtualbox.conf work/conf/virtualbox.conf.old
 
     # Download the CAPEv2 configuration files
-    wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/cuckoo.conf.default -O work/conf/cuckoo.conf
-    wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/auxiliary.conf.default -O work/conf/auxiliary.conf
+    wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/cuckoo.conf.default -O work/conf/cuckoo.conf || error_message "Failed to download cuckoo.conf.default" || exit 1
+    wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/auxiliary.conf.default -O work/conf/auxiliary.conf || error_message "Failed to download auxiliary.conf.default" || exit 1
     
     # Replace the placeholder with the actual values
     echo -e "${BLUE}Replacing the placeholder with the actual values...${NC}"
@@ -452,7 +490,9 @@ rerun_cape() {
 
 # MAIN SCRIPT
 main() {
-        
+    # Check for internet connection
+    check_internet
+
     # Check for apt package manager
     check_apt
 
