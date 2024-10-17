@@ -229,8 +229,8 @@ start_services() {
     echo -e "${GREEN}Vagrant service is started and enabled.${NC}"
 
     # Start and enable VirtualBox services
-    systemctl start vboxautostart-service > /dev/null 2>&1
-    systemctl enable vboxautostart-service > /dev/null 2>&1
+    systemctl start virtualbox.service > /dev/null 2>&1
+    systemctl enable virtualbox.service > /dev/null 2>&1
 
     # Notify user that services are started and enabled
     echo -e "${GREEN}VirtualBox service is started and enabled.${NC}"
