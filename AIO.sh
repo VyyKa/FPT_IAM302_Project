@@ -8,7 +8,7 @@ fi
 
 BASE_DIR=$(pwd)
 
-VAGRANTFILE_URL="https://gist.githubusercontent.com/nquangit/83633b69f28757217b1222d112b1a4c3/raw/c6e81b578ba1b4672cec7a4f22b89e3514956d58/Vagrant"
+VAGRANTFILE_URL="https://gist.githubusercontent.com/nquangit/83633b69f28757217b1222d112b1a4c3/raw/bdb44ca6039dc9a211b2796137c67df1d844e87d/Vagrant"
 
 # VM variables
 VM_NAME="cybersec_windows_10"
@@ -304,10 +304,17 @@ setup_capev2_guest_vm() {
     # Run the provisioning script
     echo -e "${BLUE}Running the provisioning script...${NC}"
     sudo -u $CURRENT_USER vagrant provision
+    # The VM will be rebooted after the provisioning script
+
+    # Wait for the VM to be up. Check with ping
+    while ! ping -c 1 -W 1 "$VM_IP" &> /dev/null; do
+        echo -e "${YELLOW}Waiting for the VM to be up...${NC}"
+        sleep 5
+    done
 
     # Reload the VM without provisioning
-    echo -e "${BLUE}Reloading the VM without provisioning...${NC}"
-    sudo -u $CURRENT_USER vagrant reload --force --no-provision
+    # echo -e "${BLUE}Reloading the VM without provisioning...${NC}"
+    # sudo -u $CURRENT_USER vagrant reload --force --no-provision
 
     # Notify user that the CAPEv2 Guest VM is set up
     echo -e "${GREEN}CAPEv2 Guest VM is set up.${NC}"
