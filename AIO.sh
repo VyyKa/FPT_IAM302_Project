@@ -267,6 +267,10 @@ setup_capev2_guest_vm() {
     echo -e "${BLUE}Running the provisioning script...${NC}"
     sudo -u $CURRENT_USER vagrant provision
 
+    # Reload the VM without provisioning
+    echo -e "${BLUE}Reloading the VM without provisioning...${NC}"
+    sudo -u $CURRENT_USER vagrant reload --force --no-provision
+
     # Notify user that the CAPEv2 Guest VM is set up
     echo -e "${GREEN}CAPEv2 Guest VM is set up.${NC}"
 
