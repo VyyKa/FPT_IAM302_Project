@@ -307,10 +307,17 @@ setup_capev2_guest_vm() {
     # The VM will be rebooted after the provisioning script
 
     # Wait for the VM to be up. Check with ping
-    while ! ping -c 1 -W 1 "$VM_IP" &> /dev/null; do
+    # Initialize a variable to ensure the loop runs at least once
+    ping_success=false
+    # Do the loop
+    do {
         echo -e "${YELLOW}Waiting for the VM to be up...${NC}"
-        sleep 5
-    done
+        sleep 20
+        # Attempt to ping the VM
+        if ping -c 1 -W 1 "$VM_IP" &> /dev/null; then
+            ping_success=true
+        fi
+    } while [ "$ping_success" = false ]
 
     # Reload the VM without provisioning
     # echo -e "${BLUE}Reloading the VM without provisioning...${NC}"
