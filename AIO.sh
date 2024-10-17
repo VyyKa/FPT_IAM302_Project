@@ -491,7 +491,7 @@ EOF
 rerun_cape() {
     # Install optional dependencies
     echo -e "${BLUE}Installing optional dependencies...${NC}"
-    sudo -u cape poetry run pip install -r extra/optional_dependencies.txt
+    sudo -u $CURRENT_USER docker exec -it cape /bin/bash -c "sudo -u cape poetry run pip install -r extra/optional_dependencies.txt"
     # Restart cape service on docker
     echo -e "${BLUE}Restarting CAPEv2 on Docker...${NC}"
     sudo -u $CURRENT_USER docker exec -it cape /bin/bash -c "systemctl restart cape"
