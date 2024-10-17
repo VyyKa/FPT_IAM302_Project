@@ -491,6 +491,8 @@ EOF
 rerun_cape() {
     # Install optional dependencies
     echo -e "${BLUE}Installing optional dependencies...${NC}"
+    sudo -u $CURRENT_USER docker exec -it cape /bin/bash -c "sudo apt install -y graphviz libgraphviz-dev"
+    sudo -u $CURRENT_USER docker exec -it cape /bin/bash -c "sudo -u cape poetry run pip install \"pydantic>=2\" \"rich>=13\" \"pyparsing<3,>=2.1.0\""
     sudo -u $CURRENT_USER docker exec -it cape /bin/bash -c "sudo -u cape poetry run pip install -r extra/optional_dependencies.txt"
     # Restart cape service on docker
     echo -e "${BLUE}Restarting CAPEv2 on Docker...${NC}"
