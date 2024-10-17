@@ -443,7 +443,13 @@ override_cape_config() {
     # Download the CAPEv2 configuration files
     # wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/cuckoo.conf.default -O work/conf/cuckoo.conf || error_message "Failed to download cuckoo.conf.default" || exit 1
     # wget https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/conf/default/auxiliary.conf.default -O work/conf/auxiliary.conf || error_message "Failed to download auxiliary.conf.default" || exit 1
-    
+    wget https://raw.githubusercontent.com/CyberSecN00bers/FPT_IAM302_Project/refs/heads/main/sandbox-config/work/conf/processing.conf -O work/conf/processing.conf || error_message "Failed to download processing.conf" || exit 1
+    wget https://raw.githubusercontent.com/CyberSecN00bers/FPT_IAM302_Project/refs/heads/main/sandbox-config/work/conf/reporting.conf -O work/conf/reporting.conf || error_message "Failed to download reporting.conf" || exit 1
+    wget https://raw.githubusercontent.com/CyberSecN00bers/FPT_IAM302_Project/refs/heads/main/sandbox-config/work/conf/cuckoo.conf -O work/conf/cuckoo.conf || error_message "Failed to download cuckoo.conf" || exit 1
+    wget https://raw.githubusercontent.com/CyberSecN00bers/FPT_IAM302_Project/refs/heads/main/sandbox-config/work/conf/web.conf -O work/conf/web.conf || error_message "Failed to download web.conf" || exit 1
+    wget https://raw.githubusercontent.com/CyberSecN00bers/FPT_IAM302_Project/refs/heads/main/sandbox-config/work/conf/check_service.sh -O work/conf/check_service.sh || error_message "Failed to download check_service.sh" || exit 1
+    wget https://raw.githubusercontent.com/CyberSecN00bers/FPT_IAM302_Project/refs/heads/main/sandbox-config/work/conf/auxiliary.conf -O work/conf/auxiliary.conf || error_message "Failed to download auxiliary.conf" || exit 1
+
     # Replace the placeholder with the actual values
     echo -e "${BLUE}Replacing the placeholder with the actual values...${NC}"
     sed -i "s/machinery = kvm/machinery = virtualbox/g" work/conf/cuckoo.conf
