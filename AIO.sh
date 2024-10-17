@@ -410,6 +410,11 @@ override_cape_config() {
     # interface = virbr1 to interface = $VM_NETWORK
     sed -i "s/interface = virbr1/interface = $VM_NETWORK/g" work/conf/auxiliary.conf
 
+    # Enable the reporting module
+    sed -i '/reporthtmlsummary/,/\[.*\]/ {
+        s/enabled = no/enabled = yes/
+    }' work/conf/reporting.conf
+
     # Create the virtualbox.conf file
     cat <<EOF > work/conf/virtualbox.conf
 [virtualbox]
