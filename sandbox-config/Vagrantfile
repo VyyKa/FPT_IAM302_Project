@@ -126,10 +126,6 @@ $packagesClientExtensions = Get-ChildItem -Path "$env:SystemRoot\\servicing\\Pac
 foreach ($package in $packagesClientExtensions) {
     DISM /Online /NoRestart /Add-Package:"$($package.FullName)"
 }
-
-# Reboot the machine
-Write-Host "Rebooting the machine..."
-Restart-Computer -Force
 SCRIPT
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
