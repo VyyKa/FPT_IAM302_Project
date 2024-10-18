@@ -1,33 +1,33 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report
 from sklearn.pipeline import Pipeline
 import joblib
+import pandas as pd
 
-class StringMachineLearning:
-    def __init__(self, labels: list, strings: list, debug: bool = False):
+class BehaviorMachineLearning:
+    def __init__(self, labels: list, behaviors: dict, debug: bool = False):
         self.__labels = labels
-        self.__strings = strings
+        self.__behaviors = behaviors
         self.__pipeline = None
         self.debug = debug
 
     @property
     def labels(self) -> list:
         return self.__labels
-
+    
     @property
-    def strings(self) -> list:
-        return self.__strings
-
+    def behaviors(self) -> dict:
+        return self.__behaviors
+    
     def train(self):
-        # Concatenate all the strings into one string
-        concatenated_strings = [" ".join(string) for string in self.strings]
+        # Create a DataFrame from the behaviors
+        df = pd.DataFrame(self.behaviors).T
+        df["label"] = self.labels
 
         # Create a self.__pipeline
         self.__pipeline = Pipeline(
             [
-                ("tfidf", TfidfVectorizer()),
                 ("clf", RandomForestClassifier()),
             ],
             memory=None  # Specify a memory argument
@@ -35,14 +35,14 @@ class StringMachineLearning:
 
         # Check to not split the data if the debug is True or the length of the data is < 5
         if self.debug or len(self.labels) < 5:
-            x_train = concatenated_strings
-            y_train = self.labels
-            x_test = concatenated_strings
-            y_test = self.labels
+            x_train = df.drop("label", axis=1)
+            y_train = df["label"]
+            x_test = df.drop("label", axis=1)
+            y_test = df["label"]
         else:
             # Split the data into training and testing
             x_train, x_test, y_train, y_test = train_test_split(
-                concatenated_strings, self.labels, test_size=0.3
+                df.drop("label", axis=1), df["label"], test_size=0.3
             )
 
         # Train the model
@@ -55,20 +55,18 @@ class StringMachineLearning:
         if self.debug:
             print(classification_report(y_test, y_pred))
 
-    def predict(self, strings: list) -> list:
+    def predict(self, behaviors: dict) -> list:
         '''
-        Predict the labels of the strings
+        Predict the labels of the behaviors
         '''
-        return self.__pipeline.predict(strings)
+        # Create a DataFrame from the behaviors
+        df = pd.DataFrame(behaviors).T
 
-    def save_model(self, model_path: str) -> None:
+        # Predict the labels
+        return self.__pipeline.predict(df)
+    
+    def save_model(self, model_path: str):
         '''
         Save the model to a file
         '''
         joblib.dump(self.__pipeline, model_path)
-
-    def load_model(self, model_path: str) -> None:
-        '''
-        Load the model from a file
-        '''
-        self.__pipeline = joblib.load(model_path)
