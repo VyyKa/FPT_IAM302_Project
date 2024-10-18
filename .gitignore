@@ -13,3 +13,6 @@ diagrams/venv/**
 machine-learning/dataset/**/*.json
 
 machine-learning/results/**
+
+# ignore all __pycache__ folders (recursive)
+**/__pycache__/**
