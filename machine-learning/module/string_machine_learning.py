@@ -33,10 +33,17 @@ class StringMachineLearning:
             memory=None  # Specify a memory argument
         )
 
-        # Split the data
-        x_train, x_test, y_train, y_test = train_test_split(
-            concatenated_strings, self.labels, test_size=0.2, random_state=42
-        )
+        # Check to not split the data if the debug is True or the length of the data is < 5
+        if self.debug or len(self.labels) < 5:
+            x_train = concatenated_strings
+            y_train = self.labels
+            x_test = concatenated_strings
+            y_test = self.labels
+        else:
+            # Split the data into training and testing
+            x_train, x_test, y_train, y_test = train_test_split(
+                concatenated_strings, self.labels, test_size=0.3
+            )
 
         # Train the model
         self.__pipeline.fit(x_train, y_train)
