@@ -90,3 +90,19 @@ class ReportLoader:
     @property
     def reports(self) -> list:
         return self.__reports
+
+    @property
+    def clean_reports(self) -> list:
+        return [report for report in self.__reports if report.label == 0]
+    
+    @property
+    def malicious_reports(self) -> list:
+        return [report for report in self.__reports if report.label == 1]
+    
+    @property
+    def labels_list(self) -> list:
+        return [report.label for report in self.__reports]
+    
+    @property
+    def strings_list(self) -> list:
+        return [report.strings for report in self.__reports]
