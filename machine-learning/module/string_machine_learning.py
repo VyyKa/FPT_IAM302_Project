@@ -1,86 +1,93 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report
+from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier, VotingClassifier
 from sklearn.pipeline import Pipeline
+from sklearn.utils.validation import check_is_fitted
+from sklearn.metrics import classification_report
+from sklearn.exceptions import NotFittedError
 import joblib
 
-from .machine_learning import MachineLearning
-
-class StringMachineLearning(MachineLearning):
+class StringMachineLearning:
     def __init__(self, labels: list, strings: list, debug: bool = False):
         self.__labels = labels
         self.__strings = strings
-        self.__pipeline = None
         self.debug = debug
+        self.__classes = list(set(labels))  # Lưu lại danh sách các nhãn
 
-        # Parse the string
+        # Khởi tạo pipeline và các mô hình
+        self.__init_models()
         self.__parse_data()
 
     def __parse_data(self):
         '''
-        Parse the string into a list of words
+        Parse strings thành list các từ để đưa vào vectorizer.
         '''
-        self.__concatenated_strings = [" ".join(string) for string in self.strings]
+        self.__concatenated_strings = [" ".join(string) for string in self.__strings]
 
-    @property
-    def labels(self) -> list:
-        return self.__labels
+    def __init_models(self):
+        '''
+        Khởi tạo SGDClassifier và RandomForest trong ensemble.
+        '''
+        self.vectorizer = TfidfVectorizer(ngram_range=(1, 2), max_features=5000)
+        self.sgd = SGDClassifier(max_iter=1000, tol=1e-3)
+        self.rf = RandomForestClassifier()
 
-    @property
-    def strings(self) -> list:
-        return self.__strings
-
-    def train(self):
-        # Create a self.__pipeline
-        self.__pipeline = Pipeline(
-            [
-                ("tfidf", TfidfVectorizer()),
-                ("clf", RandomForestClassifier()),
-            ],
-            memory=None  # Specify a memory argument
+        # Ensemble model để kết hợp cả SGD và RandomForest
+        self.ensemble = VotingClassifier(
+            estimators=[('sgd', self.sgd), ('rf', self.rf)], voting='soft'
         )
 
-        # Check to not split the data if the debug is True or the length of the data is < 5
-        if self.debug or len(self.labels) < 5:
-            x_train = self.__concatenated_strings
-            y_train = self.labels
-            x_test = self.__concatenated_strings
-            y_test = self.labels
-        else:
-            # Split the data into training and testing
-            x_train, x_test, y_train, y_test = train_test_split(
-                self.__concatenated_strings, self.labels, test_size=0.3
-            )
-
-        # Train the model
-        self.__pipeline.fit(x_train, y_train)
-
-        # Predict the test data
-        y_pred = self.__pipeline.predict(x_test)
-
-        # Print the classification report
-        if self.debug:
-            print(classification_report(y_test, y_pred))
-
-    def predict(self, input_strings: list = None) -> list:
+    def train(self):
         '''
-        Predict the labels of the strings
+        Huấn luyện ban đầu trên toàn bộ dữ liệu.
+        '''
+        X = self.vectorizer.fit_transform(self.__concatenated_strings)
+        y = self.__labels
+
+        self.ensemble.fit(X, y)
+
+        if self.debug:
+            print("Initial training completed.")
+
+    def update_model(self, new_strings: list, new_labels: list):
+        '''
+        Cập nhật mô hình với dữ liệu mới.
+        '''
+        try:
+            check_is_fitted(self.ensemble)  # Kiểm tra mô hình đã huấn luyện chưa
+        except NotFittedError:
+            raise ValueError("Model is not initialized. Call train() first.")
+
+        new_data = [" ".join(string) for string in new_strings]
+        X_new = self.vectorizer.transform(new_data)
+
+        # Cập nhật chỉ SGDClassifier (partial_fit)
+        self.sgd.partial_fit(X_new, new_labels, classes=self.__classes)
+
+        if self.debug:
+            print("Model updated with new data.")
+
+    def predict(self, input_strings: list) -> list:
+        '''
+        Dự đoán nhãn của các chuỗi đầu vào.
         '''
         if input_strings is None:
             raise ValueError("The input_strings is None")
-        return self.__pipeline.predict(input_strings)
 
-    def save_model(self, model_path: str = None) -> None:
+        input_data = [" ".join(s) for s in input_strings]
+        X = self.vectorizer.transform(input_data)
+        return self.ensemble.predict(X)
+
+    def save_model(self, model_path: str):
         '''
-        Save the model to a file
+        Lưu mô hình ra file.
         '''
         if model_path is None:
             raise ValueError("The model_path is None")
-        joblib.dump(self.__pipeline, model_path)
+        joblib.dump(self.ensemble, model_path)
 
-    def load_model(self, model_path: str) -> None:
+    def load_model(self, model_path: str):
         '''
-        Load the model from a file
+        Tải mô hình từ file.
         '''
-        self.__pipeline = joblib.load(model_path)
+        self.ensemble = joblib.load(model_path)
