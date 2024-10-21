@@ -4,6 +4,7 @@ from sklearn.metrics import classification_report
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction import FeatureHasher
 from sklearn.pipeline import Pipeline
+from sklearn.linear_model import SGDClassifier
 import joblib
 import pandas as pd
 
@@ -17,13 +18,13 @@ class BehaviorMachineLearning(MachineLearning):
         self.debug = debug
 
         # Parse the data
-        self.__parse_data()
+        self.__df = self.__parse_data(behaviors)
 
-    def __parse_data(self):
+    def __parse_data(self, behaviors: dict = None) -> pd.DataFrame:
         '''
         Parse the behaviors
         '''
-        df = pd.DataFrame(self.__behaviors)
+        df = pd.DataFrame(behaviors)
         # Convert the list of strings to a single string by joining them
         df['api_text'] = df['resolved_apis'].apply(lambda x: ' '.join(x))
         df['command_text'] = df['executed_commands'].apply(lambda x: ' '.join(x))
@@ -78,7 +79,7 @@ class BehaviorMachineLearning(MachineLearning):
 
         df["label"] = self.__labels
 
-        self.__df = df
+        return df
 
 
     @property
@@ -91,12 +92,10 @@ class BehaviorMachineLearning(MachineLearning):
     
     def train(self):
         # Create a self.__pipeline
-        self.__pipeline = Pipeline(
-            [
-                ("clf", RandomForestClassifier()),
-            ],
-            memory=None  # Specify a memory argument
-        )
+        self.__pipeline = Pipeline([
+            ('clf', SGDClassifier(loss='log_loss', warm_start=True))
+        ], memory=None)
+
 
         # Check to not split the data if the debug is True or the length of the data is < 5
         if self.debug or len(self.labels) < 5:
@@ -110,8 +109,8 @@ class BehaviorMachineLearning(MachineLearning):
                 self.__df.drop("label", axis=1), self.__df["label"], test_size=0.3
             )
 
-        # Train the model
-        self.__pipeline.fit(x_train, y_train)
+        # Train the model with SGDClassifier
+        self.__pipeline.named_steps['clf'].partial_fit(x_train, y_train, classes=[0, 1])
 
         # Predict the test data
         y_pred = self.__pipeline.predict(x_test)
@@ -126,12 +125,28 @@ class BehaviorMachineLearning(MachineLearning):
         '''
         if behaviors is None:
             raise ValueError("The behaviors is None")
-        # Create a DataFrame from the behaviors
-        df = pd.DataFrame(behaviors).T
-
+        
+        # Parse the behaviors
+        df = self.__parse_data(behaviors)
         # Predict the labels
-        return self.__pipeline.predict(df)
+        return self.__pipeline.predict(df.drop("label", axis=1))
     
+    def update_model(self, behaviors: dict, labels: list):
+        '''
+        Update the model with the new behaviors
+        '''
+        if behaviors is None:
+            raise ValueError("The behaviors is None")
+        if labels is None:
+            raise ValueError("The labels is None")
+        
+        # Parse the behaviors
+        df = self.__parse_data(behaviors)
+        df["label"] = labels
+
+        # Update the model
+        self.__pipeline.named_steps['clf'].partial_fit(df.drop("label", axis=1), df["label"], classes=[0, 1])
+
     def save_model(self, model_path: str = None):
         '''
         Save the model to a file
@@ -139,3 +154,11 @@ class BehaviorMachineLearning(MachineLearning):
         if model_path is None:
             raise ValueError("The model_path is None")
         joblib.dump(self.__pipeline, model_path)
+
+    def load_model(self, model_path: str = None):
+        '''
+        Load the model from a file
+        '''
+        if model_path is None:
+            raise ValueError("The model_path is None")
+        self.__pipeline = joblib.load(model_path)
