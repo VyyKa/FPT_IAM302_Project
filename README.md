@@ -4,6 +4,12 @@
 
 Welcome to the Hybrid Malware Analysis System project repository. This system integrates machine learning with CAPEv2 sandbox to provide detailed hybrid analysis of potentially malicious files. Developed by the Cybersec_N00bers team as part of the IAM302 course at FPT University, this project aims to streamline the malware analysis process through automation and enhanced detection capabilities.
 
+## Members
+
+- **Huynh Ngoc Quang** (Leader): [GitHub](https://github.com/nquangit)
+- **Pham Thanh Long**: [GitHub](https://github.com/longcyber)
+- **Hoang Kim Long**: [GitHub](https://github.com/selpakon)
+- **Ho Tai Lien Vy Kha**: [GitHub](https://github.com/VyyKa)
 
 ## Objective
 
@@ -51,7 +57,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-- Special thanks to FPT University and the IAM302 course instructors for guidance and support.
+- Special thanks to FPT University and the IAM302 course instructors for guidance and support - Mr. Mai Hoang Dinh.
 - This project was inspired by the need for accessible, efficient malware analysis tools in the cybersecurity community.
 
 ---
