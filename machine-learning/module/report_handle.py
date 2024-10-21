@@ -16,6 +16,9 @@ class Report:
             self.report_raw_data.get("target", {}).get("file", []).get("strings", [])
         )
 
+        # Behavior summary
+        self.__behavior_summary = self.report_raw_data.get("behavior", {}).get("summary", {})
+
     @property
     def strings(self) -> list:
         """
@@ -36,6 +39,13 @@ class Report:
         Return the label in string format
         """
         return "malicious" if self.__label == 1 else "clean"
+    
+    @property
+    def behavior_summary(self) -> dict:
+        """
+        Return the behavior summary
+        """
+        return self.__behavior_summary
 
 
 class ReportLoader:
@@ -106,3 +116,7 @@ class ReportLoader:
     @property
     def strings_list(self) -> list:
         return [report.strings for report in self.__reports]
+    
+    @property
+    def behavior_summary_list(self) -> list:
+        return [report.behavior_summary for report in self.__reports]
