@@ -1,9 +1,9 @@
 # Hybrid Malware Analysis System
 
+![Banner](assets/banner.jpg)
+
 Welcome to the Hybrid Malware Analysis System project repository. This system integrates machine learning with CAPEv2 sandbox to provide detailed hybrid analysis of potentially malicious files. Developed by the Cybersec_N00bers team as part of the IAM302 course at FPT University, this project aims to streamline the malware analysis process through automation and enhanced detection capabilities.
 
-<!-- Banner Image at assets/banner.jpg-->
-![Banner](assets/banner.jpg)
 
 ## Objective
 
