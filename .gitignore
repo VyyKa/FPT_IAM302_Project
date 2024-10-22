@@ -5,3 +5,17 @@ web/uploads/**
 web/instance/**
 
 web/venv/**
+
+diagrams/venv/**
+
+**/venv/**
+
+machine-learning/dataset/**/*.json
+
+machine-learning/results/**
+
+# ignore all __pycache__ folders (recursive)
+**/__pycache__/**
+
+# ignore all pkl files
+**/*.pkl
