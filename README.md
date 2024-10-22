@@ -1,4 +1,4 @@
-# Hybrid Malware Analysis System
+# Automated Hybrid Malware Analysis System
 
 ![Banner](assets/banner.jpg)
 
