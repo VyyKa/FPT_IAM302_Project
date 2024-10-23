@@ -228,6 +228,11 @@ nav ul {
     list-style: none;
 }
 
+.nav-right {
+    justify-content: center;
+    align-items: center;
+}
+
 nav ul.nav-left li,
 nav ul.nav-right li {
     margin: 0 10px;
@@ -288,6 +293,15 @@ nav a:hover {
 }
 
 /* Upload Page Specific Styles */
+.upload-main, .home-main {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-color: var(--background-color);
+}
+
 .upload-container {
     background-color: var(--card-background);
     padding: 30px;
@@ -301,6 +315,19 @@ nav a:hover {
 .upload-container h2 {
     margin-bottom: 25px;
     color: var(--primary-color);
+}
+
+.upload-container input[type="submit"] {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: var(--primary-color);
+    color: var(--button-text);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .upload-container input[type="file"] {
@@ -405,7 +432,7 @@ body.dark-mode .upload-container {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-body.dark-mode h2 {
+body.dark-mode h2, body.dark-mode h1{
     color: var(--secondary-color);
 }
 
@@ -416,6 +443,10 @@ body.dark-mode input[type="file"] {
     background-color: var(--input-background);
     border-color: var(--input-border);
     color: var(--text-color);
+}
+
+body.dark-mode input[type="submit"] {
+    background-color: var(--secondary-color);
 }
 
 body.dark-mode input[type="file"]::file-selector-button {
