@@ -5,8 +5,46 @@ from app.utils.response_utils import response_dict
 from werkzeug.utils import secure_filename
 import os
 import uuid
+import requests
+import threading
 
 upload_bp = Blueprint('upload_bp', __name__)
+
+# Create a function threading to simulate file processing
+def process_file(file_id):
+    # Get the file from the database
+    file = UploadedFile.query.get(file_id)
+    if not file:
+        print(f"File with ID {file_id} not found")
+        return
+
+    # Post this file to http://localhost:8000/apiv2/tasks/create/file
+    url = current_app.config['CUCKOO_CREATE_FILE_URL']
+
+    response = requests.post(url, files={'file': open(file.filepath, 'rb')})
+
+    if response.status_code == 200:
+        # Update the file status to "Processing"
+        file.status = "Processing"
+        db.session.commit()
+    else:
+        # Update the file status to "Failed"
+        file.status = "Failed"
+        db.session.commit()
+        return
+
+    url = current_app.config['ML_ADD_TASK_URL']
+    response = requests.post(url, json=response.json())
+
+    if response.status_code == 200:
+        # Update the file status to "Processing"
+        file.status = "Processing"
+        db.session.commit()
+    else:
+        # Update the file status to "Failed"
+        file.status = "Failed"
+        db.session.commit()
+
 
 @upload_bp.route('/upload', methods=['POST'])
 def upload_files():
@@ -54,7 +92,7 @@ def upload_files():
             db.session.commit()
 
             # Save the initial file upload and set the status to "In Progress"
-            new_file.status = "In Progress"
+            new_file.status = "Uploaded"
             db.session.commit()
 
             # Simulate file processing or malware analysis
@@ -77,6 +115,9 @@ def upload_files():
                 'status': new_file.status,
                 'timestamp': new_file.timestamp
             })
+
+            # Start a new thread to process the file
+            threading.Thread(target=process_file, args=(new_file.id,)).start()
 
         return jsonify(response_dict('success', 'File uploaded successfully!', {'files': uploaded_files})), 201
 
