@@ -16,6 +16,10 @@ machine-learning/results/**
 
 # ignore all __pycache__ folders (recursive)
 **/__pycache__/**
+**/__pycache__/
+
+**/*.pyc
+*.pyc
 
 # ignore all pkl files
 **/*.pkl
