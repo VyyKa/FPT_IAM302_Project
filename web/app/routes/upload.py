@@ -5,8 +5,46 @@ from app.utils.response_utils import response_dict
 from werkzeug.utils import secure_filename
 import os
 import uuid
+import requests
+import threading
 
 upload_bp = Blueprint('upload_bp', __name__)
+
+# Create a function threading to simulate file processing
+def process_file(file_id):
+    # Get the file from the database
+    file = UploadedFile.query.get(file_id)
+    if not file:
+        print(f"File with ID {file_id} not found")
+        return
+
+    # Post this file to http://localhost:8000/apiv2/tasks/create/file
+    url = current_app.config['CUCKOO_CREATE_FILE_URL']
+
+    response = requests.post(url, files={'file': open(file.filepath, 'rb')})
+
+    if response.status_code == 200:
+        # Update the file status to "Processing"
+        file.status = "Processing"
+        db.session.commit()
+    else:
+        # Update the file status to "Failed"
+        file.status = "Failed"
+        db.session.commit()
+        return
+
+    url = current_app.config['ML_ADD_TASK_URL']
+    response = requests.post(url, json=response.json())
+
+    if response.status_code == 200:
+        # Update the file status to "Processing"
+        file.status = "Processing"
+        db.session.commit()
+    else:
+        # Update the file status to "Failed"
+        file.status = "Failed"
+        db.session.commit()
+
 
 @upload_bp.route('/upload', methods=['POST'])
 def upload_files():
@@ -26,42 +64,60 @@ def upload_files():
         uploaded_files = []        
         for file in files:
             filename = secure_filename(file.filename)  # Secure the file name
-            filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+            absolute_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+            relative_path = os.path.join('uploads', filename)  
+            # filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
 
             # Check if the file already exists in the directory
-            if os.path.exists(filepath):
+            if os.path.exists(absolute_path):
                 # Create a new file name with UUID to avoid duplication
                 unique_filename = f"{uuid.uuid4().hex}_{filename}"
-                filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], unique_filename)
+                # filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], unique_filename)
+                absolute_path = os.path.join(current_app.config['UPLOAD_FOLDER'], unique_filename)
+                relative_path = os.path.join('uploads', unique_filename)
                 print(f"File {filename} already exists, saving as: {unique_filename}")
             else:
                 unique_filename = filename
 
             # Save the file to the specified path
             try:
-                file.save(filepath)
+                file.save(absolute_path)
             except Exception as e:
                 print(f"Error saving file {filename}: {e}")
                 return jsonify(response_dict('error', f"Failed to save file {filename}", {})), 500
 
-            # Create a new record for the file in the database
-            new_file = UploadedFile(filename=unique_filename, filepath=filepath, user_id=user_id)
+            # Save relative path in the database
+            new_file = UploadedFile(filename=unique_filename, filepath=relative_path, user_id=user_id)
             db.session.add(new_file)
             db.session.commit()
 
-            # Simulate the file analysis status
-            new_file.status = "In Progress"
+            # Save the initial file upload and set the status to "In Progress"
+            new_file.status = "Uploaded"
             db.session.commit()
 
-            # Example: File analysis completed successfully
-            # new_file.status = "Analyzed"  # Could be "Failed" if the analysis fails
-            # db.session.commit()
+            # Simulate file processing or malware analysis
+            # try:
+            #     # Perform some analysis here...
+            #     # Example: Assume analysis is successful and we detect no issues
+            #     new_file.status = "Clean"
+            #     db.session.commit()
+            # except AnalysisError as e:
+            #     # If something went wrong during analysis, mark it as failed
+            #     new_file.status = "Failed"
+            #     db.session.commit()
 
+            # If file is found to be malicious:
+            # new_file.status = "Malicious"
+            # db.session.commit()
+            
             uploaded_files.append({
                 'filename': new_file.filename,
                 'status': new_file.status,
                 'timestamp': new_file.timestamp
             })
+
+            # Start a new thread to process the file
+            threading.Thread(target=process_file, args=(new_file.id,)).start()
 
         return jsonify(response_dict('success', 'File uploaded successfully!', {'files': uploaded_files})), 201
 

@@ -1,4 +1,4 @@
-# Hybrid Malware Analysis System
+# Automated Hybrid Malware Analysis System
 
 ![Banner](assets/banner.jpg)
 
@@ -53,7 +53,7 @@ Contributions to this project are welcome. Please fork the repository, make your
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the GNU General Public License v3.0. For more information, please refer to the [LICENSE](LICENSE) file.
 
 ## Acknowledgments
 

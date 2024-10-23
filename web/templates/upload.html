@@ -22,7 +22,7 @@
                     <li id="username-display"></li>
                     <li><a href="{{ url_for('frontend.signin') }}">Sign In</a></li>
                     <li><a href="{{ url_for('frontend.signup') }}">Sign Up</a></li>
-                    <li><a href="#" id="logout-button">Logout</a></li> 
+                    <li><a href="#" id="logout-button">Logout</a></li>
                     <li class="theme-switch-wrapper">
                         <button id="dark-mode-toggle" aria-label="Switch to dark mode">
                             <img src="{{ url_for('static', filename='images/moon-icon.svg') }}" alt="Moon Icon" />
@@ -33,15 +33,13 @@
         </div>
     </header>
 
-    <main>
-        <div class="flash-messages" id="flash-messages">
-
-        </div>
+    <main class="upload-main">
+        <div class="flash-messages" id="flash-messages"></div>
 
         <div class="upload-container">
             <form id="upload-form" enctype="multipart/form-data">
                 <h2>Upload Your File</h2>
-                <input type="file" name="file" id="file" aria-label="Upload your file" multiple required />
+                <input type="file" name="file" id="file" aria-label="Upload your file" required />
                 <input type="submit" value="Upload Files" />
             </form>
             <p>
@@ -56,18 +54,19 @@
 
     <script src="{{ url_for('static', filename='js/themeToggle.js') }}"></script>
     <script>
-        // Get the username from localStorage and display it
+        // Display the username if logged in
         const username = localStorage.getItem('username');
         if (username) {
-            document.getElementById('username-display').innerText = `Logged in as: ${username}`;
+            // document.getElementById('username-display').innerText = `Logged in as: ${username}`;
+            document.getElementById('username-display').innerText = `${username}`;
             document.getElementById('logout-button').style.display = 'inline';  // Show Logout button
             document.querySelector('a[href="{{ url_for("frontend.signin") }}"]').style.display = 'none';  // Hide Sign In and Sign Up buttons
-            document.querySelector('a[href="{{ url_for("frontend.signup") }}"]').style.display = 'none';  
+            document.querySelector('a[href="{{ url_for("frontend.signup") }}"]').style.display = 'none';
         } else {
             document.getElementById('logout-button').style.display = 'none';  // Hide Logout button if not logged in
         }
 
-        // Handle the event when the upload file button is clicked
+        // Handle file upload
         document.getElementById('upload-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const files = document.getElementById('file').files;
@@ -75,7 +74,7 @@
                 alert('Please select at least one file to upload.');
                 return;
             }
-        
+
             const formData = new FormData();
             for (let i = 0; i < files.length; i++) {
                 formData.append('file', files[i]);
@@ -85,18 +84,18 @@
                 method: 'POST',
                 body: formData,
             });
-        
+
             const data = await response.json();
             const flashDiv = document.getElementById('flash-messages');
-        
+
             if (data.status === 'success') {
                 flashDiv.innerHTML = `<p class="success">${data.message}</p>`;
                 document.getElementById('upload-form').reset();  // Reset form after successful upload
             } else {
                 flashDiv.innerHTML = `<p class="error">${data.message}</p>`;
             }
-        });       
-        
+        });
+
         // Handle logout
         document.getElementById('logout-button').addEventListener('click', async function(e) {
             e.preventDefault();
@@ -108,12 +107,12 @@
 
                 const data = await response.json();
                 if (data.status === 'success') {
-                    // Remove token from localStorage
+                    // Remove tokens and username from localStorage
                     localStorage.removeItem('access_token');
                     localStorage.removeItem('refresh_token');
-                    localStorage.removeItem('username');  // Remove username if stored
-                    alert('Successfully logged out.');
-                    window.location.href = '{{ url_for('frontend.index') }}';  // Redirect to the homepage
+                    localStorage.removeItem('username');
+                    // alert('Successfully logged out.');
+                    window.location.href = '{{ url_for('frontend.index') }}';  // Redirect to homepage
                 } else {
                     alert(data.message);
                 }

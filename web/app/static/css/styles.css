@@ -1,295 +1,468 @@
-/* ============================
-   Base Reset
-============================ */
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+/* Global Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-/* ============================
-   Root Variables for Light and Dark Modes
-============================ */
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    /* background: url('/static/images/1.jpg') no-repeat; */
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    background-size: cover;
+    background-position: center;
+    animation: animateBg 5s linear infinite;
+}
+
+@keyframes animateBg {
+    100% {
+        filter: hue-rotate(360deg);
+    }  
+}
+
+/* CSS Variables for Theming */
 :root {
-    /* Light mode colors */
-    --primary-color-light: #007acc;
-    --secondary-color-light: #005f99;
-    --background-light: #f0f4f8;
-    --text-color-light: #333;
-    --button-color-light: #006bb3;
-    --button-text-light: #fff;
-
-    /* Dark mode colors */
-    --primary-color-dark: #0a0a0a;
-    --secondary-color-dark: #1c1c1c;
-    --background-dark: #141414;
-    --text-color-dark: #d4d4d4;
-    --button-color-dark: #555;
-    --button-text-dark: #fff;
-
-    /* Additional colors */
-    --success-color: #28a745;
-    --error-color: #dc3545;
-
-    /* Common variables */
-    --border-radius: 8px;
-    --transition-speed: 0.3s;
-    --font-family: 'Arial', sans-serif;
-}
-
-/* ============================
-   Body Styles
-============================ */
-body {
-    font-family: var(--font-family);
-    line-height: 1.6;
-    transition: background-color var(--transition-speed), color var(--transition-speed);
-    background-color: var(--background-light);
-    color: var(--text-color-light);
+    /* Light Theme Colors */
+    --primary-color: #4A90E2;
+    --secondary-color: #50E3C2;
+    --accent-color: #F5A623;
+    --background-color: #F0F2F5;
+    --card-background: #FFFFFF;
+    --text-color: #333333;
+    --input-background: #FFFFFF;
+    --input-border: #CCCCCC;
+    --button-text: #FFFFFF;
+    --success-color: #27AE60;
+    --error-color: #E74C3C;
 }
 
 body.dark-mode {
-    background-color: var(--background-dark);
-    color: var(--text-color-dark);
+    /* Dark Theme Colors */
+    --primary-color: #34495E;
+    --secondary-color: #1ABC9C;
+    --accent-color: #E67E22;
+    --background-color: #2C3E50;
+    --card-background: #34495E;
+    --text-color: #ECF0F1;
+    --input-background: #3C4A5A;
+    --input-border: #7F8C8D;
+    --button-text: #FFFFFF;
+    --success-color: #2ECC71;
+    --error-color: #E74C3C;
 }
 
-/* ============================
-   Header Styles
-============================ */
+.signin-box {
+    position: relative;
+    width: 400px;
+    height: 450px;
+    /* background: transparent;  */
+    background: rgb(0, 162, 255);
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(15px);
+}
+
+.signup-box {
+    position: relative;
+    width: 400px;
+    height: 450px;
+    /* background: transparent;  */
+    background: rgb(0, 162, 255);
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(15px);
+}
+
+h2 {
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    width: 310px;
+    margin: 30px 0;
+    border-bottom: 2px solid #fff;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+}
+
+.input-box input {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #fff;
+    padding: 0 35px 0 5px;
+}
+
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    color: #fff;
+    font-size: 1.2em;
+    line-height: 57px;
+}
+
+.remmember-forgot {
+    margin: -15px 0 15px;
+    font-size: .9em;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remmember-forgot label input {
+    margin-right: 3px;
+}
+
+.remmember-forgot a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.remmember-forgot a:hover {
+    text-decoration: underline;
+}
+
+button {
+    width: 100%;
+    height: 40px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #000;
+    font-weight: 500;
+}
+
+.register-link {
+    font-size: .9em;
+    color: #fff;
+    text-align: center;
+    margin: 25px 0 10px;
+}
+
+.register-link p a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link p a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width:360px) {
+    .signin-box {
+        width: 100%;
+        height: 100vh;
+        border: none;
+        border-radius: 0;
+    }
+
+    .input-box {
+        width: 290px;
+    }
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Header Styles */
 header {
+    background-color: var(--primary-color);
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--primary-color-light);
-    padding: 1rem 2rem;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    transition: background-color var(--transition-speed);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-body.dark-mode header {
-    background-color: var(--primary-color-dark);
-}
-
-/* ============================
-   Navigation Styles
-============================ */
-nav {
-    flex-grow: 1;
 }
 
 nav ul {
+    display: flex;
     list-style: none;
-    display: flex;
-    justify-content: flex-end;
+}
+
+.nav-right {
+    justify-content: center;
     align-items: center;
 }
 
-nav ul li {
-    margin-right: 1.5rem;
+nav ul.nav-left li,
+nav ul.nav-right li {
+    margin: 0 10px;
 }
 
-nav ul li a {
+nav a {
+    color: var(--button-text);
     text-decoration: none;
-    color: var(--button-text-light);
-    font-weight: 500;
-    transition: color var(--transition-speed), transform var(--transition-speed);
+    font-weight: 600;
+    transition: color 0.3s;
 }
 
-nav ul li a:hover {
-    color: var(--secondary-color-light);
-    transform: scale(1.05);
-}
-
-body.dark-mode nav ul li a:hover {
-    color: var(--secondary-color-dark);
-}
-
-/* ============================
-   Theme Switcher Styles
-============================ */
-.theme-switch-wrapper {
-    display: flex;
-    align-items: center;
+nav a:hover {
+    color: var(--secondary-color);
 }
 
 .theme-switch-wrapper button {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.3rem;
-    transition: transform var(--transition-speed);
+    padding: 5px;
+    transition: transform 0.3s;
+}
+
+.theme-switch-wrapper button:hover {
+    transform: scale(1.1);
 }
 
 .theme-switch-wrapper img {
     width: 24px;
     height: 24px;
-    transition: filter var(--transition-speed);
 }
 
-body.dark-mode .theme-switch-wrapper img {
-    filter: invert(1);
-}
-
-/* ============================
-   Auth Container Styles
-============================ */
-.auth-container {
-    max-width: 400px; /* Increased max width */
-    margin: 5rem auto 2rem; /* Centered */
-    padding: 2rem;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: var(--border-radius);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
-}
-
-body.dark-mode .auth-container {
-    background-color: rgba(30, 30, 30, 0.9);
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-}
-
-/* ============================
-   Form Styles
-============================ */
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: inherit;
-    font-weight: bold;
-}
-
-.form-group input,
-.form-group textarea {
+/* Flash Messages */
+.flash-messages {
     width: 100%;
-    padding: 0.75rem;
-    border: 2px solid var(--primary-color-light);
-    border-radius: var(--border-radius);
-    font-size: 1rem;
-    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    max-width: 400px;
+    margin-bottom: 20px;
 }
 
-body.dark-mode .form-group input,
-body.dark-mode .form-group textarea {
-    border-color: var(--secondary-color-dark);
-    background-color: var(--secondary-color-dark);
-    color: var(--text-color-dark);
+.flash-messages p {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-weight: 600;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: var(--secondary-color-light);
-    box-shadow: 0 0 5px var(--secondary-color-light);
+.flash-messages .success {
+    background-color: rgba(39, 174, 96, 0.1);
+    color: var(--success-color);
+    border-left: 5px solid var(--success-color);
 }
 
-body.dark-mode .form-group input:focus,
-body.dark-mode .form-group textarea:focus {
-    border-color: var(--secondary-color-dark);
-    box-shadow: 0 0 5px var(--secondary-color-dark);
+.flash-messages .error {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--error-color);
+    border-left: 5px solid var(--error-color);
 }
 
-/* ============================
-   Button Styles
-============================ */
-button,
-input[type="submit"] {
-    background-color: var(--button-color-light);
-    color: var(--button-text-light);
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color var(--transition-speed), transform var(--transition-speed);
-}
-
-body.dark-mode button,
-body.dark-mode input[type="submit"] {
-    background-color: var(--button-color-dark);
-    color: var(--button-text-dark);
-}
-
-button:hover,
-input[type="submit"]:hover {
-    background-color: var(--secondary-color-light);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-body.dark-mode button:hover,
-body.dark-mode input[type="submit"]:hover {
-    background-color: var(--secondary-color-dark);
-    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.2);
-}
-
-/* ============================
-   Upload Container Styles
-============================ */
-.upload-container {
+/* Upload Page Specific Styles */
+.upload-main, .home-main {
     display: flex;
-    flex-direction: column;
+    flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 60px); /* Adjust to center within the viewport */
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: var(--border-radius);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(5px);
-    width: 80%;
-    max-width: 600px; /* Limits the width of the form */
-    transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+    height: 90vh;
+    background-color: var(--background-color);
+}
+
+.upload-container {
+    background-color: var(--card-background);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .upload-container h2 {
-    margin-bottom: 1.5rem;
-    color: var(--primary-color-light);
+    margin-bottom: 25px;
+    color: var(--primary-color);
+}
+
+.upload-container input[type="submit"] {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: var(--primary-color);
+    color: var(--button-text);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .upload-container input[type="file"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 1rem;
-    border: 2px solid var(--primary-color-light);
-    border-radius: var(--border-radius);
+    border: 1px solid var(--input-border);
+    border-radius: 5px;
+    background-color: var(--input-background);
+    color: var(--text-color);
+    margin-bottom: 20px;
+    transition: border-color 0.3s, background-color 0.3s;
 }
 
-/* ============================
-   Flash Messages Styles
-============================ */
-.flash-messages {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: var(--border-radius);
-    transition: background-color var(--transition-speed);
+.upload-container input[type="file"]:focus {
+    border-color: var(--secondary-color);
+    outline: none;
 }
 
-.success {
-    background-color: rgba(40, 167, 69, 0.1);
-    color: var(--success-color);
-    border: 1px solid var(--success-color);
+.upload-container input[type="file"]::file-selector-button {
+    padding: 10px 15px;
+    background-color: var(--primary-color);
+    color: var(--button-text);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.error {
-    background-color: rgba(220, 53, 69, 0.1);
-    color: var(--error-color);
-    border: 1px solid var(--error-color);
+.upload-container input[type="file"]::file-selector-button:hover {
+    background-color: var(--secondary-color);
 }
 
-/* ============================
-   Additional Navigation Styles
-============================ */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.upload-container p {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+.upload-container a {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* Username Display */
+#username-display {
+    color: var(--button-text);
+    font-weight: 600;
+}
+
+/* Logout Button */
+#logout-button {
+    display: none; /* Hidden by default, shown when logged in */
+    color: var(--button-text);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#logout-button:hover {
+    color: var(--secondary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul.nav-left,
+    nav ul.nav-right {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .container {
+        padding: 10px 0;
+    }
+
+    main {
+        padding: 20px 10px;
+    }
+
+    .signin-box,
+    .signup-box,
+   .login-box,
+    .upload-container {
+        max-width: 100%;
+    }
+}
+
+/* Additional Enhancements */
+body.dark-mode {
+    background-color: var(--background-color);
+}
+
+body.dark-mode .signin-box,
+body.dark-mode .signup-box,
+body.dark-mode .login-box,
+body.dark-mode .upload-container {
+    background-color: var(--card-background);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode h2, body.dark-mode h1{
+    color: var(--secondary-color);
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode input[type="password"],
+body.dark-mode input[type="email"],
+body.dark-mode input[type="file"] {
+    background-color: var(--input-background);
+    border-color: var(--input-border);
+    color: var(--text-color);
+}
+
+body.dark-mode input[type="submit"] {
+    background-color: var(--secondary-color);
+}
+
+body.dark-mode input[type="file"]::file-selector-button {
+    background-color: var(--secondary-color);
+}
+
+body.dark-mode a {
+    color: var(--secondary-color);
+}
+
+body.dark-mode .flash-messages .success {
+    background-color: rgba(46, 204, 113, 0.1);
+    border-left: 5px solid var(--success-color);
+}
+
+body.dark-mode .flash-messages .error {
+    background-color: rgba(231, 76, 60, 0.1);
+    border-left: 5px solid var(--error-color);
 }

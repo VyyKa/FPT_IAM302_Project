@@ -18,7 +18,7 @@
                 </ul>
                 <ul class="nav-right">
                     {% if username %}                   
-                    <li><span>Hello, {{ username }}</span></li>
+                    <li><span id="username-display">Hello, {{ username }}</span></li>
                     <li><a href="#" id="logout-btn">Logout</a></li>
                     {% else %}
                     <li><a href="{{ url_for('frontend.signin') }}">Sign In</a></li>
@@ -26,7 +26,7 @@
                     {% endif %}
                     <li class="theme-switch-wrapper">
                         <button id="dark-mode-toggle" aria-label="Switch to dark mode">
-                            <img src="{{ url_for('static', filename='images/moon-icon.svg') }}" alt="Moon Icon">
+                            <img src="{{ url_for('static', filename='images/moon-icon.svg') }}" alt="Moon Icon" id="theme-icon">
                         </button>
                     </li>
                 </ul>
@@ -34,7 +34,7 @@
         </div>
     </header>
 
-    <main>
+    <main class="home-main">
         <h1>Welcome to the File Upload Platform</h1>
     </main>
 
@@ -58,18 +58,20 @@
                 localStorage.removeItem('access_token');
                 localStorage.removeItem('refresh_token');
 
-                // Redirect to the sign-in page or refresh the page
+                // Redirect to the sign-in page
                 window.location.href = '{{ url_for('frontend.signin') }}';
             } else {
                 alert(data.message);
             }
         });
 
-        // Display the logged-in username
+        // Display the logged-in username if available
         const username = localStorage.getItem('username');
         if (username) {
-            document.getElementById('username-display').innerText = `Logged in as: ${username}`;
+            document.getElementById('username-display').innerText = `Hello, ${username}`;
         }
+
+        // Update theme icon based on current theme (managed in themeToggle.js)
     </script>
 </body>
 

@@ -12,28 +12,38 @@
 </head>
 
 <body>
-    <div class="container">
-        <main>
-            <h2>Sign Up</h2>
-            <form id="signup-form">
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" aria-label="Username" placeholder="Choose a username" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" aria-label="Email" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" aria-label="Password" placeholder="Create a password" minlength="8" required autocomplete="off">
-                </div>
-                <button type="submit">Sign Up</button>
-                <p>Already have an account? <a href="{{ url_for('frontend.signin') }}">Sign in</a></p>
-            </form>
-            <div id="message"></div>
-        </main>
-    </div>
+    <section>
+        <div class="signup-box">
+            <main>
+                <h2>Sign Up</h2>
+                <form id="signup-form">
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                        <input type="text" id="username" name="username" aria-label="Username" required>
+                        <label>Username</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                        <input type="email" id="email" name="email" aria-label="Email" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                        <input type="password" id="password" name="password" aria-label="Password" minlength="8" required autocomplete="off">
+                        <label>Password</label>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                    <div class="register-link">
+                        <p>Already have an account? <a href="{{ url_for('frontend.signin') }}">Sign in</a></p>
+                    </div>
+                </form>
+                <div id="message"></div>
+            </main>
+        </div>
+    </section>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <script>
         document.getElementById('signup-form').addEventListener('submit', async function(e) {
