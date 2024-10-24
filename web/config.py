@@ -7,6 +7,7 @@ class Config:
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'logn2') 
     UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
     MAX_CONTENT_LENGTH = 300 * 1024 * 1024  # 300MB max file size
+    ADMIN_USERS = ['admin', 'administrator']
 
     # Cuckoo API URL
     CUCKOO_API_URL = os.getenv('CUCKOO_API_URL', 'http://localhost:8000')

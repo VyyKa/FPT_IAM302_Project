@@ -20,9 +20,9 @@ def process_file(file_id):
 
     # Post this file to http://localhost:8000/apiv2/tasks/create/file
     url = current_app.config['CUCKOO_CREATE_FILE_URL']
-
     response = requests.post(url, files={'file': open(file.filepath, 'rb')})
 
+    # Handle response and update the status of the file
     if response.status_code == 200:
         # Update the file status to "Processing"
         file.status = "Processing"
@@ -58,8 +58,11 @@ def upload_files():
         if not files or files[0].filename == '':
             return jsonify(response_dict('error', 'No file selected for uploading', {})), 400
         
-        # Retrieve user_id from the session if the user is logged in
+        # Retrieve user_id from session
         user_id = session.get('user_id')  # None if not logged in
+        
+        if user_id is None:
+            return jsonify(response_dict('error', 'User not authenticated', {})), 403
         
         uploaded_files = []        
         for file in files:
@@ -68,7 +71,7 @@ def upload_files():
             relative_path = os.path.join('uploads', filename)  
             # filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
 
-            # Check if the file already exists in the directory
+            # Handle file name duplication
             if os.path.exists(absolute_path):
                 # Create a new file name with UUID to avoid duplication
                 unique_filename = f"{uuid.uuid4().hex}_{filename}"
@@ -79,14 +82,14 @@ def upload_files():
             else:
                 unique_filename = filename
 
-            # Save the file to the specified path
+            # Save the file
             try:
                 file.save(absolute_path)
             except Exception as e:
                 print(f"Error saving file {filename}: {e}")
                 return jsonify(response_dict('error', f"Failed to save file {filename}", {})), 500
 
-            # Save relative path in the database
+            # Create new record in the database
             new_file = UploadedFile(filename=unique_filename, filepath=relative_path, user_id=user_id)
             db.session.add(new_file)
             db.session.commit()
@@ -110,6 +113,7 @@ def upload_files():
             # new_file.status = "Malicious"
             # db.session.commit()
             
+             # Prepare the uploaded file details for response
             uploaded_files.append({
                 'filename': new_file.filename,
                 'status': new_file.status,

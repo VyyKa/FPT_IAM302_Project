@@ -68,10 +68,19 @@
 
         // Handle file upload
         document.getElementById('upload-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
+            e.preventDefault(); // Prevent the default form submission
+
+            // Check if the user is signed in
+            if (!username) {
+                const flashDiv = document.getElementById('flash-messages');
+                flashDiv.innerHTML = `<p class="error">Please sign in to upload files.</p>`; // Show message in flash area
+                return; // Stop execution if not signed in
+            }
+
             const files = document.getElementById('file').files;
             if (files.length === 0) {
-                alert('Please select at least one file to upload.');
+                const flashDiv = document.getElementById('flash-messages');
+                flashDiv.innerHTML = `<p class="error">Please select at least one file to upload.</p>`; // Show message in flash area
                 return;
             }
 
@@ -111,14 +120,15 @@
                     localStorage.removeItem('access_token');
                     localStorage.removeItem('refresh_token');
                     localStorage.removeItem('username');
-                    // alert('Successfully logged out.');
                     window.location.href = '{{ url_for('frontend.index') }}';  // Redirect to homepage
                 } else {
-                    alert(data.message);
+                    const flashDiv = document.getElementById('flash-messages');
+                    flashDiv.innerHTML = `<p class="error">${data.message}</p>`; // Show message in flash area
                 }
             } catch (error) {
                 console.error('Error during logout:', error);
-                alert('An error occurred during logout.');
+                const flashDiv = document.getElementById('flash-messages');
+                flashDiv.innerHTML = `<p class="error">An error occurred during logout.</p>`; // Show message in flash area
             }
         });
     </script>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Status</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <ul class="nav-left">
+                    <!-- Navigation items -->
+                </ul>
+                <ul class="nav-right">
+                    <li><a href="{{ url_for('frontend.index') }}">Home</a></li>
+                    <li class="theme-switch-wrapper">
+                        <button id="dark-mode-toggle" aria-label="Switch to dark mode">
+                            <img src="{{ url_for('static', filename='images/moon-icon.svg') }}" alt="Moon Icon" id="theme-icon">
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>File Upload Status</h1>
+        {% if files %}
+            <table border="1">
+                <thead>
+                    <tr>
+                        {% if session.get('is_admin') %}
+                            <th>ID</th>
+                            <th>Filename</th>
+                            <th>Status</th>
+                            <th>Filepath</th>
+                            <th>Timestamp</th>
+                            <th>User</th>
+                        {% else %}
+                            <th>Filename</th>
+                            <th>Status</th>
+                            <th>Timestamp</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file in files %}
+                    <tr>
+                        {% if session.get('is_admin') %}
+                            <td>{{ file.id }}</td>
+                            <td>{{ file.filename }}</td>
+                            <td>{{ file.status }}</td>
+                            <td>{{ file.filepath }}</td>
+                            <td>{{ file.timestamp }}</td>
+                            <td>{{ file.user.username if file.user else 'Unauthenticated' }}</td>
+                        {% else %}
+                            <td>{{ file.filename }}</td>
+                            <td>{{ file.status }}</td>
+                            <td>{{ file.timestamp }}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No files found.</p>
+        {% endif %}
+    </main>
+
+    <!-- JavaScript for theme toggle -->
+    <script src="{{ url_for('static', filename='js/themeToggle.js') }}"></script>
+</body>
+
+</html>
