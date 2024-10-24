@@ -8,7 +8,7 @@ fi
 
 BASE_DIR=$(pwd)
 
-VAGRANTFILE_URL="https://gist.githubusercontent.com/nquangit/83633b69f28757217b1222d112b1a4c3/raw/d9c9974b6eb985e8095387f472790cea5d02bba4/Vagrant"
+VAGRANTFILE_URL="https://gist.githubusercontent.com/nquangit/83633b69f28757217b1222d112b1a4c3/raw/4b19069a89bd54bca35df0273f8e0260a649a32e/Vagrant"
 
 # VM variables
 VM_NAME="cybersec_windows_10"
@@ -304,6 +304,10 @@ setup_capev2_guest_vm() {
     # Run the provisioning script
     echo -e "${BLUE}Running the provisioning script...${NC}"
     sudo -u $CURRENT_USER vagrant provision
+
+    # Restart the VM
+    echo -e "${BLUE}Restarting the VM...${NC}"
+    sudo -u $CURRENT_USER Restart-Computer -Force
 
     # Wait for the VM to be up. Check with ping
     while true; do
