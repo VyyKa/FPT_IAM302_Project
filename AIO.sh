@@ -478,6 +478,14 @@ override_cape_config() {
         s/enabled = no/enabled = yes/
     }' work/conf/reporting.conf
 
+    sed -i '/malscore/,/\[.*\]/ {
+        s/enabled = no/enabled = yes/
+    }' work/conf/web.conf
+
+    sed -i '/malstatus/,/\[.*\]/ {
+        s/enabled = no/enabled = yes/
+    }' work/conf/web.conf
+
     # Create the virtualbox.conf file
     cat <<EOF > work/conf/virtualbox.conf
 [virtualbox]
@@ -511,6 +519,9 @@ rerun_cape() {
     sudo -u $CURRENT_USER docker exec -it cape /bin/bash -c "sudo -u cape poetry run pip install -r extra/optional_dependencies.txt"
     # Restart cape service on docker
     echo -e "${BLUE}Restarting CAPEv2 on Docker...${NC}"
+    sudo -u $CURRENT_USER docker exec -it cape /bin/bash -c "systemctl restart cape-processor"
+    sudo -u $CURRENT_USER docker exec -it cape /bin/bash -c "systemctl restart cape-rooter"
+    sudo -u $CURRENT_USER docker exec -it cape /bin/bash -c "systemctl restart cape-web"
     sudo -u $CURRENT_USER docker exec -it cape /bin/bash -c "systemctl restart cape"
 }
 
