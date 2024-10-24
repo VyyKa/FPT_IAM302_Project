@@ -305,6 +305,10 @@ setup_capev2_guest_vm() {
     echo -e "${BLUE}Running the provisioning script...${NC}"
     sudo -u $CURRENT_USER vagrant provision
 
+    # Restart the VM
+    echo -e "${BLUE}Restarting the VM...${NC}"
+    sudo -u $CURRENT_USER Restart-Computer -Force
+
     # Wait for the VM to be up. Check with ping
     while true; do
         echo -e "${YELLOW}Waiting for the VM to be up...${NC}"
