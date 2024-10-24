@@ -20,12 +20,17 @@ def signin():
     user = User.query.filter_by(username=username).first()
     if user and check_password_hash(user.password, password):
         session['user_id'] = user.id  # Store the user's ID in the session
+        
+        # Check if user is admin and set session variable
+        session['is_admin'] = user.is_admin  # This will be True or False based on the user's status
+
         access_token = create_access_token(identity=user.id)
         refresh_token = create_refresh_token(identity=user.id)
         return jsonify(response_dict('success', 'Login successful', {
             'access_token': access_token,
             'refresh_token': refresh_token
         })), 200
+
     return jsonify(response_dict('error', 'Invalid username or password', {})), 401
 
 @auth_bp.route('/signup', methods=['POST'])
