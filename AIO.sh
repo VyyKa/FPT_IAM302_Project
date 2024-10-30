@@ -370,21 +370,27 @@ setup_capev2() {
 
     # Change directory to the CAPEv2 repository
     cd cape-docker || error_message "CAPEv2 repository not found." || exit 1
-
-    # Build the vbox-server
-    echo -e "${BLUE}Building the vbox-server...${NC}"
-    make vbox-server
     
     # Set up the vbox-server run as a service
-    echo -e "${BLUE}Setting up the vbox-server as a service...${NC}"
+    echo -e "${BLUE}Setting up the vbox-server...${NC}"
     # Check if the vbox-socket-server service already exists
     if [ -f "/etc/systemd/system/vbox-socket-server.service" ]; then
         echo -e "${YELLOW}➜ vbox-socket-server service already exists.${NC}"
-        echo -e "${YELLOW}➜ Reloading systemd services...${NC}"
+
+        # Remove the old vbox-socket-server service
+        echo -e "${YELLOW}➜ Removing the old vbox-socket-server service...${NC}"
+        systemctl stop vbox-socket-server.service
+        systemctl disable vbox-socket-server.service
+        rm /etc/systemd/system/vbox-socket-server.service
         systemctl daemon-reload
-    else
-        # Create the vbox-socket-server service
-        cat <<EOF > /etc/systemd/system/vbox-socket-server.service
+
+    # Rebuid the vbox-server
+    echo -e "${BLUE}Building the vbox-server...${NC}"
+    make clean
+    sudo -u $CURRENT_USER make vbox-server
+
+    # Create the vbox-socket-server service
+    cat <<EOF > /etc/systemd/system/vbox-socket-server.service
 [Unit]
 Description=CAPEv2 vbox-socket-server
 After=network.target
@@ -402,9 +408,7 @@ Group=$CURRENT_USER
 WantedBy=multi-user.target
 EOF
 
-        # Reload systemd services
-        systemctl daemon-reload
-    fi
+    systemctl daemon-reload
 
     # Start and enable the vbox-socket-server service
     systemctl start vbox-socket-server
