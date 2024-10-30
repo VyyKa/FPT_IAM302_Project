@@ -309,7 +309,7 @@ setup_capev2_guest_vm() {
 
     # Restart the VM
     echo -e "${BLUE}Restarting the VM...${NC}"
-    sudo -u $CURRENT_USER Restart-Computer -Force
+    sudo -u $CURRENT_USER vagrant winrm --elevated --shell powershell --command "Restart-Computer -Force"
 
     # Wait for the VM to be up. Check with ping
     while true; do
