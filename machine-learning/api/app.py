@@ -1,7 +1,24 @@
 from flask import Flask, request, jsonify
 import requests
+# import threading
 
 app = Flask(__name__)
+
+# add a thread function to running the machine learning task
+'''
+    ml_detaction_status = "" # Malware Detection Status Clean or Malware
+
+    # TODO: Call the Machine Learning model to get the status of the task
+
+    ml_detaction_status = "Clean"
+
+    # Send status after done the Malware Detection task
+
+    api_callback_url = "http://localhost:5000/api/callback"
+
+    response = requests.post(api_callback_url, json={"task_id": task_id, "detection": ml_detaction_status, "status": "success"})
+'''
+
 
 @app.route('/ml_task_status', methods=['POST'])
 def ml_task_status():
@@ -24,8 +41,13 @@ def ml_task_status():
             report_data = response.json()
             status = report_data.get('status', 'Unknown')  # Retrieve the 'status' field from the report
             return jsonify({"task_id": task_id, "status": status}), 200
+
+            # Call :2 add a thread function to running the machine learning task
+
         else:
             return jsonify({"error": f"Failed to retrieve report for task_id {task_id}"}), response.status_code
+        
+            # TODO: send a request to api_callback_url to update the status of the task to failed
 
     except requests.exceptions.RequestException as e:
         return jsonify({"error": f"Request to report endpoint failed: {str(e)}"}), 500
