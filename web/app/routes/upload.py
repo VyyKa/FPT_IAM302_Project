@@ -31,19 +31,6 @@ def process_file(file_id):
         # Update the file status to "Failed"
         file.status = "Failed"
         db.session.commit()
-        return
-
-    url = current_app.config['ML_ADD_TASK_URL']
-    response = requests.post(url, json=response.json())
-
-    if response.status_code == 200:
-        # Update the file status to "Processing"
-        file.status = "Processing"
-        db.session.commit()
-    else:
-        # Update the file status to "Failed"
-        file.status = "Failed"
-        db.session.commit()
 
 
 @upload_bp.route('/upload', methods=['POST'])
