@@ -8,6 +8,8 @@ fi
 
 BASE_DIR=$(pwd)
 
+MACHINE_LEARNING_CALLBACK="http://localhost:8001/callback"
+
 VAGRANTFILE_URL="https://gist.githubusercontent.com/nquangit/83633b69f28757217b1222d112b1a4c3/raw/4b19069a89bd54bca35df0273f8e0260a649a32e/Vagrant"
 
 # VM variables
@@ -485,6 +487,12 @@ override_cape_config() {
     sed -i '/malstatus/,/\[.*\]/ {
         s/enabled = no/enabled = yes/
     }' work/conf/web.conf
+
+    sed -i '/callback/,/\[.*\]/ {
+        s/enabled = no/enabled = yes/
+    }' work/conf/reporting.conf
+
+    sed -i "s|url = http://IP/callback|url = $MACHINE_LEARNING_CALLBACK|g" work/conf/reporting.conf
 
     # Create the virtualbox.conf file
     cat <<EOF > work/conf/virtualbox.conf
