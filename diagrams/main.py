@@ -80,7 +80,7 @@ with Diagram(
         >> Edge(label="socket\ncommunication", reverse=True, color="darkorange")
         >> socket_server
         >> Edge(label="socket\ncommunication", reverse=True, color="darkorange")
-        << cuckoo >> Edge(label="report", color="darkgreen") >> ml >> Edge(color="darkgreen") >> api
+        << cuckoo >> Edge(reverse=True, label="report", color="darkgreen") >> ml >> Edge(color="darkgreen") >> api
     )
 
     (
