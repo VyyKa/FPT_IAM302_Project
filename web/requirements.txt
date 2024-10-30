@@ -17,7 +17,6 @@ MarkupSafe==2.1.5
 PyJWT==2.9.0
 requests==2.32.3
 SQLAlchemy==2.0.35
-typed_ast==1.5.5
 typing_extensions==4.12.2
 urllib3==2.2.3
 Werkzeug==3.0.4
