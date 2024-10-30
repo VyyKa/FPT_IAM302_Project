@@ -301,7 +301,7 @@ setup_capev2_guest_vm() {
 
     # Install the guest additions
     echo -e "${BLUE}Installing the VirtualBox Guest Additions...${NC}"
-    sudo -u $CURRENT_USER vagrant vbguest --do install --auto-reboot
+    sudo -u $CURRENT_USER vagrant vbguest --do install --auto-reboot --no-provision
 
     # Run the provisioning script
     echo -e "${BLUE}Running the provisioning script...${NC}"
