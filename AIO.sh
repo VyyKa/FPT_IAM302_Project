@@ -383,6 +383,7 @@ setup_capev2() {
         systemctl disable vbox-socket-server.service
         rm /etc/systemd/system/vbox-socket-server.service
         systemctl daemon-reload
+    fi
 
     # Rebuid the vbox-server
     echo -e "${BLUE}Building the vbox-server...${NC}"
