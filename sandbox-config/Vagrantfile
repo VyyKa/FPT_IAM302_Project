@@ -75,7 +75,7 @@ if (Test-Path $filePath) {
 } else {
     Write-Host "Downloading the agent..."
     # Download the agent
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/kevoreilly/CAPEv2/refs/heads/master/agent/agent.py" -OutFile $filePath
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/kevoreilly/CAPEv2/249bbe3af709919c4fac0975a914bb0e977ede6b/agent/agent.py" -OutFile $filePath
 
     Write-Host "Agent downloaded to $filePath."
 }

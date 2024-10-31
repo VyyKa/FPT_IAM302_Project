@@ -10,7 +10,7 @@ BASE_DIR=$(pwd)
 
 MACHINE_LEARNING_CALLBACK="http://localhost:8001/callback"
 
-VAGRANTFILE_URL="https://gist.githubusercontent.com/nquangit/83633b69f28757217b1222d112b1a4c3/raw/4f64c41ac31bb819d6ec673521439fa288e7596e/Vagrant"
+VAGRANTFILE_URL="https://gist.githubusercontent.com/nquangit/83633b69f28757217b1222d112b1a4c3/raw/eb396e3c3ae111a6aa29bd58bd943cecfd0ac64d/Vagrant"
 
 # VM variables
 VM_NAME="cybersec_windows_10"
