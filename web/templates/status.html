@@ -36,6 +36,7 @@
                         {% if session.get('is_admin') %}
                             <th>ID</th>
                             <th>Filename</th>
+                            <th>Task ID</th>
                             <th>Status</th>
                             <th>Filepath</th>
                             <th>Timestamp</th>
@@ -43,6 +44,7 @@
                             <th>Detecion</th>
                         {% else %}
                             <th>Filename</th>
+                            <th>Task ID</th>
                             <th>Status</th>
                             <th>Timestamp</th>
                             <th>Detecion</th>
@@ -54,14 +56,16 @@
                     <tr>
                         {% if session.get('is_admin') %}
                             <td>{{ file.id }}</td>
-                            <td>{{ file.filename }}</td>
+                            <td><a href="{{ url_for('frontend.get_report', task_id=file.task_id) }}">{{ file.filename }}</a></td>
+                            <td>{{ file.task_id }}</td>
                             <td>{{ file.status }}</td>
                             <td>{{ file.filepath }}</td>
                             <td>{{ file.timestamp }}</td>
                             <td>{{ file.user.username if file.user else 'Unauthenticated' }}</td>
                             <td>{{ file.detection_status }}</td>
                         {% else %}
-                            <td>{{ file.filename }}</td>
+                            <td><a href="{{ url_for('frontend.get_report', task_id=file.task_id) }}">{{ file.filename }}</a></td>
+                            <td>{{ file.task_id }}</td>
                             <td>{{ file.status }}</td>
                             <td>{{ file.timestamp }}</td>
                             <td>{{ file.detection_status }}</td>
