@@ -11,7 +11,7 @@ class Config:
 
     # Cuckoo API URL
     CUCKOO_API_URL = os.getenv('CUCKOO_API_URL', 'http://localhost:8000')
-    CUCKOO_CREATE_FILE_URL = f'{CUCKOO_API_URL}/apiv2/tasks/create/file'
+    CUCKOO_CREATE_FILE_URL = f'{CUCKOO_API_URL}/apiv2/tasks/create/file/'
 
     # Machine learning model URL
     ML_MODEL_URL = os.getenv('ML_MODEL_URL', 'http://localhost:5001')

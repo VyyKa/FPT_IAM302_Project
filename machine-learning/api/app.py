@@ -43,7 +43,7 @@ def ml_task_status():
     
     # Build the report URL to access task status
     report_url = f"http://localhost:8000/apiv2/tasks/get/report/{task_id}/"
-    api_callback_url = "http://localhost:5000/api/callback"
+    api_callback_url = "http://localhost:5000/api/callback/callback"
     
     try:
         # Send a GET request to the report endpoint to fetch the status
@@ -75,4 +75,4 @@ def ml_task_status():
         return jsonify({"error": f"Request to report endpoint failed: {str(e)}"}), 500
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(port=8001)

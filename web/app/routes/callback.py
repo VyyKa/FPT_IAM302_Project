@@ -31,23 +31,3 @@ def callback():
     db.session.commit()
 
     return jsonify({"task_id": task_id, "detection": detection, "status": status}), 200
-
-
-@callback_bp.route('/get_report/<task_id>', methods=['GET'])
-def get_report(task_id):
-    # URL of the Cuckoo API to retrieve the report
-    cuckoo_report_url = f"http://localhost:8000/apiv2/tasks/get/report/{task_id}/"
-
-    try:
-        # Send a GET request to retrieve the report from the Cuckoo API
-        response = requests.get(cuckoo_report_url)
-        
-        # Check if the request was successful
-        if response.status_code == 200:
-            report_data = response.json()  # Convert the report to JSON format
-            return jsonify(report_data), 200
-        else:
-            return jsonify({"error": f"Failed to retrieve report for task_id {task_id}: {response.status_code}"}), 500
-
-    except requests.exceptions.RequestException as e:
-        return jsonify({"error": f"Request to Cuckoo API failed: {str(e)}"}), 500

@@ -10,109 +10,98 @@ import threading
 
 upload_bp = Blueprint('upload_bp', __name__)
 
-# Create a function threading to simulate file processing
-def process_file(file_id):
-    # Get the file from the database
-    file = UploadedFile.query.get(file_id)
-    if not file:
-        print(f"File with ID {file_id} not found")
-        return
+def process_file(app, file_id):
+    # Tạo ngữ cảnh ứng dụng cho thread
+    with app.app_context():
+        # Lấy file từ database
+        file = UploadedFile.query.get(file_id)
+        if not file:
+            print(f"File with ID {file_id} not found")
+            return
 
-    # Post this file to http://localhost:8000/apiv2/tasks/create/file
-    url = current_app.config['CUCKOO_CREATE_FILE_URL']
-    response = requests.post(url, files={'file': open(file.filepath, 'rb')})
+        # Đăng file lên endpoint được chỉ định
+        url = app.config['CUCKOO_CREATE_FILE_URL']
+        try:
+            with open(file.filepath, 'rb') as f:
+                response = requests.post(url, files={'file': f})
 
-    # Handle response and update the status of the file
-    if response.status_code == 200:
-        # Update the file status to "Processing"
-        file.status = "Processing"
-        db.session.commit()
-    else:
-        # Update the file status to "Failed"
-        file.status = "Failed"
-        db.session.commit()
-
+            # Cập nhật trạng thái file dựa trên kết quả phản hồi
+            if response.status_code == 200:
+                response_data = response.json()
+                if response_data.get('error', True):
+                    file.status = "Failed on upload"
+                else:
+                    task_ids = response_data.get('data', {}).get('task_ids', [])
+                    if len(task_ids) > 0:
+                        file.task_id = task_ids[0]
+                        file.status = "Processing"
+                    else:
+                        file.status = "Failed to start processing"
+            else:
+                file.status = "Failed on upload"
+            
+            db.session.commit()
+        except Exception as e:
+            print(f"Error processing file {file.filename}: {e}")
+            file.status = "Failed"
+            db.session.commit()
 
 @upload_bp.route('/upload', methods=['POST'])
 def upload_files():
     try:
-        # Check if the 'file' part exists in the request
+        # Kiểm tra xem phần 'file' có tồn tại trong request hay không
         if 'file' not in request.files:
             return jsonify(response_dict('error', 'No file part in the request', {})), 400
 
-        # Get the list of files from the request
         files = request.files.getlist('file')
         if not files or files[0].filename == '':
             return jsonify(response_dict('error', 'No file selected for uploading', {})), 400
         
-        # Retrieve user_id from session
-        user_id = session.get('user_id')  # None if not logged in
-        
+        user_id = session.get('user_id')
         if user_id is None:
             return jsonify(response_dict('error', 'User not authenticated', {})), 403
-        
-        uploaded_files = []        
-        for file in files:
-            filename = secure_filename(file.filename)  # Secure the file name
-            absolute_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
-            relative_path = os.path.join('uploads', filename)  
-            # filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
 
-            # Handle file name duplication
+        uploaded_files = []
+        for file in files:
+            filename = secure_filename(file.filename)
+            absolute_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+            relative_path = os.path.join('uploads', filename)
+
             if os.path.exists(absolute_path):
-                # Create a new file name with UUID to avoid duplication
                 unique_filename = f"{uuid.uuid4().hex}_{filename}"
-                # filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], unique_filename)
                 absolute_path = os.path.join(current_app.config['UPLOAD_FOLDER'], unique_filename)
                 relative_path = os.path.join('uploads', unique_filename)
                 print(f"File {filename} already exists, saving as: {unique_filename}")
             else:
                 unique_filename = filename
 
-            # Save the file
+            # Lưu file
             try:
                 file.save(absolute_path)
             except Exception as e:
                 print(f"Error saving file {filename}: {e}")
                 return jsonify(response_dict('error', f"Failed to save file {filename}", {})), 500
 
-            # Create new record in the database
+            # Thêm record file vào database
             new_file = UploadedFile(filename=unique_filename, filepath=relative_path, user_id=user_id)
             db.session.add(new_file)
             db.session.commit()
 
-            # Save the initial file upload and set the status to "In Progress"
             new_file.status = "Uploaded"
             db.session.commit()
 
-            # Simulate file processing or malware analysis
-            # try:
-            #     # Perform some analysis here...
-            #     # Example: Assume analysis is successful and we detect no issues
-            #     new_file.status = "Clean"
-            #     db.session.commit()
-            # except AnalysisError as e:
-            #     # If something went wrong during analysis, mark it as failed
-            #     new_file.status = "Failed"
-            #     db.session.commit()
-
-            # If file is found to be malicious:
-            # new_file.status = "Malicious"
-            # db.session.commit()
-            
-             # Prepare the uploaded file details for response
+            # Thêm thông tin file cho phản hồi
             uploaded_files.append({
                 'filename': new_file.filename,
                 'status': new_file.status,
                 'timestamp': new_file.timestamp
             })
 
-            # Start a new thread to process the file
-            threading.Thread(target=process_file, args=(new_file.id,)).start()
+            # Khởi chạy một thread để xử lý file, truyền `current_app._get_current_object()` để dùng `app` trực tiếp
+            threading.Thread(target=process_file, args=(current_app._get_current_object(), new_file.id)).start()
 
         return jsonify(response_dict('success', 'File uploaded successfully!', {'files': uploaded_files})), 201
 
     except Exception as e:
-        # Print detailed error for debugging
         print(f"Error during file upload: {e}")
         return jsonify(response_dict('error', 'Internal Server Error', {})), 500

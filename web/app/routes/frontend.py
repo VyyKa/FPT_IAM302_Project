@@ -2,6 +2,7 @@
 
 from flask import Blueprint, render_template, session
 from ..models import UploadedFile, User
+import requests
 
 frontend_bp = Blueprint('frontend', __name__, template_folder='../../templates')
 
@@ -37,3 +38,22 @@ def status():
         all_files = []  # No user logged in
 
     return render_template('status.html', files=all_files)
+
+@frontend_bp.route('/get_report/<task_id>', methods=['GET'])
+def get_report(task_id):
+    # URL of the Cuckoo API to retrieve the report
+    report_format = "pdf"
+    cuckoo_report_url = f"http://localhost:8000/apiv2/tasks/get/report/{task_id}/{report_format}/"
+    # curl apiv2/tasks/get/report/[task id]/[format]/
+    try:
+        # Send a GET request to retrieve the report from the Cuckoo API
+        response = requests.get(cuckoo_report_url)
+        
+        # Check if the request was successful
+        if response.status_code == 200:
+            report_file_raw = response.content
+
+            # Return the report file content as a response
+            return report_file_raw, 200, {"Content-Type": "application/pdf"}
+    except requests.exceptions.RequestException as e:
+        return {"error": f"Request to Cuckoo API failed: {str(e)}"}, 500

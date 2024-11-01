@@ -27,8 +27,10 @@ def create_app():
     from app.routes.upload import upload_bp
     from app.routes.auth import auth_bp
     from app.routes.user import user_bp
+    from app.routes.callback import callback_bp
 
     app.register_blueprint(frontend_bp)
+    app.register_blueprint(callback_bp, url_prefix='/api/callback')
     app.register_blueprint(upload_bp, url_prefix='/api/upload')
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(user_bp, url_prefix='/api/user')
