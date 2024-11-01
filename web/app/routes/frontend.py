@@ -41,6 +41,9 @@ def status():
 
 @frontend_bp.route('/get_report/<task_id>', methods=['GET'])
 def get_report(task_id):
+    # Check if the task_id is exists
+    UploadedFile.query.filter_by(task_id=task_id).first_or_404()
+
     # URL of the Cuckoo API to retrieve the report
     report_format = "pdf"
     cuckoo_report_url = f"http://localhost:8000/apiv2/tasks/get/report/{task_id}/{report_format}/"
