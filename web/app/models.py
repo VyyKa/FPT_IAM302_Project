@@ -17,8 +17,8 @@ class UploadedFile(db.Model):
     filepath = db.Column(db.String(200), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.now)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
-    # TODO: add a column to store the task_id
-    # TODO: detection_status = db.Column(db.String(50), nullable=True)
+    task_id = db.Column(db.String(50), unique=True, nullable=True)
+    detection_status = db.Column(db.String(50), nullable=True)
 
     # Establishing a relationship between User and UploadedFile
     user = db.relationship('User', backref=db.backref('uploaded_files', lazy=True))

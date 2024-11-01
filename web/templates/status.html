@@ -40,10 +40,12 @@
                             <th>Filepath</th>
                             <th>Timestamp</th>
                             <th>User</th>
+                            <th>Detecion</th>
                         {% else %}
                             <th>Filename</th>
                             <th>Status</th>
                             <th>Timestamp</th>
+                            <th>Detecion</th>
                         {% endif %}
                     </tr>
                 </thead>
@@ -57,10 +59,12 @@
                             <td>{{ file.filepath }}</td>
                             <td>{{ file.timestamp }}</td>
                             <td>{{ file.user.username if file.user else 'Unauthenticated' }}</td>
+                            <td>{{ file.detection_status }}</td>
                         {% else %}
                             <td>{{ file.filename }}</td>
                             <td>{{ file.status }}</td>
                             <td>{{ file.timestamp }}</td>
+                            <td>{{ file.detection_status }}</td>
                         {% endif %}
                     </tr>
                     {% endfor %}
