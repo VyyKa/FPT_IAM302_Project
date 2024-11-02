@@ -538,9 +538,16 @@ rerun_cape() {
     sudo -u $CURRENT_USER docker exec -it cape /bin/bash -c "systemctl restart cape"
 }
 
-# MAIN SCRIPT
-main() {
-    # Check for internet connection
+run_web() {
+    # Run the web service
+    echo -e "${BLUE}Running the web service...${NC}"
+    sudo -u $CURRENT_USER docker run -d --rm --name  file-uploader --network host -v $BASE_DIR/web_db:/app/instance cybersecn00bers/file-uploader:latest
+    echo -e "${GREEN}The web service is running.${NC}"
+}
+
+install_requirements() {
+    # Install the requirements
+    # Check for the internet connection
     check_internet
 
     # Check for apt package manager
@@ -557,7 +564,10 @@ main() {
 
     # Install Docker
     install_docker
+}
 
+# MAIN SCRIPT
+start_sandbox() {
     # Start and enable services
     start_services
 
@@ -574,6 +584,12 @@ main() {
     override_cape_config
 
     rerun_cape
+}
+
+main() {
+    install_requirements
+    start_sandbox
+    run_web
 }
 
 main "$@"
