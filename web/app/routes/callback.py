@@ -15,18 +15,20 @@ def callback():
     task_id = data.get('task_id')
     detection = data.get('detection', 'Unknown')
     status = data.get('status', 'Unknown')
+    results = data.get('results', 'Unknown')
 
     # Check if the task failed
     if status != "success":
         # Update status to 'Failed' in the database
-        UploadedFile.query.filter_by(task_id=task_id).update({'status': 'Failed'})
+        UploadedFile.query.filter_by(task_id=task_id).update({'status': 'Failed', 'detection_status': 'Failed', 'results': results})
         db.session.commit()
         return jsonify({"task_id": task_id, "status": "Failed"}), 200
 
     # If the task succeeded, update the detection status
     UploadedFile.query.filter_by(task_id=task_id).update({
         'status': 'Completed',
-        'detection_status': detection
+        'detection_status': detection,
+        'results': results
     })
     db.session.commit()
 

@@ -25,8 +25,8 @@ def pad_static_data(static_data, max_len):
 
 def main():
     # Directory setup
-    reports_dir = '/home/elsoo/Documents/ML-in-MA/Model-1/reports'
-    model_dir = '/home/elsoo/Documents/ML-in-MA/Model-1/models'
+    reports_dir = 'reports'
+    model_dir = 'models'
 
     # Load and prepare dataset
     print("Loading and preparing dataset...")
@@ -88,9 +88,7 @@ def main():
         })
 
     # Save results to a file
-    save_results(results, "/home/elsoo/Documents/ML-in-MA/Model-1/reports/ana_results.txt")
-
-
+    save_results(results, "results.txt")
 
 if __name__ == "__main__":
     main()

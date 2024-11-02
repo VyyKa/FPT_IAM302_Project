@@ -19,6 +19,7 @@ class UploadedFile(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
     task_id = db.Column(db.String(50), unique=True, nullable=True)
     detection_status = db.Column(db.String(50), nullable=True)
+    results = db.Column(db.Text, nullable=True)
 
     # Establishing a relationship between User and UploadedFile
     user = db.relationship('User', backref=db.backref('uploaded_files', lazy=True))

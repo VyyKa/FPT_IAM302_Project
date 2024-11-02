@@ -1,5 +1,5 @@
 from gensim.models import FastText
-from sklearn.linear_model import SGDClassifier
+from sklearn.linear_model import SGDClassifier, LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, VotingClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.utils.validation import check_is_fitted

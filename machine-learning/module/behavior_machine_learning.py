@@ -26,6 +26,10 @@ class BehaviorMachineLearning(MachineLearning):
         '''
         df = pd.DataFrame(behaviors)
         # Convert the list of strings to a single string by joining them
+        # Check if df['resolved_apis'] is a empty list
+        # if 'resolved_apis' in df.columns and df['resolved_apis'].empty:
+            # df['resolved_apis'] = df['resolved_apis'].apply(lambda x: x if isinstance(x, list) else [x])
+
         df['api_text'] = df['resolved_apis'].apply(lambda x: ' '.join(x))
         df['command_text'] = df['executed_commands'].apply(lambda x: ' '.join(x))
 
