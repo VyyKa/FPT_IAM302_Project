@@ -14,8 +14,8 @@ docker start cape
 docker start file-uploader # Start the file uploader service
 
 # Restart all the services
-docker exec cape "systemctl restart cape"
-docker exec cape "systemctl restart cape-web"
-docker exec cape "systemctl restart cape-processor"
-docker exec cape "systemctl restart cape-rooter"
+docker exec cape /bin/bash -c "systemctl restart cape"
+docker exec cape /bin/bash -c "systemctl restart cape-web"
+docker exec cape /bin/bash -c "systemctl restart cape-processor"
+docker exec cape /bin/bash -c "systemctl restart cape-rooter"
 
