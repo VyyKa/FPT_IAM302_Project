@@ -41,13 +41,13 @@
                             <th>Filepath</th>
                             <th>Timestamp</th>
                             <th>User</th>
-                            <th>Detecion</th>
+                            <th>Detection</th>
                         {% else %}
                             <th>Filename</th>
                             <th>Task ID</th>
                             <th>Status</th>
                             <th>Timestamp</th>
-                            <th>Detecion</th>
+                            <th>Detection</th>
                         {% endif %}
                     </tr>
                 </thead>
@@ -56,16 +56,28 @@
                     <tr>
                         {% if session.get('is_admin') %}
                             <td>{{ file.id }}</td>
-                            <td><a target="_blank" href="{{ url_for('frontend.get_report', task_id=file.task_id) }}">{{ file.filename }}</a></td>
-                            <td>{{ file.task_id }}</td>
+                            <td>
+                                {% if file.task_id %}
+                                    <a target="_blank" href="{{ url_for('frontend.get_report', task_id=file.task_id) }}">{{ file.filename }}</a>
+                                {% else %}
+                                    {{ file.filename }} (No Report Available)
+                                {% endif %}
+                            </td>
+                            <td>{{ file.task_id if file.task_id else 'N/A' }}</td>
                             <td>{{ file.status }}</td>
                             <td>{{ file.filepath }}</td>
                             <td>{{ file.timestamp }}</td>
                             <td>{{ file.user.username if file.user else 'Unauthenticated' }}</td>
                             <td>{{ file.detection_status }}</td>
                         {% else %}
-                            <td><a target="_blank" href="{{ url_for('frontend.get_report', task_id=file.task_id) }}">{{ file.filename }}</a></td>
-                            <td>{{ file.task_id }}</td>
+                            <td>
+                                {% if file.task_id %}
+                                    <a target="_blank" href="{{ url_for('frontend.get_report', task_id=file.task_id) }}">{{ file.filename }}</a>
+                                {% else %}
+                                    {{ file.filename }} (No Report Available)
+                                {% endif %}
+                            </td>
+                            <td>{{ file.task_id if file.task_id else 'N/A' }}</td>
                             <td>{{ file.status }}</td>
                             <td>{{ file.timestamp }}</td>
                             <td>{{ file.detection_status }}</td>
