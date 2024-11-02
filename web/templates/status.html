@@ -57,7 +57,7 @@
                         {% if session.get('is_admin') %}
                             <td>{{ file.id }}</td>
                             <td>
-                                {% if file.task_id %}
+                                {% if file.task_id and file.status == "Complete" %}
                                     <a target="_blank" href="{{ url_for('frontend.get_report', task_id=file.task_id) }}">{{ file.filename }}</a>
                                 {% else %}
                                     {{ file.filename }} (No Report Available)
@@ -71,7 +71,7 @@
                             <td>{{ file.detection_status }}</td>
                         {% else %}
                             <td>
-                                {% if file.task_id %}
+                                {% if file.task_id and file.status == "Complete" %}
                                     <a target="_blank" href="{{ url_for('frontend.get_report', task_id=file.task_id) }}">{{ file.filename }}</a>
                                 {% else %}
                                     {{ file.filename }} (No Report Available)
