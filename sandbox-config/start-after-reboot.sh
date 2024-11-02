@@ -11,6 +11,7 @@ ifconfig vboxnet0 192.168.23.1/24 up
 
 # Start cape sandbox in Docker
 docker start cape
+docker start file-uploader # Start the file uploader service
 
 # Restart all the services
 docker exec cape "systemctl restart cape"
