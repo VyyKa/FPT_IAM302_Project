@@ -1,0 +1,8 @@
+Report Name: cuckoo_report.json
+File: 00b65f272f9cc1d013a0.exe
+Classification: Malicious
+Score (0-10): 7.7
+RF Prediction Probability: 0.5900
+XGB Prediction Probability: 0.7311
+LSTM Prediction Probability: nan
+Hybrid Prediction: nan
