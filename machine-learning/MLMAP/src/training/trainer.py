@@ -29,31 +29,27 @@ class ModelTrainer:
         return train_test_split(self.features, self.labels, test_size=0.2, random_state=42)
 
     def _generate_data_fingerprint(self):
-        """Tạo một dấu vân tay (fingerprint) từ dữ liệu hiện tại để so sánh."""
         data_str = pd.util.hash_pandas_object(self.features).sum()
         return hashlib.md5(str(data_str).encode()).hexdigest()
 
     def _is_data_new(self, model_path, fingerprint_path):
-        """Kiểm tra nếu dữ liệu hiện tại đã được mô hình xử lý chưa dựa trên fingerprint."""
         if os.path.exists(model_path) and os.path.exists(fingerprint_path):
             with open(fingerprint_path, 'r') as f:
                 saved_fingerprint = f.read()
             if saved_fingerprint == self.data_fingerprint:
-                return False  # Dữ liệu không thay đổi
-        return True  # Có dữ liệu mới
+                return False  
+        return True 
 
     def _save_data_fingerprint(self, fingerprint_path):
         with open(fingerprint_path, 'w') as f:
             f.write(self.data_fingerprint)
 
     def _calculate_checksum(self, model_path):
-        """Tính toán checksum MD5 của mô hình."""
         with open(model_path, 'rb') as f:
             model_data = f.read()
         return hashlib.md5(model_data).hexdigest()
 
     def save_model_checksums(self, rf_checksum, xgb_checksum, lstm_checksum):
-        """Ghi các checksum của các mô hình vào file."""
         checksums_path = '../../models/stored/model_checksums.txt'
         with open(checksums_path, 'w') as f:
             f.write(f"Random Forest Checksum: {rf_checksum}\n")
@@ -70,7 +66,7 @@ class ModelTrainer:
             rf_predictions = rf_model.predict(self.X_test)
             rf_accuracy = accuracy_score(self.y_test, rf_predictions)
             rf_classification_report = classification_report(self.y_test, rf_predictions, zero_division=1)
-            rf_probabilities = rf_model.predict_proba(self.X_test)[:, 1]  # Lấy xác suất lớp dương (1)
+            rf_probabilities = rf_model.predict_proba(self.X_test)[:, 1]  
 
             rf_checksum = self._calculate_checksum(model_path)
             return rf_accuracy, rf_classification_report, rf_probabilities.tolist(), rf_checksum
@@ -82,7 +78,7 @@ class ModelTrainer:
         rf_predictions = rf_model.predict(self.X_test)
         rf_accuracy = accuracy_score(self.y_test, rf_predictions)
         rf_classification_report = classification_report(self.y_test, rf_predictions, zero_division=1)
-        rf_probabilities = rf_model.predict_proba(self.X_test)[:, 1]  # Lấy xác suất lớp dương (1)
+        rf_probabilities = rf_model.predict_proba(self.X_test)[:, 1]  
 
         joblib.dump(rf_model, model_path)
         self._save_data_fingerprint(fingerprint_path)
@@ -101,7 +97,7 @@ class ModelTrainer:
             xgb_predictions = xgb_model.predict(self.X_test)
             xgb_accuracy = accuracy_score(self.y_test, xgb_predictions)
             xgb_classification_report = classification_report(self.y_test, xgb_predictions, zero_division=1)
-            xgb_probabilities = xgb_model.predict_proba(self.X_test)[:, 1]  # Lấy xác suất lớp dương (1)
+            xgb_probabilities = xgb_model.predict_proba(self.X_test)[:, 1] 
 
             xgb_checksum = self._calculate_checksum(model_path)
             return xgb_accuracy, xgb_classification_report, xgb_probabilities.tolist(), xgb_checksum
@@ -113,7 +109,7 @@ class ModelTrainer:
         xgb_predictions = xgb_model.predict(self.X_test)
         xgb_accuracy = accuracy_score(self.y_test, xgb_predictions)
         xgb_classification_report = classification_report(self.y_test, xgb_predictions, zero_division=1)
-        xgb_probabilities = xgb_model.predict_proba(self.X_test)[:, 1]  # Lấy xác suất lớp dương (1)
+        xgb_probabilities = xgb_model.predict_proba(self.X_test)[:, 1]  
 
         joblib.dump(xgb_model, model_path)
         self._save_data_fingerprint(fingerprint_path)
@@ -130,7 +126,7 @@ class ModelTrainer:
             print("LSTM: No new data to add! Loading existing model results...")
             lstm_model = self.load_lstm()
             X_test_seq = np.expand_dims(self.X_test.values, axis=-1)
-            lstm_probabilities = lstm_model.predict(X_test_seq).flatten()  # Trả về mảng 1D xác suất
+            lstm_probabilities = lstm_model.predict(X_test_seq).flatten()  
             lstm_predictions = (lstm_probabilities > 0.5).astype("int32")
             lstm_accuracy = accuracy_score(self.y_test, lstm_predictions)
             lstm_classification_report = classification_report(self.y_test, lstm_predictions, zero_division=1)
@@ -154,7 +150,7 @@ class ModelTrainer:
         model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
         model.fit(X_train_seq, self.y_train, epochs=10, batch_size=32, verbose=1)
 
-        lstm_probabilities = model.predict(X_test_seq).flatten()  # Trả về mảng 1D xác suất
+        lstm_probabilities = model.predict(X_test_seq).flatten() 
         lstm_predictions = (lstm_probabilities > 0.5).astype("int32")
         lstm_accuracy = accuracy_score(self.y_test, lstm_predictions)
         lstm_classification_report = classification_report(self.y_test, lstm_predictions, zero_division=1)
@@ -203,14 +199,3 @@ class ModelTrainer:
             f.write(f"Probabilities: {lstm_results[2]}\n")
             f.write(f"Checksum: {lstm_results[3]}\n")
 
-
-# Usage Example
-if __name__ == "__main__":
-    trainer = ModelTrainer(file_path='../../data/dataset/dataset_csv/cuckoo_processed.csv')
-
-    rf_results = trainer.train_random_forest()
-    xgb_results = trainer.train_xgboost()
-    lstm_results = trainer.train_lstm()
-
-    trainer.save_results(rf_results, xgb_results, lstm_results)
-    trainer.save_model_checksums(rf_results[3], xgb_results[3], lstm_results[3])

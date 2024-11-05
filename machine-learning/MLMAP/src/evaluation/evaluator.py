@@ -24,18 +24,15 @@ class ReportAnalyzer:
         self.results_dir = results_dir
         self.data_extractor = DataExtractor(reports_dir, results_dir)
 
-        # Lấy danh sách các đặc trưng đã sử dụng trong quá trình huấn luyện
         if hasattr(self.rf_model, 'feature_names_in_'):
             self.feature_names = self.rf_model.feature_names_in_
         else:
             raise AttributeError("Random Forest model does not have feature names.")
 
-        self.results = []  # Danh sách lưu trữ kết quả phân tích
-        self.probabilities = []  # Danh sách lưu trữ xác suất cho mỗi mô hình
-        self.labels = []  # Store true labels for confusion matrix
+        self.results = []  
+        self.probabilities = []  
 
     def analyze_reports(self):
-        """Phân tích tất cả các báo cáo trong thư mục hoặc một file cụ thể."""
         if os.path.isdir(self.reports_dir):
             report_files = [f for f in os.listdir(self.reports_dir) if f.endswith(".json")]
             print(f"Found {len(report_files)} report files to analyze.")
@@ -54,7 +51,6 @@ class ReportAnalyzer:
             self.plot_model(self.reports_dir)
 
     def analyze_report(self, report_file):
-        """Phân tích một file báo cáo và lưu kết quả."""
         report_data = self.load_report(report_file)
         features = self.extract_features(report_data)
 
@@ -96,15 +92,12 @@ class ReportAnalyzer:
 
     @staticmethod
     def load_report(report_file):
-        """Load report data from a JSON file."""
         with open(report_file, 'r') as file:
             data = json.load(file)
 
-        # Kiểm tra xem data có phải là một danh sách và không rỗng
         if isinstance(data, list) and data:
             data = data[0]  # Lấy phần tử đầu tiên trong danh sách
 
-        # Kiểm tra nếu data không phải là dictionary, thì có thể xử lý lỗi hoặc trả về None
         if not isinstance(data, dict):
             raise ValueError("Loaded data is not a valid report dictionary.")
 
@@ -112,10 +105,8 @@ class ReportAnalyzer:
 
     @staticmethod
     def extract_features(report_data):
-        """Extract relevant features from the Cuckoo report data."""
         features = {}
 
-        # Basic file information
         target_info = report_data.get("target", {}).get("file", {})
         features["filename"] = target_info.get("name", "Unknown")
         features["size"] = target_info.get("size", 0) if target_info.get("size") is not None else 0
@@ -125,7 +116,6 @@ class ReportAnalyzer:
         features["ssdeep"] = target_info.get("ssdeep", "No-ssdeep")
         features["type"] = target_info.get("type", "")
 
-        # String information (yara, cape_yara)
         yara_info = target_info.get("yara", [])
         features["yara_names"] = " ".join([y["name"] for y in yara_info])
         features["yara_descriptions"] = ", ".join(
@@ -140,7 +130,6 @@ class ReportAnalyzer:
         features["cape_yara_strings"] = ", ".join(
             [s for cape in cape_yara_info for s in cape.get("strings", [])])
 
-        # PE information
         pe_info = target_info.get("pe", {})
         features["pe_digital_signers"] = ", ".join(pe_info.get("digital_signers", []))
         features["pe_imagebase"] = pe_info.get("imagebase", "0")
@@ -160,11 +149,9 @@ class ReportAnalyzer:
         features["pe_exports"] = ", ".join([exp["name"] for exp in pe_info.get("exports", [])])
         features["custom_strings"] = ", ".join(target_info.get("strings", []))
 
-        # Rating information
         features["malstatus"] = report_data.get("malstatus", "Suspicious")
         features["malscore"] = report_data.get("malscore", 0)
 
-        # Behavior and process information
         behav_info = report_data.get("behavior", {})
         features["behavior_process_count"] = len(behav_info.get("processes", []))
         features["call_api"] = ", ".join(call.get("api", "") for process in
@@ -174,7 +161,6 @@ class ReportAnalyzer:
                                    behav_info.get("processes", [])
                                    for call in process.get("calls", [])]
 
-        # Signature information
         signatures = report_data.get("signatures", [])
         features["sig_name"] = " ".join([sig.get("name", "") for sig in signatures])
         features["sig_description"] = " ".join([sig.get("description", "") for sig in signatures])
@@ -182,7 +168,6 @@ class ReportAnalyzer:
         return features
 
     def predict(self, transformed_data):
-        """Dự đoán nhãn cho dữ liệu đầu vào."""
         rf_prediction = self.rf_model.predict_proba(transformed_data)[:, 1]
         xgb_prediction = self.xgb_model.predict_proba(transformed_data)[:, 1]
         lstm_prediction = self.lstm_model.predict(transformed_data).flatten()
@@ -195,7 +180,6 @@ class ReportAnalyzer:
 
     @staticmethod
     def calculate_score(predictions):
-        """Tính toán điểm dựa trên xác suất dự đoán."""
         rf_score = np.mean(predictions["rf"])
         xgb_score = np.mean(predictions["xgb"])
         # lstm_score = np.mean(predictions["lstm"])
@@ -205,11 +189,9 @@ class ReportAnalyzer:
 
     @staticmethod
     def classify_malware(report_data):
-        """Phân loại malware từ báo cáo dựa trên thông tin có sẵn."""
         return report_data.get("target", {}).get("file", {}).get("name", "Unknown")
 
     def plot_model(self, report_file):
-        """Vẽ biểu đồ hiển thị hiệu suất của các mô hình và confusion matrix trong cùng một khung ảnh."""
         scores = np.array(self.probabilities)
         scores = np.nan_to_num(scores, nan=1)
 
@@ -223,17 +205,14 @@ class ReportAnalyzer:
 
         cm = confusion_matrix(true_labels, predictions, labels=['Malicious', 'Clean'])
 
-        # Create a figure with 1 row and 2 columns
         fig, ax = plt.subplots(1, 2, figsize=(14, 6))
 
-        # Plot confusion matrix
         sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=ax[0],
                     xticklabels=['Malicious', 'Clean'], yticklabels=['Malicious', 'Clean'])
         ax[0].set_title('Confusion Matrix')
         ax[0].set_xlabel('Predicted Labels')
         ax[0].set_ylabel('True Labels')
 
-        # Plot model performance
         ax[1].bar(labels, avg_scores, color=colors)
         ax[1].set_ylabel('Average Probability')
         ax[1].set_title('Model Performance Comparison')
@@ -249,7 +228,6 @@ class ReportAnalyzer:
         plt.show()
 
     def export_report_results(self, report_file, label, score, predictions):
-        """Export the analysis results to a result file."""
         predictions_serializable = {model: pred.tolist() if isinstance(pred, np.ndarray) else pred for model, pred in
                                     predictions.items()}
 
@@ -261,15 +239,12 @@ class ReportAnalyzer:
         predictions_serializable['lstm']
         hybrid = (rf_prob + xgb_prob + lstm_prob) / 3
 
-        #results_path = os.path.join(self.results_dir, f"results_{os.path.basename(report_file)}")
         report_name = os.path.basename(report_file).replace('.json', '') + '_results'
         file_name = os.path.basename(report_file)
         results_file = os.path.join(self.results_dir, f"{report_name}.txt")
 
-        # Ensure the directory exists
         os.makedirs(self.results_dir, exist_ok=True)
 
-        # Convert report_file to report_data to extract information
         report_data = self.load_report(report_file)
 
         with open(results_file, 'w') as file:

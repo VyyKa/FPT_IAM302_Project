@@ -11,7 +11,6 @@ class DataExtractor:
         self.dataset_dir = dataset_dir
         self.output_dir = output_dir
 
-        # Kiểm tra và tạo thư mục đầu ra nếu chưa tồn tại
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir)
             logger.info(f"Created output directory: {self.output_dir}")
@@ -47,7 +46,6 @@ class DataExtractor:
                     overlay_offset = target_pe["pe"].get("overlay", {}).get("offset", "N/A")
                     overlay_size = target_pe["pe"].get("overlay", {}).get("size", "N/A")
 
-                # Extract cape_yara data separately
                 cape_yara_names = ", ".join(cape['name'] for cape in target.get('cape_yara', []))
                 cape_yara_descriptions = ", ".join(
                     cape.get('meta', {}).get('description', 'unknown') for cape in target.get('cape_yara', []))
@@ -67,9 +65,9 @@ class DataExtractor:
                         [yara.get('meta', {}).get('description', 'unknown') for yara in target.get('yara', [])]),
                     "yara_strings": ", ".join(
                         [yara_string for yara in target.get('yara', []) for yara_string in yara.get('strings', [])]),
-                    "cape_yara_names": cape_yara_names,  # Cape Yara Names
-                    "cape_yara_descriptions": cape_yara_descriptions,  # Cape Yara Descriptions
-                    "cape_yara_strings": cape_yara_strings,  # Cape Yara Strings
+                    "cape_yara_names": cape_yara_names,
+                    "cape_yara_descriptions": cape_yara_descriptions,  
+                    "cape_yara_strings": cape_yara_strings,  
                     "pe_digital_signers": ", ".join(target.get("pe", {}).get("digital_signers", [])),
                     "pe_imagebase": target.get("pe", {}).get("imagebase", "N/A"),
                     "pe_entrypoint": target.get("pe", {}).get("entrypoint", "N/A"),
@@ -109,11 +107,8 @@ class DataExtractor:
                 record.update(dynamic_features)
                 records.append(record)
 
-        df = pd.DataFrame(records)  # Convert list of records to DataFrame
+        df = pd.DataFrame(records)  
         logger.info(f"DataFrame columns after extraction: {df.columns.tolist()}")
-
-        # Print extracted data
-        print(df)
 
         logger.info(f"Output directory: {self.output_dir}")
 
