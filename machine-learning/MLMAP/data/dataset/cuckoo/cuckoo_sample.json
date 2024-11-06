@@ -1,0 +1,2871 @@
+[
+  {
+    "filename": "cuckoo_report.json",
+    "malstatus": "Malicious",
+    "content": {
+      "statistics": {
+        "processing": [
+          {
+            "name": "Decompression",
+            "time": 0.003
+          }
+        ],
+        "signatures": [
+          {
+            "name": "packer_themida",
+            "time": 0.0
+          }
+        ],
+        "reporting": [
+          {
+            "name": "BinGraph",
+            "time": 0.0
+          }
+        ]
+      },
+      "decompression": [],
+      "target": {
+        "category": "file",
+        "file": {
+          "name": "00b65f272f9cc1d013a0.exe",
+          "path": "/work/storage/binaries/00b65f272f9cc1d013a0e3cd24024299ef3eee6c87d35e0de9996ca97f1cf037",
+          "guest_paths": "",
+          "size": 86448,
+          "crc32": "EC520696",
+          "md5": "41f8e9c7158c72c5c6a3c5a651e7a412",
+          "sha1": "a189e0dd0a6a36d235ba314b4961ac7697e81df3",
+          "sha256": "00b65f272f9cc1d013a0e3cd24024299ef3eee6c87d35e0de9996ca97f1cf037",
+          "sha512": "bf9edfc34b7ac93319ff6325ffce96a378ddc0ff83010b7b3d31c151fadf941148f2eaed09e4a7a8a9f073fcefd7c783a40db928e73d9b19dba0f49b55b16868",
+          "rh_hash": null,
+          "ssdeep": "1536:PwM5lz+Dxn3KbGTkY/lRR6m+Mnkb5sMFj60/BOUqwYic93SzuSygxx:Z5lqeokY16mvkb5/JBO3iuSi+",
+          "type": "PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS Windows",
+          "yara": [
+            {
+              "name": "INDICATOR_SUSPICIOUS_EXE_NoneWindowsUA",
+              "meta": {
+                "author": "ditekSHen",
+                "description": "Detects Windows executables referencing non-Windows User-Agents"
+              },
+              "strings": [
+                "M\u0000o\u0000z\u0000i\u0000l\u0000l\u0000a\u0000/\u00005\u0000.\u00000\u0000 \u0000(\u0000i\u0000P\u0000h\u0000o\u0000n\u0000e\u0000;\u0000 \u0000C\u0000P\u0000U\u0000 \u0000i\u0000P\u0000h\u0000o\u0000n\u0000e\u0000 \u0000O\u0000S\u0000"
+              ],
+              "addresses": {
+                "ua2": 68390
+              }
+            }
+          ],
+          "cape_yara": [
+            {
+              "name": "XWorm",
+              "meta": {
+                "author": "ditekSHen",
+                "description": "Detects XWorm",
+                "cape_type": "XWorm Payload"
+              },
+              "strings": [
+                "P\u0000I\u0000N\u0000G\u0000!\u0000",
+                "U\u0000r\u0000l\u0000h\u0000i\u0000d\u0000e\u0000",
+                "P\u0000C\u0000S\u0000h\u0000u\u0000t\u0000d\u0000o\u0000w\u0000n\u0000",
+                "P\u0000C\u0000R\u0000e\u0000s\u0000t\u0000a\u0000r\u0000t\u0000",
+                "S\u0000t\u0000a\u0000r\u0000t\u0000D\u0000D\u0000o\u0000s\u0000",
+                "S\u0000t\u0000o\u0000p\u0000D\u0000D\u0000o\u0000s\u0000",
+                "S\u0000t\u0000a\u0000r\u0000t\u0000R\u0000e\u0000p\u0000o\u0000r\u0000t\u0000",
+                "S\u0000t\u0000o\u0000p\u0000R\u0000e\u0000p\u0000o\u0000r\u0000t\u0000",
+                "O\u0000f\u0000f\u0000l\u0000i\u0000n\u0000e\u0000G\u0000e\u0000t\u0000",
+                "i\u0000n\u0000j\u0000R\u0000u\u0000n\u0000",
+                "X\u0000c\u0000h\u0000a\u0000t\u0000",
+                "U\u0000A\u0000C\u0000F\u0000u\u0000n\u0000c\u0000"
+              ],
+              "addresses": {
+                "v2_1": 57776,
+                "v2_2": 60108,
+                "v2_3": 60194,
+                "v2_4": 60392,
+                "v2_5": 60714,
+                "v2_6": 60856,
+                "v2_7": 60414,
+                "v2_8": 60870
+              }
+            }
+          ],
+          "clamav": [],
+          "tlsh": "T1E8836D7877F60415F1FFAFB15AE17652CA76F3136A02D25F20D8028A0723A89CE516F9",
+          "sha3_384": "ed3189f16850a63531fd555f0ddaa8a5e01ae4bba773244434297126c8cf879784e2f2ff2e3557982d1d337bf5ac679a",
+          "pe": {
+            "guest_signers": {
+              "aux_sha1": null,
+              "aux_timestamp": "Mon Aug 05 10:20:52 2024",
+              "aux_valid": false,
+              "aux_error": true,
+              "aux_error_desc": "WinVerifyTrust returned error: 0x80096010 The digital signature of the object did not verify.",
+              "aux_signers": [
+                {
+                  "name": "Certificate Chain 1",
+                  "Issued to": "Microsoft Windows",
+                  "Issued by": "Microsoft Windows",
+                  "Expires": "Tue Aug 05 10:28:13 2025",
+                  "SHA1 hash": "610fa777ff04684128689bc7bd61c0b716c49af0"
+                }
+              ]
+            },
+            "digital_signers": [],
+            "imagebase": "0x00400000",
+            "entrypoint": "0x0001485e",
+            "ep_bytes": "ff250020400000000000000000000000",
+            "peid_signatures": null,
+            "reported_checksum": "0x00023da0",
+            "actual_checksum": "0x00023da0",
+            "osversion": "4.0",
+            "pdbpath": null,
+            "imports": {
+              "mscoree": {
+                "dll": "mscoree.dll",
+                "imports": [
+                  {
+                    "address": "0x402000",
+                    "name": "_CorExeMain"
+                  }
+                ]
+              }
+            },
+            "exported_dll_name": null,
+            "exports": [],
+            "dirents": [
+              {
+                "name": "IMAGE_DIRECTORY_ENTRY_EXPORT",
+                "virtual_address": "0x00000000",
+                "size": "0x00000000"
+              }
+            ],
+            "sections": [
+              {
+                "name": ".text",
+                "raw_address": "0x00000200",
+                "virtual_address": "0x00002000",
+                "virtual_size": "0x00012864",
+                "size_of_data": "0x00012a00",
+                "characteristics": "IMAGE_SCN_CNT_CODE|IMAGE_SCN_MEM_EXECUTE|IMAGE_SCN_MEM_READ",
+                "characteristics_raw": "0x60000020",
+                "entropy": "5.96"
+              }
+            ],
+            "overlay": {
+              "offset": "0x00013600",
+              "size": "0x00001bb0"
+            },
+            "resources": [
+              {
+                "name": "RT_VERSION",
+                "offset": "0x000160a0",
+                "size": "0x00000378",
+                "filetype": null,
+                "language": "LANG_NEUTRAL",
+                "sublanguage": "SUBLANG_NEUTRAL",
+                "entropy": "3.32"
+              }
+            ],
+            "versioninfo": [
+              {
+                "name": "Translation",
+                "value": "0x0000 0x04b0"
+              }
+            ],
+            "imphash": "f34d5f2d4577ed6d9ceec516c1f5a744",
+            "timestamp": "2024-08-05 10:20:15",
+            "icon": null,
+            "icon_hash": null,
+            "icon_fuzzy": null,
+            "icon_dhash": null,
+            "imported_dll_count": 1
+          },
+          "dotnet": {
+            "typerefs": [
+              {
+                "assembly": "Microsoft.VisualBasic",
+                "typename": "Microsoft.VisualBasic.ApplicationServices.ApplicationBase"
+              }
+            ],
+            "assemblyrefs": [
+              {
+                "name": "Microsoft.VisualBasic",
+                "version": "10.0.0.0"
+              }
+            ],
+            "assemblyinfo": {
+              "name": "services",
+              "version": "1.0.0.0"
+            },
+            "customattrs": [
+              {
+                "type": "Property",
+                "name": "[System]System.ComponentModel.Design.HelpKeywordAttribute",
+                "value": "My.Comput"
+              }
+            ]
+          },
+          "data": null,
+          "strings": [
+            "60NZh9C057MRMl7nqZ5tol13aDp8VdxRkdUw89DCs",
+            "ehy2K2R2R2eWF03VvonzbYKAss",
+            "gVzl4qbDybpLms96b6w4Z6B0eWnfqpdqkB2UKFjIGTr6l7tB8pWbOu2L0oqT4oOjttBGUGc7Fugz8fbGMth1mGxIKv",
+            "4http://crl3.digicert.com/DigiCertAssuredIDRootCA.crl0"
+          ],
+          "virustotal": {
+            "names": [
+              "services.exe",
+              "NetworkService.exe"
+            ],
+            "scan_id": "00b65f272f9cc1d013a0e3cd24024299ef3eee6c87d35e0de9996ca97f1cf037",
+            "md5": "41f8e9c7158c72c5c6a3c5a651e7a412",
+            "sha1": "a189e0dd0a6a36d235ba314b4961ac7697e81df3",
+            "sha256": "00b65f272f9cc1d013a0e3cd24024299ef3eee6c87d35e0de9996ca97f1cf037",
+            "tlsh": "T1E8836D7877F60415F1FFAFB15AE17652CA76F3136A02D25F20D8028A0723A89CE516F9",
+            "positives": 56,
+            "total": 76,
+            "permalink": "https://www.virustotal.com/api/v3/files/00b65f272f9cc1d013a0e3cd24024299ef3eee6c87d35e0de9996ca97f1cf037",
+            "scans": {
+              "Bkav": {
+                "method": "blacklist",
+                "engine_name": "Bkav",
+                "engine_version": "2.0.0.1",
+                "engine_update": "20241001",
+                "category": "malicious",
+                "result": "W32.AIDetectMalware.CS"
+              }
+            },
+            "resource": "00b65f272f9cc1d013a0e3cd24024299ef3eee6c87d35e0de9996ca97f1cf037",
+            "results": [
+              {
+                "vendor": "Bkav",
+                "sig": "W32.AIDetectMalware.CS"
+              }
+            ],
+            "detection": "",
+            "summary": "56/76"
+          },
+          "extracted_files": [
+            {
+              "name": "4edc7b9d3ac705579b939bbb1d0967117c9e2327ba2bc640582ef198528fbaf4",
+              "path": "/opt/CAPEv2/storage/analyses/41/selfextracted/4edc7b9d3ac705579b939bbb1d0967117c9e2327ba2bc640582ef198528fbaf4",
+              "guest_paths": [
+                "00b65f272f9cc1d013a0e3cd24024299ef3eee6c87d35e0de9996ca97f1cf037"
+              ],
+              "size": 74240,
+              "crc32": "D5B79CDF",
+              "md5": "52c8ab7c872f499f5dd3806b6f4fe797",
+              "sha1": "b38ce3e254f3d0266fcddef1089f1dd1d95453f5",
+              "sha256": "4edc7b9d3ac705579b939bbb1d0967117c9e2327ba2bc640582ef198528fbaf4",
+              "sha512": "b718511af4c73e788ee379348ddf628d0cb49b0d6c8e46c2fbd76223c875d5c0dc911850c444d5ceb9fb45ae7c4dd28749ca907d53fe7e02d470e5d71da4373e",
+              "rh_hash": null,
+              "ssdeep": "1536:EjTO6i9Rphndjr5JAFeTgwZytJOiPYPrYnrbgLH6160/BOUqwYic93SzL:OTO6ihhGFeTgwZy3YPErbg+rBO3iuSn",
+              "type": "PE32 executable (GUI) Intel 80386 Mono/.Net assembly, for MS Windows",
+              "yara": [
+                {
+                  "name": "INDICATOR_SUSPICIOUS_EXE_NoneWindowsUA",
+                  "meta": {
+                    "author": "ditekSHen",
+                    "description": "Detects Windows executables referencing non-Windows User-Agents"
+                  },
+                  "strings": [
+                    "M\u0000o\u0000z\u0000i\u0000l\u0000l\u0000a\u0000/\u00005\u0000.\u00000\u0000 \u0000(\u0000i\u0000P\u0000h\u0000o\u0000n\u0000e\u0000;\u0000 \u0000C\u0000P\u0000U\u0000 \u0000i\u0000P\u0000h\u0000o\u0000n\u0000e\u0000 \u0000O\u0000S\u0000"
+                  ],
+                  "addresses": {
+                    "ua2": 63662
+                  }
+                }
+              ],
+              "cape_yara": [
+                {
+                  "name": "XWorm",
+                  "meta": {
+                    "author": "ditekSHen",
+                    "description": "Detects XWorm",
+                    "cape_type": "XWorm Payload"
+                  },
+                  "strings": [
+                    "P\u0000I\u0000N\u0000G\u0000!\u0000",
+                    "U\u0000r\u0000l\u0000h\u0000i\u0000d\u0000e\u0000",
+                    "P\u0000C\u0000S\u0000h\u0000u\u0000t\u0000d\u0000o\u0000w\u0000n\u0000",
+                    "P\u0000C\u0000R\u0000e\u0000s\u0000t\u0000a\u0000r\u0000t\u0000",
+                    "S\u0000t\u0000a\u0000r\u0000t\u0000D\u0000D\u0000o\u0000s\u0000",
+                    "S\u0000t\u0000o\u0000p\u0000D\u0000D\u0000o\u0000s\u0000",
+                    "S\u0000t\u0000a\u0000r\u0000t\u0000R\u0000e\u0000p\u0000o\u0000r\u0000t\u0000",
+                    "S\u0000t\u0000o\u0000p\u0000R\u0000e\u0000p\u0000o\u0000r\u0000t\u0000",
+                    "O\u0000f\u0000f\u0000l\u0000i\u0000n\u0000e\u0000G\u0000e\u0000t\u0000",
+                    "i\u0000n\u0000j\u0000R\u0000u\u0000n\u0000",
+                    "X\u0000c\u0000h\u0000a\u0000t\u0000",
+                    "U\u0000A\u0000C\u0000F\u0000u\u0000n\u0000c\u0000"
+                  ],
+                  "addresses": {
+                    "v2_1": 53048,
+                    "v2_2": 55380,
+                    "v2_3": 55466,
+                    "v2_4": 55664,
+                    "v2_5": 55986,
+                    "v2_6": 56128,
+                    "v2_7": 55686,
+                    "v2_8": 56142
+                  }
+                }
+              ],
+              "clamav": [],
+              "tlsh": "T186736E6877F60029F1FFBFB11EF27552D67AF3136902A64F24C402894623A49CD526FA",
+              "sha3_384": "da8d61488344e039d16a1c39d3cf8ae720ac1d424947568686d9255b99d4af6a6024d7b5c48db976a1c0f0017e6fc75c",
+              "data": null
+            }
+          ],
+          "extracted_files_tool": "de4dot",
+          "extracted_files_time": 0.7319893089988909,
+          "cape_type_code": 0,
+          "cape_type": "Xworm payload: 32-bit executable"
+        }
+      },
+      "detections": [
+        {
+          "family": "Xworm",
+          "details": [
+            {
+              "Yara": "00b65f272f9cc1d013a0e3cd24024299ef3eee6c87d35e0de9996ca97f1cf037"
+            }
+          ]
+        },
+        {
+          "family": "XWorm",
+          "details": [
+            {
+              "Yara": "00b65f272f9cc1d013a0e3cd24024299ef3eee6c87d35e0de9996ca97f1cf037"
+            }
+          ]
+        }
+      ],
+      "CAPE": {
+        "payloads": [
+          {
+            "name": "ef1e29a441f14ff91e40103547925d08f246843b6d7cd640293e00b578492002",
+            "path": "/opt/CAPEv2/storage/analyses/41/CAPE/ef1e29a441f14ff91e40103547925d08f246843b6d7cd640293e00b578492002",
+            "guest_paths": "9;?C:\\Windows\\Temp\\00b65f272f9cc1d013a0.exe;?C:\\Windows\\Temp\\00b65f272f9cc1d013a0.exe;?0x00007FF9AD370000;?",
+            "size": 278,
+            "crc32": "3D990CB1",
+            "md5": "e9a99b1a85c3dc09d0ca9bb224c1d1e9",
+            "sha1": "456d73c775f0d74fa57aafa0aa7290c8773e3ad2",
+            "sha256": "ef1e29a441f14ff91e40103547925d08f246843b6d7cd640293e00b578492002",
+            "sha512": "63bfe8ad7fd02e9018f6a28fbb8b588e2cd98ea4e1d48a9d1568e69f2805e17a168a6da9bb579083cfcc8a0fdc2ec5884906873a0b78c2bd05f4cc91f0f86843",
+            "rh_hash": null,
+            "ssdeep": "3:flVFIZhec54l9cBwllcpolNcaag1caiIdcaqwFcayYtca6AVcairth5srn:faZAvnHH/3vnSth54n",
+            "type": "data",
+            "yara": [],
+            "cape_yara": [],
+            "clamav": [],
+            "tlsh": "T174D092C69A6A24A8EA33C07CAF04B504B2F3307DCDBE808213209689D68E9124319783",
+            "sha3_384": "be1029c5e0d9f8b766346cdf5c4c0ff86c47c0ac3208ef8b92b16d0fcdc3f36d1db50c65794de5fa0ecca0b80b4a7bdb",
+            "data": null,
+            "strings": [],
+            "cape_type_code": 9,
+            "cape_type": "Unpacked Shellcode",
+            "process_path": "C:\\Windows\\Temp\\00b65f272f9cc1d013a0.exe",
+            "process_name": "00b65f272f9cc1d013a0.exe",
+            "module_path": "C:\\Windows\\Temp\\00b65f272f9cc1d013a0.exe",
+            "pid": 8880,
+            "virtual_address": "0x00007FF9AD370000"
+          }
+        ],
+        "configs": [
+          {
+            "XWorm": {
+              "C2": [
+                "45.156.30.9"
+              ],
+              "Port": [
+                "1604"
+              ],
+              "AES Key (connections)": [
+                "123456789"
+              ],
+              "SPL": [
+                "Xwormmm"
+              ],
+              "AES Key (configs)": [
+                "064045f1d0e9eaa8fb646ca19e7f5c064045f1d0e9eaa8fb646ca19e7f5c3400"
+              ],
+              "Mutex": [
+                "Q32vD9vuXlQVHw5A"
+              ],
+              "InstallDir": [
+                "Terrafirma"
+              ],
+              "InstallBinName": [
+                "USB.exe"
+              ]
+            },
+            "_associated_config_hashes": [
+              {
+                "md5": "41f8e9c7158c72c5c6a3c5a651e7a412",
+                "sha1": "a189e0dd0a6a36d235ba314b4961ac7697e81df3",
+                "sha256": "00b65f272f9cc1d013a0e3cd24024299ef3eee6c87d35e0de9996ca97f1cf037",
+                "sha512": "bf9edfc34b7ac93319ff6325ffce96a378ddc0ff83010b7b3d31c151fadf941148f2eaed09e4a7a8a9f073fcefd7c783a40db928e73d9b19dba0f49b55b16868",
+                "sha3_384": "ed3189f16850a63531fd555f0ddaa8a5e01ae4bba773244434297126c8cf879784e2f2ff2e3557982d1d337bf5ac679a"
+              }
+            ],
+            "_associated_analysis_hashes": {
+              "md5": "41f8e9c7158c72c5c6a3c5a651e7a412",
+              "sha1": "a189e0dd0a6a36d235ba314b4961ac7697e81df3",
+              "sha256": "00b65f272f9cc1d013a0e3cd24024299ef3eee6c87d35e0de9996ca97f1cf037",
+              "sha512": "bf9edfc34b7ac93319ff6325ffce96a378ddc0ff83010b7b3d31c151fadf941148f2eaed09e4a7a8a9f073fcefd7c783a40db928e73d9b19dba0f49b55b16868",
+              "sha3_384": "ed3189f16850a63531fd555f0ddaa8a5e01ae4bba773244434297126c8cf879784e2f2ff2e3557982d1d337bf5ac679a"
+            }
+          }
+        ]
+      },
+      "amsi": null,
+      "info": {
+        "version": "2.4-CAPE",
+        "started": "2024-10-02 01:44:58",
+        "ended": "2024-10-02 01:49:57",
+        "duration": 299,
+        "id": 41,
+        "category": "file",
+        "custom": "",
+        "machine": {
+          "id": 40,
+          "status": "stopping",
+          "name": "cybersec_windows_10",
+          "label": "cybersec_windows_10",
+          "platform": "windows",
+          "manager": "VirtualBox",
+          "started_on": "2024-10-02 01:44:58",
+          "shutdown_on": "2024-10-02 01:49:56"
+        },
+        "package": "exe",
+        "timeout": true,
+        "shrike_url": null,
+        "shrike_refer": null,
+        "shrike_msg": null,
+        "shrike_sid": null,
+        "parent_id": null,
+        "tlp": null,
+        "parent_sample": {},
+        "options": {},
+        "source_url": null,
+        "route": "none",
+        "user_id": 0
+      },
+      "behavior": {
+        "processes": [
+          {
+            "process_id": 8880,
+            "process_name": "00b65f272f9cc1d013a0.exe",
+            "parent_id": 4516,
+            "module_path": "C:\\Windows\\Temp\\00b65f272f9cc1d013a0.exe",
+            "first_seen": "2024-10-02 01:45:47,137",
+            "calls": [
+              {
+                "timestamp": "2024-10-02 01:45:47,512",
+                "thread_id": "8884",
+                "caller": "0x7ffa538cc7f6",
+                "parentcaller": "0x7ffa0f36b2aa",
+                "category": "process",
+                "api": "NtProtectVirtualMemory",
+                "status": true,
+                "return": "0x00000000",
+                "arguments": [
+                  {
+                    "name": "ProcessHandle",
+                    "value": "0xffffffffffffffff"
+                  }
+                ],
+                "repeated": 0,
+                "id": 0
+              }
+            ],
+            "threads": [
+              "8884",
+              "8452",
+              "8484",
+              "8848",
+              "6176",
+              "6268",
+              "6380",
+              "6384",
+              "8432",
+              "8900"
+            ],
+            "environ": {
+              "UserName": "SYSTEM",
+              "ComputerName": "DESKTOP-AO2RKOG",
+              "WindowsPath": "C:\\Windows",
+              "TempPath": "C:\\Windows\\TEMP\\",
+              "CommandLine": "\"C:\\Windows\\TEMP\\00b65f272f9cc1d013a0.exe\" ",
+              "RegisteredOwner": "",
+              "RegisteredOrganization": "",
+              "ProductName": "",
+              "SystemVolumeSerialNumber": "58df-007c",
+              "SystemVolumeGUID": "d760102f-f540-433a-b504-ada56dabb985",
+              "MachineGUID": ""
+            },
+            "file_activities": {
+              "read_files": [],
+              "write_files": [],
+              "delete_files": []
+            }
+          }
+        ],
+        "anomaly": [],
+        "processtree": [
+          {
+            "name": "00b65f272f9cc1d013a0.exe",
+            "pid": 8880,
+            "parent_id": 4516,
+            "module_path": "C:\\Windows\\Temp\\00b65f272f9cc1d013a0.exe",
+            "children": [],
+            "threads": [
+              "8884",
+              "8452",
+              "8484",
+              "8848",
+              "6176",
+              "6268",
+              "6380",
+              "6384",
+              "8432",
+              "8900"
+            ],
+            "environ": {
+              "UserName": "SYSTEM",
+              "ComputerName": "DESKTOP-AO2RKOG",
+              "WindowsPath": "C:\\Windows",
+              "TempPath": "C:\\Windows\\TEMP\\",
+              "CommandLine": "\"C:\\Windows\\TEMP\\00b65f272f9cc1d013a0.exe\" ",
+              "RegisteredOwner": "",
+              "RegisteredOrganization": "",
+              "ProductName": "",
+              "SystemVolumeSerialNumber": "58df-007c",
+              "SystemVolumeGUID": "d760102f-f540-433a-b504-ada56dabb985",
+              "MachineGUID": ""
+            }
+          }
+        ],
+        "summary": {
+          "files": [
+            "C:\\Windows\\System32\\MSCOREE.DLL.local",
+            "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\mscoreei.dll",
+            "C:\\Windows\\Microsoft.NET\\Framework64\\*",
+            "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\clr.dll"
+          ],
+          "read_files": [],
+          "write_files": [],
+          "delete_files": [],
+          "keys": [
+            "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\.NETFramework\\Policy\\",
+            "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\.NETFramework\\policy\\v4.0",
+            "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\.NETFramework",
+            "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\.NETFramework\\InstallRoot"
+          ],
+          "read_keys": [
+            "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\.NETFramework\\InstallRoot",
+            "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\.NETFramework\\UseLegacyV2RuntimeActivationPolicyDefaultValue",
+            "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\.NETFramework\\OnlyUseLatestCLR",
+            "HKEY_LOCAL_MACHINE\\SOFTWARE\\Classes\\CLSID\\{F562A2C8-E850-4F05-8E7A-E7192E4E6C23}\\AppID"
+          ],
+          "write_keys": [],
+          "delete_keys": [],
+          "executed_commands": [
+            "C:\\Windows\\System32\\SecurityHealthHost.exe {08728914-3F57-4D52-9E31-49DAECA5A80A} -Embedding",
+            "\"C:\\Windows\\system32\\backgroundTaskHost.exe\" -ServerName:App.AppXmtcan0h2tfbfy7k9kn8hbxb6dmzz1zh0.mca"
+          ],
+          "resolved_apis": [
+            "ntdll.dll.RtlWow64GetCurrentMachine",
+            "ntdll.dll.RtlWow64IsWowGuestMachineSupported"
+          ],
+          "mutexes": [
+            "Q32vD9vuXlQVHw5A",
+            "Local\\SM0:8880:304:WilStaging_02",
+            "Local\\SM0:4436:304:WilStaging_02",
+            "Local\\SM0:8372:304:WilStaging_02"
+          ],
+          "created_services": [],
+          "started_services": [
+            "LicenseManager",
+            "WaaSMedicSvc"
+          ]
+        },
+        "enhanced": [
+          {
+            "event": "load",
+            "object": "library",
+            "timestamp": "2024-10-02 01:45:47,512",
+            "eid": 1,
+            "data": {
+              "file": "ADVAPI32.dll",
+              "pathtofile": null,
+              "moduleaddress": "0x7ffa54b00000"
+            }
+          }
+        ],
+        "encryptedbuffers": []
+      },
+      "debug": {
+        "log": "2024-10-01 11:56:45,560 [root] INFO: Date set to: 20241002T01:43:11, timeout set to: 200\n2024-10-02 01:43:11,000 [root] DEBUG: Starting analyzer from: C:\\tmp1_pwyiz3\n2024-10-02 01:43:11,000 [root] DEBUG: Storing results at: C:\\exShJV\n2024-10-02 01:43:11,000 [root] DEBUG: Pipe server name: \\\\.\\PIPE\\UuheZmVLQo",
+        "errors": []
+      },
+      "network": {},
+      "suricata": {
+        "alerts": [],
+        "tls": [],
+        "perf": [],
+        "files": [],
+        "http": [],
+        "dns": [],
+        "ssh": [],
+        "fileinfo": [],
+        "eve_log_full_path": null,
+        "alert_log_full_path": null,
+        "tls_log_full_path": null,
+        "http_log_full_path": null,
+        "file_log_full_path": null,
+        "ssh_log_full_path": null,
+        "dns_log_full_path": null
+      },
+      "url_analysis": {},
+      "dumptls": null,
+      "procmemory": [],
+      "signatures": [
+        {
+          "name": "antivm_checks_available_memory",
+          "description": "Checks available memory",
+          "categories": [
+            "antivm"
+          ],
+          "severity": 1,
+          "weight": 1,
+          "confidence": 100,
+          "references": [],
+          "data": [
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 404
+            }
+          ],
+          "new_data": [],
+          "alert": false,
+          "families": []
+        },
+        {
+          "name": "queries_keyboard_layout",
+          "description": "Queries the keyboard layout",
+          "categories": [
+            "location_discovery"
+          ],
+          "severity": 1,
+          "weight": 1,
+          "confidence": 100,
+          "references": [],
+          "data": [
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 735
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 734
+            }
+          ],
+          "new_data": [],
+          "alert": false,
+          "families": []
+        },
+        {
+          "name": "antidebug_setunhandledexceptionfilter",
+          "description": "SetUnhandledExceptionFilter detected (possible anti-debug)",
+          "categories": [
+            "anti-debug"
+          ],
+          "severity": 1,
+          "weight": 1,
+          "confidence": 40,
+          "references": [],
+          "data": [
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 360
+            }
+          ],
+          "new_data": [],
+          "alert": false,
+          "families": []
+        },
+        {
+          "name": "antidebug_guardpages",
+          "description": "Guard pages use detected - possible anti-debugging.",
+          "categories": [
+            "anti-debug"
+          ],
+          "severity": 2,
+          "weight": 1,
+          "confidence": 100,
+          "references": [],
+          "data": [
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 236
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 238
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 239
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 321
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 322
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 323
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 329
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 330
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 331
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 332
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 333
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 336
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 340
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 344
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 345
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 356
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 369
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 370
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 371
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 372
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 373
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 374
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 375
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 376
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 377
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 378
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 379
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 380
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 381
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 382
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 383
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 384
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 385
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 386
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 387
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 388
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 389
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 390
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 391
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 392
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 393
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 394
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 395
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 396
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 397
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 398
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 399
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 401
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 405
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 407
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 408
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 409
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 410
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 413
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 414
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 415
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 416
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 417
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 419
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 429
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 430
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 431
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 432
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 435
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 438
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 445
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 473
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 503
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 570
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 603
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 607
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 608
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 609
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 622
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 628
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 631
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 632
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 636
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 638
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 653
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 654
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 655
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 656
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 657
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 658
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 664
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 665
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 667
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 668
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 670
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 675
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 676
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 677
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 678
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 679
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 680
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 682
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 683
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 684
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 685
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 686
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 688
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 689
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 715
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 717
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 719
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 727
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 728
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 729
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 730
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 731
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 732
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 733
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 734
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 735
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 739
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 740
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 792
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 793
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 796
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 799
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 800
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 824
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 825
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 862
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 870
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 872
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 874
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 875
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 876
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 903
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 907
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 918
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 922
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 927
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 928
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 929
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 931
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 936
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 937
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1081
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1082
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1084
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1086
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1087
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1091
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1092
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1093
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1157
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1158
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1164
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1174
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1176
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1178
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1185
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1190
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1207
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1231
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1236
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1251
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1252
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1353
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1374
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1375
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1376
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1391
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1392
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1395
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1397
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1398
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1405
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1406
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1409
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1411
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1412
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1612
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1614
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1616
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1617
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1633
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1634
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1636
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1637
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1639
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1640
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1642
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1670
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1673
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1674
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1675
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1676
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1680
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1756
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1758
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1760
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1761
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1762
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1763
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1765
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1766
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1772
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1773
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1774
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1775
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1776
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1778
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1786
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1787
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 3
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 12
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 13
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 14
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 15
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 16
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 17
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 20
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 22
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 23
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 27
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 28
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 29
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 30
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 31
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 33
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 48
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 49
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 50
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 78
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 79
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 80
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 81
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 82
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 83
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 85
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 88
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 89
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 124
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 125
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 134
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 160
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 161
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 164
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 165
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 169
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 170
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 216
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 311
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 314
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 321
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 323
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 324
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 361
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 396
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 401
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 449
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 473
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 477
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 563
+            },
+            {
+              "type": "call",
+              "pid": 4436,
+              "cid": 564
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 1
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 2
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 13
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 14
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 15
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 16
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 17
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 18
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 21
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 23
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 24
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 28
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 29
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 30
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 31
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 32
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 34
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 49
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 50
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 51
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 79
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 80
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 81
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 82
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 83
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 84
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 86
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 89
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 90
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 125
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 126
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 160
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 161
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 164
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 165
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 169
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 170
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 171
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 218
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 243
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 315
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 317
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 323
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 324
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 340
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 362
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 402
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 473
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 477
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 479
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 564
+            },
+            {
+              "type": "call",
+              "pid": 8372,
+              "cid": 565
+            }
+          ],
+          "new_data": [],
+          "alert": false,
+          "families": []
+        },
+        {
+          "name": "resumethread_remote_process",
+          "description": "Resumed a thread in another process",
+          "categories": [
+            "injection",
+            "unpacking"
+          ],
+          "severity": 2,
+          "weight": 1,
+          "confidence": 100,
+          "references": [],
+          "data": [
+            {
+              "thread_resumed": "Process 00b65f272f9cc1d013a0.exe with process ID 8880 resumed a thread in another process with the process ID 8880"
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 353
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 423
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 868
+            },
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 1162
+            },
+            {
+              "thread_resumed": "Process svchost.exe with process ID 796 resumed a thread in another process with the process ID 7264"
+            },
+            {
+              "type": "call",
+              "pid": 796,
+              "cid": 313
+            },
+            {
+              "type": "call",
+              "pid": 796,
+              "cid": 315
+            },
+            {
+              "type": "call",
+              "pid": 796,
+              "cid": 609
+            },
+            {
+              "type": "call",
+              "pid": 796,
+              "cid": 748
+            }
+          ],
+          "new_data": [],
+          "alert": false,
+          "families": []
+        },
+        {
+          "name": "terminates_remote_process",
+          "description": "Terminates another process",
+          "categories": [
+            "persistence",
+            "stealth"
+          ],
+          "severity": 2,
+          "weight": 1,
+          "confidence": 100,
+          "references": [],
+          "data": [
+            {
+              "type": "call",
+              "pid": 796,
+              "cid": 327
+            },
+            {
+              "process": "svchost.exe"
+            },
+            {
+              "type": "call",
+              "pid": 796,
+              "cid": 340
+            },
+            {
+              "process": "svchost.exe"
+            },
+            {
+              "type": "call",
+              "pid": 796,
+              "cid": 396
+            },
+            {
+              "process": "svchost.exe"
+            },
+            {
+              "type": "call",
+              "pid": 796,
+              "cid": 415
+            },
+            {
+              "process": "svchost.exe"
+            },
+            {
+              "type": "call",
+              "pid": 796,
+              "cid": 428
+            },
+            {
+              "process": "svchost.exe"
+            },
+            {
+              "type": "call",
+              "pid": 796,
+              "cid": 441
+            },
+            {
+              "process": "svchost.exe"
+            },
+            {
+              "type": "call",
+              "pid": 796,
+              "cid": 454
+            },
+            {
+              "process": "svchost.exe"
+            }
+          ],
+          "new_data": [],
+          "alert": false,
+          "families": []
+        },
+        {
+          "name": "injection_rwx",
+          "description": "Creates RWX memory",
+          "categories": [
+            "injection"
+          ],
+          "severity": 2,
+          "weight": 1,
+          "confidence": 50,
+          "references": [],
+          "data": [
+            {
+              "type": "call",
+              "pid": 8880,
+              "cid": 230
+            }
+          ],
+          "new_data": [],
+          "alert": false,
+          "families": []
+        },
+        {
+          "name": "binary_yara",
+          "description": "Binary file triggered YARA rule",
+          "categories": [
+            "static"
+          ],
+          "severity": 3,
+          "weight": 1,
+          "confidence": 80,
+          "references": [],
+          "data": [
+            {
+              "Binary triggered YARA rule": "INDICATOR_SUSPICIOUS_EXE_NoneWindowsUA"
+            }
+          ],
+          "new_data": [],
+          "alert": false,
+          "families": []
+        }
+      ],
+      "malscore": 10.0,
+      "ttps": [
+        {
+          "signature": "antidebug_guardpages",
+          "ttps": [
+            "T1106"
+          ],
+          "mbcs": [
+            "OB0001",
+            "B0001",
+            "B0001.009",
+            "B0002",
+            "B0002.008",
+            "OC0002",
+            "C0008"
+          ]
+        }
+      ],
+      "malstatus": "Malicious"
+    }
+  },
+  {
+    "filename": "sample_report.json",
+    "malstatus": "Clean",
+    "content": {
+      "statistics": {
+        "processing": [
+          {
+            "name": "CAPE",
+            "time": 1.686
+          }
+        ],
+        "signatures": [
+          {
+            "name": "packer_themida",
+            "time": 0.0
+          }
+        ],
+        "reporting": [
+          {
+            "name": "BinGraph",
+            "time": 0.0
+          }
+        ]
+      },
+      "target": {
+        "category": "file",
+        "file": {
+          "name": "a7e91c5f61c76363722d.exe",
+          "path": "/work/storage/binaries/a7e91c5f61c76363722d1e31fa302174ea041cab8470b40c8c65cc6524bbd6e0",
+          "guest_paths": "",
+          "size": 60928,
+          "crc32": "12F145E0",
+          "md5": "0825404394ab2ff375c9b7f54c584da0",
+          "sha1": "3e28063f7a1c2695910384dc36f9c61f7eac10ec",
+          "sha256": "a7e91c5f61c76363722d1e31fa302174ea041cab8470b40c8c65cc6524bbd6e0",
+          "sha512": "30e3926e98857edb4bc97a183f005e03373f2e689c2c88df428e544e953f19311ac3e3c365a5d46f34ed41fa3683715c6c105788ac48731d3afbe9e0278686ff",
+          "rh_hash": null,
+          "ssdeep": "768:sZBjqy7xJLKa49mwk+Cw6iSNMN6y8u/2bxV2x0a1Ng5ceur9u1PHJIrWDdu:Mjq+LKDmwP1NdYv2amNt81Jyad",
+          "type": "PE32 executable (GUI) Intel 80386, for MS Windows",
+          "yara": [],
+          "cape_yara": [],
+          "clamav": [],
+          "tlsh": "T10D531752B7F58939F0F36FB86D3A9A14993BBD603D78850E72684D4E4E707809868733",
+          "sha3_384": "ac855d50d05f7c7ebc88a145f625e01905467ff92ce96709a95f848a2f7cd6b511c5d7b57f2cc4f3de38f776cb354dc5",
+          "pe": {
+            "guest_signers": {
+              "aux_sha1": null,
+              "aux_timestamp": null,
+              "aux_valid": false,
+              "aux_error": true,
+              "aux_error_desc": "No signature found.",
+              "aux_signers": []
+            },
+            "digital_signers": [],
+            "imagebase": "0x00400000",
+            "entrypoint": "0x0000ab1c",
+            "ep_bytes": "558bec83c4ec53565733c08945f08945",
+            "peid_signatures": null,
+            "reported_checksum": "0x00000000",
+            "actual_checksum": "0x00011fc4",
+            "osversion": "1.0",
+            "pdbpath": null,
+            "imports": {
+              "kernel32": {
+                "dll": "kernel32.dll",
+                "imports": [
+                  {
+                    "address": "0x41c0a0",
+                    "name": "DeleteCriticalSection"
+                  }
+                ]
+              },
+              "user32": {
+                "dll": "user32.dll",
+                "imports": [
+                  {
+                    "address": "0x41c11c",
+                    "name": "MessageBoxA"
+                  }
+                ]
+              },
+              "oleaut32": {
+                "dll": "oleaut32.dll",
+                "imports": [
+                  {
+                    "address": "0x41c124",
+                    "name": "VariantChangeTypeEx"
+                  }
+                ]
+              },
+              "advapi32": {
+                "dll": "advapi32.dll",
+                "imports": [
+                  {
+                    "address": "0x41c13c",
+                    "name": "RegSetValueExA"
+                  }
+                ]
+              },
+              "shell32": {
+                "dll": "shell32.dll",
+                "imports": [
+                  {
+                    "address": "0x41c1cc",
+                    "name": "ShellExecuteA"
+                  }
+                ]
+              }
+            },
+            "exported_dll_name": null,
+            "exports": [],
+            "dirents": [
+              {
+                "name": "IMAGE_DIRECTORY_ENTRY_EXPORT",
+                "virtual_address": "0x00000000",
+                "size": "0x00000000"
+              }
+            ],
+            "sections": [
+              {
+                "name": "CODE",
+                "raw_address": "0x00000400",
+                "virtual_address": "0x00001000",
+                "virtual_size": "0x00009fe4",
+                "size_of_data": "0x0000a000",
+                "characteristics": "IMAGE_SCN_CNT_CODE|IMAGE_SCN_MEM_EXECUTE|IMAGE_SCN_MEM_READ",
+                "characteristics_raw": "0x60000020",
+                "entropy": "6.53"
+              }
+            ],
+            "overlay": null,
+            "resources": [
+              {
+                "name": "RT_ICON",
+                "offset": "0x0002045c",
+                "size": "0x000002e8",
+                "filetype": null,
+                "language": "LANG_POLISH",
+                "sublanguage": "SUBLANG_DEFAULT",
+                "entropy": "2.45"
+              }
+            ],
+            "versioninfo": [],
+            "imphash": "13f5b0f3f7f99dfd6675e2c4515efe76",
+            "timestamp": "1992-06-19 22:22:17",
+            "icon": "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABCklEQVR4nO1VQRLEIAjDfrzh5e6h0iqC4nb2tGbGsVUhEUGJNjY2/h0psCb/kkNPdmT5JX2y6VP3QUR5RMZ89ec5J52tLaISEdFhkTM/TnwSUEpPX0OIPR+Fq9luLiLCjYgycLXnHyE/wteKaidyRBSA0vfjM5+mgIlaswm5FiG2tvAFASsRANAIkXlNvhSB2lDvso0AumhEInBQAHVZMeMeB1DGbDsAt72sYbbLc7r76zs3YdU5oI9A/OroDXPASibvCPocsOfDOTDK6NFd4NlGcuCVAKl3LxJfVcGIXB+DctJcQLJL+2h6AdNEtJMJ5vOlIzMif/Uc16+aA8/afI5Xnaz42NjYcPEBmkw7+f7FYawAAAAASUVORK5CYII=",
+            "icon_hash": "7ac2a24d0a7d403437f994a2425258d7",
+            "icon_fuzzy": "c5735e8a9fd13f2385248c44a5bdc5f8",
+            "icon_dhash": "8600e8ae8e9c9820",
+            "imported_dll_count": 5
+          },
+          "data": null,
+          "strings": [
+            "(Untitled)",
+            "; ;$;(;,;T;\\;`;d;h;l;",
+            "&Ignore",
+            "VirtualFree",
+            "GetCommandLineA",
+            "Could not load CARDS.DLL"
+          ],
+          "virustotal": {
+            "error": true,
+            "msg": "Unable to complete connection to VirusTotal. Status code: 429"
+          },
+          "cape_type_code": 0,
+          "cape_type": ""
+        }
+      },
+      "CAPE": {
+        "payloads": [],
+        "configs": []
+      },
+      "info": {
+        "version": "2.4-CAPE",
+        "started": "2024-10-01 16:08:30",
+        "ended": "2024-10-01 16:10:25",
+        "duration": 115,
+        "id": 40,
+        "category": "file",
+        "custom": "",
+        "machine": {
+          "id": 39,
+          "status": "stopping",
+          "name": "cybersec_windows_10",
+          "label": "cybersec_windows_10",
+          "platform": "windows",
+          "manager": "VirtualBox",
+          "started_on": "2024-10-01 16:08:30",
+          "shutdown_on": "2024-10-01 16:10:24"
+        },
+        "package": "exe",
+        "timeout": false,
+        "shrike_url": null,
+        "shrike_refer": null,
+        "shrike_msg": null,
+        "shrike_sid": null,
+        "parent_id": null,
+        "tlp": null,
+        "parent_sample": {},
+        "options": {},
+        "source_url": null,
+        "route": "none",
+        "user_id": 0
+      },
+      "behavior": {
+        "processes": [
+          {
+            "process_id": 7588,
+            "process_name": "a7e91c5f61c76363722d.exe",
+            "parent_id": 4564,
+            "module_path": "C:\\Windows\\Temp\\a7e91c5f61c76363722d.exe",
+            "first_seen": "2024-10-01 16:09:08,921",
+            "calls": [
+              {
+                "timestamp": "2024-10-01 16:09:09,421",
+                "thread_id": "1996",
+                "caller": "0x76f56a46",
+                "parentcaller": "0x76f56951",
+                "category": "threading",
+                "api": "NtTestAlert",
+                "status": true,
+                "return": "0x00000000",
+                "arguments": [],
+                "repeated": 4,
+                "id": 0
+              }
+            ],
+            "threads": [
+              "1996",
+              "4900",
+              "7928"
+            ],
+            "environ": {
+              "UserName": "SYSTEM",
+              "ComputerName": "DESKTOP-AO2RKOG",
+              "WindowsPath": "C:\\Windows",
+              "TempPath": "C:\\Windows\\TEMP\\",
+              "CommandLine": "\"C:\\Windows\\TEMP\\a7e91c5f61c76363722d.exe\" ",
+              "RegisteredOwner": "",
+              "RegisteredOrganization": "",
+              "ProductName": "",
+              "SystemVolumeSerialNumber": "58df-007c",
+              "SystemVolumeGUID": "d760102f-f540-433a-b504-ada56dabb985",
+              "MachineGUID": ""
+            },
+            "file_activities": {
+              "read_files": [],
+              "write_files": [],
+              "delete_files": []
+            }
+          }
+        ],
+        "anomaly": [],
+        "processtree": [
+          {
+            "name": "a7e91c5f61c76363722d.exe",
+            "pid": 7588,
+            "parent_id": 4564,
+            "module_path": "C:\\Windows\\Temp\\a7e91c5f61c76363722d.exe",
+            "children": [],
+            "threads": [
+              "1996",
+              "4900",
+              "7928"
+            ],
+            "environ": {
+              "UserName": "SYSTEM",
+              "ComputerName": "DESKTOP-AO2RKOG",
+              "WindowsPath": "C:\\Windows",
+              "TempPath": "C:\\Windows\\TEMP\\",
+              "CommandLine": "\"C:\\Windows\\TEMP\\a7e91c5f61c76363722d.exe\" ",
+              "RegisteredOwner": "",
+              "RegisteredOrganization": "",
+              "ProductName": "",
+              "SystemVolumeSerialNumber": "58df-007c",
+              "SystemVolumeGUID": "d760102f-f540-433a-b504-ada56dabb985",
+              "MachineGUID": ""
+            }
+          }
+        ],
+        "summary": {
+          "files": [
+            "C:\\Windows\\Temp\\a7e91c5f61c76363722d.exe",
+            "C:\\Windows\\System\\Rundll32~.exe",
+            "a:",
+            "b:",
+            "C:\\Mouse_MX",
+            "C:\\*.*"
+          ],
+          "read_files": [
+            "C:\\Windows\\Temp\\a7e91c5f61c76363722d.exe",
+            "C:\\Windows\\System\\Rundll32~.exe"
+          ],
+          "write_files": [
+            "C:\\Windows\\System\\Rundll32~.exe",
+            "C:\\Mouse_MX\\loader.exe",
+            "C:\\tmpz74d5dk1\\bin\\loader.exe"
+          ],
+          "delete_files": [
+            "C:\\tmpz74d5dk1\\bin\\loader.exe"
+          ],
+          "keys": [
+            "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\CustomLocale",
+            "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CustomLocale\\en-US",
+            "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\Nls\\ExtendedLocale"
+          ],
+          "read_keys": [
+            "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CustomLocale\\en-US",
+            "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\ExtendedLocale\\en-US",
+            "HKEY_USERS\\.DEFAULT\\Control Panel\\International\\LocaleName"
+          ],
+          "write_keys": [
+            "HKEY_CURRENT_USER\\Software\\Mouse_MX2",
+            "HKEY_USERS\\.DEFAULT\\Software\\Mouse_MX2\\Name",
+            "HKEY_USERS\\.DEFAULT\\Software\\Mouse_MX2\\Version",
+            "HKEY_USERS\\.DEFAULT\\Software\\Mouse_MX2\\Type"
+          ],
+          "delete_keys": [],
+          "executed_commands": [],
+          "resolved_apis": [],
+          "mutexes": [],
+          "created_services": [],
+          "started_services": []
+        },
+        "enhanced": [
+          {
+            "event": "read",
+            "object": "registry",
+            "timestamp": "2024-10-01 16:09:09,421",
+            "eid": 1,
+            "data": {
+              "regkey": "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Control\\Nls\\CustomLocale\\en-US",
+              "content": null
+            }
+          }
+        ],
+        "encryptedbuffers": []
+      },
+      "debug": {
+        "log": "2024-10-01 11:56:45,252 [root] INFO: Date set to: 20241001T16:08:29, timeout set to: 200\n2024-10-01 16:08:29,344 [root] DEBUG: Starting analyzer from: C:\\tmp1_pwyiz3\n2024-10-01 16:08:29,344 [root] DEBUG: Storing results at: C:\\SnFMgGfBU",
+        "errors": []
+      },
+      "network": {},
+      "suricata": {
+        "alerts": [],
+        "tls": [],
+        "perf": [],
+        "files": [],
+        "http": [],
+        "dns": [],
+        "ssh": [],
+        "fileinfo": [],
+        "eve_log_full_path": null,
+        "alert_log_full_path": null,
+        "tls_log_full_path": null,
+        "http_log_full_path": null,
+        "file_log_full_path": null,
+        "ssh_log_full_path": null,
+        "dns_log_full_path": null
+      },
+      "url_analysis": {},
+      "procmemory": [],
+      "signatures": [
+        {
+          "name": "accesses_public_folder",
+          "description": "A file was accessed within the Public folder.",
+          "categories": [
+            "generic"
+          ],
+          "severity": 1,
+          "weight": 1,
+          "confidence": 100,
+          "references": [],
+          "data": [
+            {
+              "file": "C:\\Users\\Public\\Pictures\\*.*"
+            }
+          ],
+          "new_data": [],
+          "alert": false,
+          "families": []
+        }
+      ],
+      "malscore": 2.7,
+      "ttps": [
+        {
+          "signature": "persistence_autorun",
+          "ttps": [
+            "T1547.001",
+            "T1112",
+            "T1547"
+          ],
+          "mbcs": [
+            "OB0012",
+            "E1112",
+            "F0012"
+          ]
+        }
+      ],
+      "malstatus": "Clean"
+    }
+  }
+]
