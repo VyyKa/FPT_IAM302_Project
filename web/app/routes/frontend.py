@@ -60,3 +60,14 @@ def get_report(task_id):
             return report_file_raw, 200, {"Content-Type": "application/pdf"}
     except requests.exceptions.RequestException as e:
         return {"error": f"Request to Cuckoo API failed: {str(e)}"}, 500
+    
+@frontend_bp.route('/get_ml_report/<task_id>', methods=['GET'])
+def get_ml_report(task_id):
+    # Check if the task_id is exists
+    report = UploadedFile.query.filter_by(task_id=task_id).first_or_404()
+
+    # URL of the Machine Learning API to retrieve the report
+    ml_report = report.results
+
+    # Return the report file content as a response as text
+    return ml_report, 200, {"Content-Type": "text/plain"}

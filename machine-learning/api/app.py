@@ -4,6 +4,7 @@ import json
 import threading
 import subprocess
 import os
+from time import sleep
 
 app = Flask(__name__)
 
@@ -14,13 +15,15 @@ def run_ml_task(task_id, api_callback_url):
         ml_detection_status = "Not working"  # Example detection status, e.g., from ML model output
 
         # Copy the report file to the mlma/source directory
-        subprocess.run(["cp", f"report_{task_id}.json", "/mlma/reports/"])
+        # subprocess.run(["cp", f"report_{task_id}.json", "/mlma/reports/"])
 
         # using subprocess to run the machine learning model with "python /mlma/source/main.py"
-        subprocess.run(["python", "/mlma/source/main.py"])
+        cwd = "/MLMAP"
+        command = ["python", "main.py", f"/app/report_{task_id}.json"]
+        subprocess.run(command, cwd=cwd)
 
         # Check if the results file exists
-        results_file = "/mlma/results/results.txt"
+        results_file = f"/MLMAP/data/results/report_{task_id}_results.txt"
         if not os.path.exists(results_file):
             # Send status after completion of the malware detection task
             response = requests.post(api_callback_url, json={
@@ -29,7 +32,7 @@ def run_ml_task(task_id, api_callback_url):
                 "status": "failed"
             })
             # Clean up the report file
-            os.remove(f"report_{task_id}.json")
+            # os.remove(f"report_{task_id}.json")
             raise FileNotFoundError(f"Results file not found at {results_file}")
 
         # Get the results from the model at /mlma/results/results.txt
@@ -58,7 +61,7 @@ def run_ml_task(task_id, api_callback_url):
 
         # Clean up the report/result file
         os.remove(f"report_{task_id}.json")
-        os.remove(results_file)
+        # os.remove(results_file)
     except requests.exceptions.RequestException as e:
         print(f"Error in ML task callback for task {task_id}: {str(e)}")
 
@@ -82,33 +85,48 @@ def ml_task_status():
     api_callback_url = "http://localhost:5000/api/callback/callback"
     
     try:
-        # Send a GET request to the report endpoint to fetch the status
-        response = requests.get(report_url)
-        
-        # Check if the request was successful
-        if response.status_code == 200:
-            filename = f"report_{task_id}.json"
+        while True:
+            # Send a GET request to the report endpoint to fetch the status
+            response = requests.get(report_url)
             
-            # Save the report to a file
-            with open(filename, 'wb') as file:
-                file.write(response.content)
+            # Check if the request was successful
+            if response.status_code == 200:
+                # Try to load json
+                res = response.json()
 
-            # Start a new thread to run the machine learning task
-            ml_thread = threading.Thread(target=run_ml_task, args=(task_id, api_callback_url))
-            ml_thread.start()
+                print(res.get("error", False))
 
-            return jsonify({"task_id": task_id, "status": "Processing started"}), 200
-        else:
-            # If report retrieval failed, send failure status
-            requests.post(api_callback_url, json={
-                "task_id": task_id, 
-                "detection": "Unknown", 
-                "status": "failed"
-            })
-            return jsonify({"error": f"Failed to retrieve report for task_id {task_id}"}), 500
+                if res.get("error", False):
+                    print(res.get("error_value"))
+                    sleep(5)
+                    continue
+
+                filename = f"report_{task_id}.json"
+                
+                # Check if file exists
+                # if os.path.exists(filename):
+                    # return jsonify({"error": f"Report file for task_id {task_id} already exists"}), 200
+
+                # Save the report to a file
+                with open(filename, 'wb') as file:
+                    file.write(response.content)
+
+                # Start a new thread to run the machine learning task
+                ml_thread = threading.Thread(target=run_ml_task, args=(task_id, api_callback_url))
+                ml_thread.start()
+
+                return jsonify({"task_id": task_id, "status": "Processing started"}), 200
+            else:
+                # If report retrieval failed, send failure status
+                requests.post(api_callback_url, json={
+                    "task_id": task_id, 
+                    "detection": "Unknown", 
+                    "status": "failed"
+                })
+                return jsonify({"error": f"Failed to retrieve report for task_id {task_id}"}), 200
 
     except requests.exceptions.RequestException as e:
-        return jsonify({"error": f"Request to report endpoint failed: {str(e)}"}), 500
+        return jsonify({"error": f"Request to report endpoint failed: {str(e)}"}), 200
 
 if __name__ == '__main__':
     app.run(port=8001)

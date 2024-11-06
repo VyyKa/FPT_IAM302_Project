@@ -30,6 +30,7 @@ class ReportAnalyzer:
             raise AttributeError("Random Forest model does not have feature names.")
 
         self.results = []  
+        self.labels = []
         self.probabilities = []  
 
     def analyze_reports(self):
@@ -140,8 +141,11 @@ class ReportAnalyzer:
         features["pe_exported_dll_name"] = pe_info.get("exported_dll_name", "N/A")
         features["pe_imported_dll_count"] = pe_info.get("imported_dll_count", 0)
         features["sections"] = len(pe_info.get("sections", []))
-        features["pe_overlay_offset"] = pe_info.get("overlay", {}).get("offset", "N/A")
-        features["pe_overlay_size"] = pe_info.get("overlay", {}).get("size", "N/A")
+        pe_overlay = pe_info.get("overlay", {})
+        if not pe_overlay:
+            pe_overlay = {"offset": "N/A", "size": "N/A"}
+        features["pe_overlay_offset"] = pe_overlay.get("offset", "N/A")
+        features["pe_overlay_size"] = pe_overlay.get("size", "N/A")
         features["pe_entropy"] = ", ".join(
             [str(section.get("entropy", "N/A")) for section in pe_info.get("sections", [])])
         features["pe_imports"] = ", ".join([f"{imp['name']} at {imp['address']}" for imp in
@@ -225,7 +229,7 @@ class ReportAnalyzer:
         report_name = os.path.basename(report_file).replace('.json', '')
         plot_file_name = os.path.join(self.results_dir, f"{report_name}_plot_model.png")
         plt.savefig(plot_file_name)
-        plt.show()
+        plt.close()
 
     def export_report_results(self, report_file, label, score, predictions):
         predictions_serializable = {model: pred.tolist() if isinstance(pred, np.ndarray) else pred for model, pred in

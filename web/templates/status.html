@@ -80,7 +80,13 @@
                             <td>{{ file.task_id if file.task_id else 'N/A' }}</td>
                             <td>{{ file.status }}</td>
                             <td>{{ file.timestamp }}</td>
-                            <td>{{ file.detection_status }}</td>
+                            <td>
+                                {% if file.task_id and file.status == "Complete" %}
+                                    <a target="_blank" href="{{ url_for('frontend.get_ml_report', task_id=file.task_id) }}">{{ file.detection_status }}</a>
+                                {% else %}
+                                    {{ file.detection_status }} (No Report Available)
+                                {% endif %}
+                            </td>
                         {% endif %}
                     </tr>
                     {% endfor %}

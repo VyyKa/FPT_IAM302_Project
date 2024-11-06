@@ -9,8 +9,8 @@ Classification Report:
    macro avg       1.00      1.00      1.00         1
 weighted avg       1.00      1.00      1.00         1
 
-Probabilities: [[0.58 0.42]]
-Checksum: 372d5019d3dab851f5f01fd0ea83161f
+Probabilities: [0.41]
+Checksum: 229f79e2c45c416bc1b6f0c6fca32658
 
 XGBoost Results:
 Accuracy: 0.0
@@ -24,19 +24,20 @@ Classification Report:
    macro avg       0.50      0.50      0.00       1.0
 weighted avg       1.00      0.00      0.00       1.0
 
-Probabilities: [0.7310586]
-Checksum: d4b9f65ab99e0147adfab0198063b79f
+Probabilities: [0.7310585975646973]
+Checksum: 175be72cd2920a6ce1f6d9f1682ab185
 
 LSTM Results:
-Accuracy: 1.0
+Accuracy: 0.0
 Classification Report:
               precision    recall  f1-score   support
 
-           0       1.00      1.00      1.00         1
+           0       1.00      0.00      0.00       1.0
+           1       0.00      1.00      0.00       0.0
 
-    accuracy                           1.00         1
-   macro avg       1.00      1.00      1.00         1
-weighted avg       1.00      1.00      1.00         1
+    accuracy                           0.00       1.0
+   macro avg       0.50      0.50      0.00       1.0
+weighted avg       1.00      0.00      0.00       1.0
 
-Probabilities: [nan]
-Checksum: e57cf002728f789232494bf5cda5ad8a
+Probabilities: [0.551084041595459]
+Checksum: 04fdf48cc52da73064dbe839057a51c3

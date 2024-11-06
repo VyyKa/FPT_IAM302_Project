@@ -1,0 +1,8 @@
+Report Name: 7report.json
+File: 5f8decf2562bf8f3cf1a.exe
+Classification: Malicious
+Score (0-10): 8.0
+RF Prediction Probability: 0.6700
+XGB Prediction Probability: 0.7311
+LSTM Prediction Probability: 0.5511
+Hybrid Prediction: 0.6507142130533854
