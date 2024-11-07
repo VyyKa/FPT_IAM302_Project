@@ -26,7 +26,7 @@ def callback():
 
     # If the task succeeded, update the detection status
     UploadedFile.query.filter_by(task_id=task_id).update({
-        'status': 'Completed',
+        'status': 'Complete',
         'detection_status': detection,
         'results': results
     })
