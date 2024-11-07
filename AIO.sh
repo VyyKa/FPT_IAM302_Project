@@ -545,6 +545,13 @@ run_web() {
     echo -e "${GREEN}The web service is running.${NC}"
 }
 
+run_machine_learning() {
+    # Run the machine learning service
+    echo -e "${BLUE}Running the machine learning service...${NC}"
+    sudo -u $CURRENT_USER docker run -d --rm --name machine-learning --network host cybersecn00bers/machine-learning:latest
+    echo -e "${GREEN}The machine learning service is running.${NC}"
+}
+
 install_requirements() {
     # Install the requirements
     # Check for the internet connection
@@ -590,6 +597,7 @@ main() {
     install_requirements
     start_sandbox
     run_web
+    run_machine_learning
 }
 
 main "$@"

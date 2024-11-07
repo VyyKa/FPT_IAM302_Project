@@ -24,3 +24,8 @@ __pycache__/
 
 # ignore all pkl files
 **/*.pkl
+
+machine-learning/MLMAP/data/**/*.json
+machine-learning/MLMAP/*.json
+
+machine-learning/MLMAP/data/results/*
